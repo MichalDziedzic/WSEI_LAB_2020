@@ -120,18 +120,23 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"../src/App.ts":[function(require,module,exports) {
 "use strict";
 
-var formVin = document.querySelector(".formVin");
+var btnCheck = document.querySelector(".checkBtn");
+var vinCodeEl = document.querySelector("input[name=vinCode]");
 
-if (formVin != null) {
-  formVin.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var form = e.target;
-    console.log(form);
-  });
+if (btnCheck) {
+  if (vinCodeEl != null) {
+    btnCheck.addEventListener("click", function (e) {
+      var vin = document.querySelector("input[name=vinCode]").value;
+      console.log(vin);
+      document.querySelector("input[name=vinCode]").value = "";
+    });
+  } else {
+    throw new Error("vin not found");
+  }
 } else {
   throw new Error("Button not found");
 }
-},{}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/2024/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13368/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -159,7 +164,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57116" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54319" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -335,5 +340,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/2024/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13368/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

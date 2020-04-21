@@ -1,12 +1,22 @@
-const formVin: HTMLElement | null = document.querySelector(".formVin");
+const btnCheck: HTMLElement | null = document.querySelector(".checkBtn");
+let vinCodeEl: HTMLElement | null = document.querySelector(
+  "input[name=vinCode]"
+);
 
-if (formVin != null) {
-  formVin.addEventListener<"submit">("submit", (e) => {
-    e.preventDefault();
-    let form: object = <HTMLInputElement>e.target;
+if (btnCheck) {
+  if (vinCodeEl != null) {
+    btnCheck.addEventListener<"click">("click", (e) => {
+      const vin: string = (<HTMLInputElement>(
+        document.querySelector("input[name=vinCode]")
+      )).value;
+      console.log(vin);
 
-    console.log(form);
-  });
+      (<HTMLInputElement>document.querySelector("input[name=vinCode]")).value =
+        "";
+    });
+  } else {
+    throw new Error("vin not found");
+  }
 } else {
   throw new Error("Button not found");
 }
