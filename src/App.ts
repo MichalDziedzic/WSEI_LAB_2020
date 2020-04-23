@@ -6,7 +6,7 @@ let vinCodeEl: HTMLElement | null = document.querySelector(
   "input[name=vinCode]"
 );
 
-console.log(" działą w pliku  z klasa infoVin");
+console.log(" działa  infoVin");
 
 if (btnCheck) {
   if (vinCodeEl != null) {
