@@ -129,69 +129,24 @@ var InfoVin =
 /** @class */
 function () {
   function InfoVin(vin) {
+    var _this = this;
+
     this.showVin = function () {
-      fetch("http://api.carmd.com/v3.0/decode?vin=1GNALDEK9FZ108495", {
-        method: "GET",
-        headers: {
-          undefinedaccept: "application/json",
-          "accept-encoding": "gzip,deflate",
-          "accept-language": "en-US,en;q=0.8",
-          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36",
-          authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-          "partner-token": "fe1708c8fbc94a29a7885e04c837da04"
-        }
-      }).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        console.log(data);
-      }).catch(function (err) {
-        console.log(err);
-      });
+      console.log("twoj numer vin to " + _this.vin);
     };
 
     this.vin = vin;
-    this.showVin();
+
+    (function () {
+      return _this.showVin();
+    });
   }
 
   return InfoVin;
 }();
 
 exports.default = InfoVin;
-},{}],"../src/App.ts":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var InfoVin_1 = __importDefault(require("./InfoVin"));
-
-console.log("dziala w pliku app js");
-var btnCheck = document.querySelector(".checkBtn");
-var vinCodeEl = document.querySelector("input[name=vinCode]");
-console.log(" działą w pliku  z klasa infoVin");
-
-if (btnCheck) {
-  if (vinCodeEl != null) {
-    btnCheck.addEventListener("click", function (e) {
-      var vin = document.querySelector("input[name=vinCode]").value;
-      console.log("chodzi" + vin);
-      var checkVin = new InfoVin_1.default(vin);
-      document.querySelector("input[name=vinCode]").value = "";
-    });
-  } else {
-    throw new Error("vin not found");
-  }
-} else {
-  throw new Error("Button not found");
-}
-},{"./InfoVin":"../src/InfoVin.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16880/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13368/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -219,7 +174,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64829" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54319" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -395,5 +350,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16880/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
-//# sourceMappingURL=/App.c11db7a9.js.map
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13368/node_modules/parcel/src/builtins/hmr-runtime.js","../src/InfoVin.ts"], null)
+//# sourceMappingURL=/InfoVin.207a0354.js.map
