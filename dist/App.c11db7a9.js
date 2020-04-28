@@ -117,12 +117,54 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../src/InfoVin.ts":[function(require,module,exports) {
+})({"../src/Ui.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var Ui =
+/** @class */
+function () {
+  function Ui(data) {
+    var _this = this;
+
+    this.printData = function () {
+      console.log(_this.data);
+      var main = document.createElement("main");
+      var headerRaport = document.createElement("div");
+      var mainRaport = document.createElement("div");
+      var infoRaport = document.createElement("div");
+      var imgRaport = document.createElement("div");
+      var detailsRaport = document.createElement("div");
+      var elemHeaderRaport = document.createElement("h3");
+      headerRaport.className = "headerRaport";
+    };
+
+    this.data = data;
+    this.printData();
+  }
+
+  return Ui;
+}();
+
+exports.default = Ui;
+},{}],"../src/InfoVin.ts":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Ui_1 = __importDefault(require("./Ui"));
+
 console.log(" działą w pliku  z klasa infoVin"); //1GNALDEK9FZ108495 example number vin
 
 var InfoVin =
@@ -142,19 +184,20 @@ function () {
         return response.json();
       }).then(function (data) {
         console.log(data);
+        new Ui_1.default(data);
       }).catch(function (err) {
         console.log(err);
       });
     };
 
-    this.vin = vin; // this.showVin();
+    this.vin = vin; //this.showVin();
   }
 
   return InfoVin;
 }();
 
 exports.default = InfoVin;
-},{}],"../src/App.ts":[function(require,module,exports) {
+},{"./Ui":"../src/Ui.ts"}],"../src/App.ts":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -193,7 +236,7 @@ if (btnCheck) {
 } else {
   throw new Error("Button not found");
 }
-},{"./InfoVin":"../src/InfoVin.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/20456/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./InfoVin":"../src/InfoVin.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/9400/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -221,7 +264,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60700" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52113" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -397,5 +440,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/20456/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/9400/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

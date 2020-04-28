@@ -24,17 +24,20 @@
         <section>
           <div class="vinDecoder">
             <div class="vinHeader">
-              <p>SPRAWDZ SWÓJ POJAZD Z USA</p>
+              <p>SPRAWDŹ SWÓJ POJAZD Z USA</p>
             </div>
             <div class="vinFinder">
-              <label>
-                <input type="text" name="vinCode" id="InputVin" value="" style="text-transform: uppercase;">
-              </label>
-              <button class="checkBtn">
-                <span>CHECK <i class="fas fa-check"></i></span>
-              </button>
+              <div class="vinWrapper">
+                <label>
+                  <input type="text" name="vinCode" id="InputVin" value="" style="text-transform: uppercase;">
+                </label>
+                <button class="btn checkBtn">
+                  <span>CHECK <i class="fas fa-check"></i></span>
+                </button>
+              </div>
             </div>
             <div class="vinArticle">
+              <h3>Po co ten cały nr VIN?</h3>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
                 laoreet arcu consequat aliquet placerat. Proin sapien neque,
@@ -51,20 +54,7 @@
                 Nullam scelerisque odio neque, ac aliquet augue fermentum ac.
                 Donec vel enim nec velit congue dignissim a quis magna.
               </p>
-              <p>
-                Suspendisse blandit rhoncus pharetra. Aenean sit amet
-                consectetur mi. Vestibulum faucibus sapien sed faucibus varius.
-                Sed varius rhoncus lectus, vitae accumsan quam dignissim ut.
-                Aenean mollis arcu eu orci gravida porttitor. Duis sed magna
-                nisl. Donec odio mauris, pulvinar at cursus eleifend, dictum sit
-                amet lectus. Sed vel mi at ipsum mollis pulvinar. Vestibulum
-                ante ipsum primis in faucibus orci luctus et ultrices posuere
-                cubilia curae; Phasellus vehicula dictum mauris. Pellentesque
-                tempus velit magna, eget consequat massa viverra eu. Cras dui
-                nisi, rhoncus et molestie mattis, consequat in dolor. Nam
-                iaculis mi justo, quis molestie ipsum eleifend quis. Cras ut
-                lobortis leo. Curabitur non lorem velit.
-              </p>
+              <h3>Nie daj sie oszukać!</h3>
               <p>
                 Curabitur lobortis tortor metus, non mollis orci fermentum ac.
                 Pellentesque ac ex eget massa commodo pellentesque at nec justo.
@@ -82,8 +72,38 @@
         </section>
       </div>
       <main>
-        <p>main test1</p>
+        <div class="headerRaport">
+          <h3>TWOJ RAPORT</h3>
+        </div>
+        <div class="mainRaport">
+          <div class="infoRaport">
+            <ul>
+              <li>marka:cos</li>
+              <li>model:cos</li>
+              <li>rocznik:cos</li>
+              <li>
+                silnik:
+                <ul>
+                  <li>fsfs</li>
+                  <li>fsds</li>
+                  <li>fsfddsf</li>
+                </ul>
+              </li>
+              <li>inne:cos</li>
+              <li>producent:General Motors</li>
+            </ul>
+          </div>
+          <div class="imgRaport">
+            <img src="/vinLocation.bd6fb4a4.png" alt="" class="vinImg">
+          </div>
+        </div>
+        <div class="detailsRaport">
+          <button class="btn">Szczegoły Raportu</button>
+        </div>
       </main>
+      <aside>
+        miejsce na example raport form do suba oraz
+      </aside>
       <footer>
         <p>create by Misza</p>
       </footer>

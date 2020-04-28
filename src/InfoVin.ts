@@ -1,3 +1,5 @@
+import Ui from "./Ui";
+
 console.log(" działą w pliku  z klasa infoVin");
 //1GNALDEK9FZ108495 example number vin
 export default class InfoVin {
@@ -5,7 +7,7 @@ export default class InfoVin {
 
   constructor(vin: string) {
     this.vin = vin;
-    // this.showVin();
+    //this.showVin();
   }
 
   showVin = () => {
@@ -21,6 +23,7 @@ export default class InfoVin {
       })
       .then((data) => {
         console.log(data);
+        new Ui(data);
       })
       .catch((err) => {
         console.log(err);
