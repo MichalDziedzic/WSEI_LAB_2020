@@ -19,5 +19,9 @@
   "homepage": "https://github.com/MichalDziedzic/WSEI_LAB_2020#readme",
   "devDependencies": {
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "reset-css": "^5.0.1"
   }
 }

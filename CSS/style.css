@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
+
+body {
+  margin: 0 auto;
+  padding: 0 0 0 0;
+  font-family: "Lato", sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background: black;
+  color: white;
+  font-size: 40px;
+}
+header > h1 {
+  padding: 15px 10px 15px 20px;
+}
+section {
+  width: 100%;
+}
+nav {
+  font-size: 40px;
+  color: white;
+}
+.nav-container > .fas {
+  padding: 15px 45px 15px 10px;
+}
+.firstPage {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+}
+/* .checkBtn {
+} */
+.vinDecoder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.vinHeader,
+.vinFinder {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.vinFinder {
+  margin: 10px 0 20px 0;
+}
+#InputVin {
+  height: 25px;
+}
+.vinHeader {
+  padding: 30px 0 40px 0;
+  font-size: 38px;
+  background: red;
+}
+.vinArticle {
+  display: flex;
+  flex-direction: column;
+  background-color: khaki;
+  padding: 20px 50px 20px 50px;
+}
+
+.vinArticle > p {
+  width: 100%;
+  line-height: 1.3;
+  padding: 10px 0 10px 0;
+}
+main {
+  width: 100%;
+
+  height: 100vh;
+  background-color: royalblue;
+}
+footer {
+  background-color: gray;
+  color: azure;
+  height: 100px;
+  z-index: -999;
+}

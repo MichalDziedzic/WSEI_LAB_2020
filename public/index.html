@@ -3,23 +3,99 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../CSS/reset.css" />
+    <link rel="stylesheet" href="../CSS/style.css" />
+    <link
+      rel="stylesheet"
+      href="../node_modules/@fortawesome/fontawesome-free/css/all.css"
+    />
+
     <title>VIN DECODER</title>
   </head>
   <body>
     <div id="wrapper">
-      <header>
-        <h1>Car vin Decoder</h1>
-      </header>
-      <section>
-        <div class="vinDecoder">
-          <label>
-            <input type="text" name="vinCode" id="InputVin" />
-          </label>
-          <button class="checkBtn">check</button>
-        </div>
-      </section>
-      <main></main>
-      <footer></footer>
+      <div class="firstPage">
+        <header>
+          <h1>Car vin Decoder</h1>
+          <nav>
+            <div class="nav-container">
+              <i class="fas fa-history"></i>
+              <i class="fas fa-bars"></i>
+            </div>
+          </nav>
+        </header>
+        <section>
+          <div class="vinDecoder">
+            <div class="vinHeader">
+              <p>SPRAWDZ SWÓJ POJAZD Z USA</p>
+            </div>
+            <div class="vinFinder">
+              <label>
+                <input
+                  type="text"
+                  name="vinCode"
+                  id="InputVin"
+                  value=""
+                  style="text-transform: uppercase;"
+                />
+              </label>
+              <button class="checkBtn">
+                <span>CHECK <i class="fas fa-check"></i></span>
+              </button>
+            </div>
+            <div class="vinArticle">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
+                laoreet arcu consequat aliquet placerat. Proin sapien neque,
+                vulputate sed sagittis non, mollis ac leo. Nam vel ultrices
+                erat. Aenean tincidunt erat sit amet felis finibus sodales. Orci
+                varius natoque penatibus et magnis dis parturient montes,
+                nascetur ridiculus mus. Maecenas congue risus at mi rhoncus, a
+                volutpat tellus convallis. Aliquam pharetra justo nec massa
+                lacinia blandit. Curabitur consequat neque sed mi consequat
+                pulvinar. Etiam ultrices odio cursus turpis congue egestas.
+                Interdum et malesuada fames ac ante ipsum primis in faucibus.
+                Duis augue eros, auctor sit amet nulla id, auctor aliquet
+                mauris. Phasellus iaculis leo at lorem faucibus fringilla.
+                Nullam scelerisque odio neque, ac aliquet augue fermentum ac.
+                Donec vel enim nec velit congue dignissim a quis magna.
+              </p>
+              <p>
+                Suspendisse blandit rhoncus pharetra. Aenean sit amet
+                consectetur mi. Vestibulum faucibus sapien sed faucibus varius.
+                Sed varius rhoncus lectus, vitae accumsan quam dignissim ut.
+                Aenean mollis arcu eu orci gravida porttitor. Duis sed magna
+                nisl. Donec odio mauris, pulvinar at cursus eleifend, dictum sit
+                amet lectus. Sed vel mi at ipsum mollis pulvinar. Vestibulum
+                ante ipsum primis in faucibus orci luctus et ultrices posuere
+                cubilia curae; Phasellus vehicula dictum mauris. Pellentesque
+                tempus velit magna, eget consequat massa viverra eu. Cras dui
+                nisi, rhoncus et molestie mattis, consequat in dolor. Nam
+                iaculis mi justo, quis molestie ipsum eleifend quis. Cras ut
+                lobortis leo. Curabitur non lorem velit.
+              </p>
+              <p>
+                Curabitur lobortis tortor metus, non mollis orci fermentum ac.
+                Pellentesque ac ex eget massa commodo pellentesque at nec justo.
+                Aliquam condimentum varius volutpat. Nam pharetra nec nibh in
+                malesuada. Phasellus nisl lorem, auctor ac tellus vitae, congue
+                ultrices sem. Sed at quam et dui lacinia commodo. Proin commodo
+                suscipit dolor at efficitur. Quisque sapien dolor, eleifend sit
+                amet luctus in, suscipit vitae massa. Sed dignissim facilisis
+                suscipit. Aenean rutrum aliquet orci, nec placerat leo suscipit
+                placerat. Pellentesque justo eros, suscipit quis arcu at,
+                lacinia auctor massa.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <main>
+        <p>main test1</p>
+      </main>
+      <footer>
+        <p>create by Misza</p>
+      </footer>
     </div>
   </body>
   <script src="../src/App.ts"></script>
