@@ -61,7 +61,6 @@ class App {
       .then((data) => {
         console.log(data);
         CarPropierties = data;
-        return data;
       })
       .catch((err) => {
         console.log(err);

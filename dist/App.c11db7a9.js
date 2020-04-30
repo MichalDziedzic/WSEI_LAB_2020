@@ -179,7 +179,6 @@ function () {
       }).then(function (data) {
         console.log(data);
         CarPropierties = data;
-        return data;
       }).catch(function (err) {
         console.log(err);
         return new Error("sry api not works");
