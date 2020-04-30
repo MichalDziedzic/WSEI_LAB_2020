@@ -117,64 +117,58 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../src/Ui.ts":[function(require,module,exports) {
+})({"../src/App.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var Ui =
+var App =
 /** @class */
 function () {
-  function Ui(data) {
+  function App() {
     var _this = this;
 
-    this.printData = function () {
-      console.log(_this.data);
-      var main = document.createElement("main");
-      var headerRaport = document.createElement("div");
-      var mainRaport = document.createElement("div");
-      var infoRaport = document.createElement("div");
-      var imgRaport = document.createElement("div");
-      var detailsRaport = document.createElement("div");
-      var elemHeaderRaport = document.createElement("h3");
-      headerRaport.className = "headerRaport";
+    this.startAppEvent = function () {
+      if (_this.btnCheck) {
+        if (_this.vinCodeEl != null) {
+          _this.vinCodeEl.addEventListener("keyup", function () {
+            return _this.handleKeyUp();
+          });
+
+          _this.btnCheck.addEventListener("click", function () {
+            return _this.handleClickCheck();
+          });
+        } else {
+          throw new Error("vin not found");
+        }
+      } else {
+        throw new Error("Button not found");
+      }
     };
 
-    this.data = data;
-    this.printData();
-  }
+    this.handleKeyUp = function () {
+      var _a;
 
-  return Ui;
-}();
+      (_a = _this.vinCodeEl) === null || _a === void 0 ? void 0 : _a.value.toUpperCase();
+    };
 
-exports.default = Ui;
-},{}],"../src/InfoVin.ts":[function(require,module,exports) {
-"use strict";
+    this.handleClickCheck = function () {
+      var _a;
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
+      _this.vinCode = (_a = _this.vinCodeEl) === null || _a === void 0 ? void 0 : _a.value;
+      console.log("chodzi" + _this.vinCode); // const checkVin: object | null = new InfoVin(vin);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+      var vin = _this.handleVinInfo();
 
-var Ui_1 = __importDefault(require("./Ui"));
+      document.querySelector("input[name=vinCode]").value = "";
+      console.log(vin);
+    };
 
-console.log(" działą w pliku  z klasa infoVin"); //1GNALDEK9FZ108495 example number vin
-
-var InfoVin =
-/** @class */
-function () {
-  function InfoVin(vin) {
-    var _this = this;
-
-    this.showVin = function () {
-      fetch("http://api.carmd.com/v3.0/decode?vin=" + _this.vin, {
+    this.handleVinInfo = function () {
+      var CarPropierties = {};
+      fetch("http://api.carmd.com/v3.0/decode?vin=" + _this.vinCode, {
         method: "GET",
         headers: {
           authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
@@ -184,59 +178,24 @@ function () {
         return response.json();
       }).then(function (data) {
         console.log(data);
-        new Ui_1.default(data);
+        CarPropierties = data;
+        return data;
       }).catch(function (err) {
         console.log(err);
+        return new Error("sry api not works");
       });
+      return CarPropierties;
     };
 
-    this.vin = vin; //this.showVin();
+    this.btnCheck = document.querySelector(".checkBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "";
+    this.startAppEvent();
   }
 
-  return InfoVin;
+  return App;
 }();
 
-exports.default = InfoVin;
-},{"./Ui":"../src/Ui.ts"}],"../src/App.ts":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var InfoVin_1 = __importDefault(require("./InfoVin"));
-
-console.log("dziala w pliku app js");
-var btnCheck = document.querySelector(".checkBtn");
-var vinCodeEl = document.querySelector("input[name=vinCode]");
-console.log(" działa  infoVin");
-
-if (btnCheck) {
-  if (vinCodeEl != null) {
-    //keyup
-    vinCodeEl.addEventListener("keyup", function (e) {
-      var vinik = document.querySelector("input[name=vinCode]").value;
-      document.querySelector("input[name=vinCode]").value = vinik.toUpperCase();
-    });
-    btnCheck.addEventListener("click", function (e) {
-      var vin = document.querySelector("input[name=vinCode]").value;
-      console.log("chodzi" + vin);
-      var checkVin = new InfoVin_1.default(vin);
-      document.querySelector("input[name=vinCode]").value = "";
-    });
-  } else {
-    throw new Error("vin not found");
-  }
-} else {
-  throw new Error("Button not found");
-}
-},{"./InfoVin":"../src/InfoVin.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/9400/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+new App();
+},{}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/14800/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -264,7 +223,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52113" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51798" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -440,5 +399,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/9400/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/14800/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map
