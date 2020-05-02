@@ -117,84 +117,197 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../src/App.ts":[function(require,module,exports) {
+})({"../src/Ui.ts":[function(require,module,exports) {
 "use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var App =
-/** @class */
-function () {
-  function App() {
-    var _this = this;
+var Ui = function Ui(data) {
+  var _this = this;
 
-    this.startAppEvent = function () {
-      if (_this.btnCheck) {
-        if (_this.vinCodeEl != null) {
-          _this.vinCodeEl.addEventListener("keyup", function () {
-            return _this.handleKeyUp();
-          });
+  _classCallCheck(this, Ui);
 
-          _this.btnCheck.addEventListener("click", function () {
-            return _this.handleClickCheck();
-          });
-        } else {
-          throw new Error("vin not found");
-        }
-      } else {
-        throw new Error("Button not found");
+  this.printData = function () {
+    console.log(_this.data);
+    var _this$data = _this.data,
+        engine = _this$data.engine,
+        make = _this$data.make,
+        manufacturer = _this$data.manufacturer,
+        model = _this$data.model,
+        transmission = _this$data.transmission,
+        trim = _this$data.trim,
+        years = _this$data.years;
+    var aside = document.querySelector("aside");
+    var main = document.createElement("main");
+    var headerRaport = document.createElement("div");
+    var mainRaport = document.createElement("div");
+    var infoRaport = document.createElement("div");
+    var imgRaport = document.createElement("div");
+    var detailsRaport = document.createElement("div");
+    var elemHeaderRaport = document.createElement("h3");
+    var vinLocationIMG = document.createElement("img");
+    headerRaport.className = "headerRaport";
+    mainRaport.className = "mainRaport";
+    infoRaport.className = "infoRaport";
+    imgRaport.className = "imgRaport";
+    vinLocationIMG.className = "vinImg";
+    var imgSrc = "../IMG/vinLocation.png";
+    infoRaport.innerHTML = "<ul>\n    <li>".concat(engine, "</li>\n    <li>").concat(make, "</li>\n    <li>").concat(manufacturer, "</li>\n    <li>").concat(model, "</li>\n    <li>").concat(transmission, "</li>\n    <li>").concat(trim, "</li>\n    <li>").concat(years, "</li>\n    </ul>");
+
+    if (aside != null) {
+      aside.before(main);
+      main.appendChild(headerRaport);
+      headerRaport.after(mainRaport);
+      mainRaport.appendChild(infoRaport);
+      infoRaport.after(imgRaport);
+      mainRaport.after(detailsRaport);
+      imgRaport.appendChild(vinLocationIMG);
+      headerRaport.appendChild(elemHeaderRaport);
+      elemHeaderRaport.innerText = "TWÓJ RAPORT POJAZDU";
+      var imgLocation = document.querySelector(".vinImg");
+
+      if (imgLocation != null) {
+        console.log("testImg");
+        imgLocation.setAttribute("src", "../IMG/vinLocation.png");
       }
+    }
+  };
+
+  this.data = data;
+  this.printData();
+};
+
+exports.default = Ui;
+},{}],"../src/App.ts":[function(require,module,exports) {
+"use strict";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Ui_1 = __importDefault(require("./Ui"));
+
+var App = function App() {
+  var _this = this;
+
+  _classCallCheck(this, App);
+
+  this.startAppEvent = function () {
+    if (_this.btnCheck) {
+      if (_this.vinCodeEl != null) {
+        _this.vinCodeEl.addEventListener("keyup", function () {
+          return _this.handleKeyUp();
+        });
+
+        _this.btnCheck.addEventListener("click", function () {
+          return _this.handleClickCheck();
+        });
+      } else {
+        throw new Error("vin not found");
+      }
+    } else {
+      throw new Error("Button not found");
+    }
+  };
+
+  this.handleKeyUp = function () {
+    var _a;
+
+    (_a = _this.vinCodeEl) === null || _a === void 0 ? void 0 : _a.value.toUpperCase();
+  };
+
+  this.handleClickCheck = function () {
+    var _a;
+
+    _this.vinCode = (_a = _this.vinCodeEl) === null || _a === void 0 ? void 0 : _a.value;
+    console.log("chodzi" + _this.vinCode);
+
+    _this.handleVinInfo();
+
+    document.querySelector("input[name=vinCode]").value = "";
+  };
+
+  this.handleVinInfo = function () {
+    var dataExample = {
+      manufacturer: "Genral-Motors",
+      make: "Mazda",
+      model: "mx-5",
+      engine: "2,4",
+      transmission: "AUTOMATIC",
+      trim: 127546,
+      fuel: "gas",
+      year: 2015,
+      vinNum: _this.vinCode
     };
+    new Ui_1.default(dataExample);
+    fetch("http://api.carmd.com/v3.0/decode?vin=".concat(_this.vinCode), {
+      method: "GET",
+      headers: {
+        authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
+        "partner-token": "fe1708c8fbc94a29a7885e04c837da04"
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log(data);
 
-    this.handleKeyUp = function () {
-      var _a;
+      _this.saveToLocalStorage(data);
 
-      (_a = _this.vinCodeEl) === null || _a === void 0 ? void 0 : _a.value.toUpperCase();
-    };
+      new Ui_1.default(data);
+    }).catch(function (err) {
+      console.log(err);
+      return new Error("sry api not works");
+    });
+  };
 
-    this.handleClickCheck = function () {
-      var _a;
+  this.saveToLocalStorage = function (data) {
+    if (_this.vinCode) localStorage.setItem(_this.vinCode, JSON.stringify(data));
+  };
 
-      _this.vinCode = (_a = _this.vinCodeEl) === null || _a === void 0 ? void 0 : _a.value;
-      console.log("chodzi" + _this.vinCode); // const checkVin: object | null = new InfoVin(vin);
+  this.getItemsFromLocalStorage = function () {
+    var items = Object.assign({}, localStorage);
 
-      var vin = _this.handleVinInfo();
+    for (var _i = 0, _Object$entries = Object.entries(items); _i < _Object$entries.length; _i++) {
+      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+          key = _Object$entries$_i[0],
+          value = _Object$entries$_i[1];
 
-      document.querySelector("input[name=vinCode]").value = "";
-      console.log(vin);
-    };
+      console.log(key, value);
+      console.log(JSON.parse(value));
+    }
+  };
 
-    this.handleVinInfo = function () {
-      var CarPropierties = {};
-      fetch("http://api.carmd.com/v3.0/decode?vin=" + _this.vinCode, {
-        method: "GET",
-        headers: {
-          authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-          "partner-token": "fe1708c8fbc94a29a7885e04c837da04"
-        }
-      }).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        console.log(data);
-        CarPropierties = data;
-      }).catch(function (err) {
-        console.log(err);
-        return new Error("sry api not works");
-      });
-      return CarPropierties;
-    };
-
-    this.btnCheck = document.querySelector(".checkBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "";
-    this.startAppEvent();
-  }
-
-  return App;
-}();
+  this.btnCheck = document.querySelector(".checkBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "";
+  this.startAppEvent();
+  this.getItemsFromLocalStorage();
+};
 
 new App();
-},{}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/14800/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/15184/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -222,7 +335,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51798" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59093" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -398,5 +511,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/14800/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/15184/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

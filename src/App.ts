@@ -1,4 +1,5 @@
 import InfoVin from "./InfoVin";
+import Ui from "./Ui";
 
 class App {
   btnCheck: HTMLElement | null;
@@ -12,6 +13,7 @@ class App {
       (this.vin = null),
       (this.vinCode = "");
     this.startAppEvent();
+    this.getItemsFromLocalStorage();
   }
   startAppEvent = () => {
     if (this.btnCheck) {
@@ -38,16 +40,25 @@ class App {
 
     console.log("chodzi" + this.vinCode);
 
-    // const checkVin: object | null = new InfoVin(vin);
-    const vin: object = this.handleVinInfo();
+    this.handleVinInfo();
 
     (<HTMLInputElement>document.querySelector("input[name=vinCode]")).value =
       "";
-    console.log(vin);
   };
 
-  handleVinInfo = (): Object => {
-    let CarPropierties: Object = {};
+  handleVinInfo = (): void => {
+    const dataExample: object = {
+      manufacturer: "Genral-Motors",
+      make: "Mazda",
+      model: "mx-5",
+      engine: "2,4",
+      transmission: "AUTOMATIC",
+      trim: 127546,
+      fuel: "gas",
+      year: 2015,
+      vinNum: this.vinCode,
+    };
+    new Ui(dataExample);
     fetch(`http://api.carmd.com/v3.0/decode?vin=${this.vinCode}`, {
       method: "GET",
       headers: {
@@ -60,13 +71,24 @@ class App {
       })
       .then((data) => {
         console.log(data);
-        CarPropierties = data;
+        this.saveToLocalStorage(data);
+        new Ui(data);
       })
       .catch((err) => {
         console.log(err);
         return new Error("sry api not works");
       });
-    return CarPropierties;
+  };
+  saveToLocalStorage = (data: object) => {
+    if (this.vinCode) localStorage.setItem(this.vinCode, JSON.stringify(data));
+  };
+  getItemsFromLocalStorage = () => {
+    const items = { ...localStorage };
+
+    for (const [key, value] of Object.entries(items)) {
+      console.log(key, value);
+      console.log(JSON.parse(value));
+    }
   };
 }
 
