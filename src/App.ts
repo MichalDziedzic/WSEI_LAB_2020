@@ -4,19 +4,23 @@ import Ui from "./Ui";
 class App {
   btnCheck: HTMLElement | null;
   btnDetailsRaport: HTMLElement | null;
+  ContainerDetailsRaport: HTMLElement | null;
   vinCodeEl: HTMLInputElement | null;
   vinCode: string | null | undefined;
   vin: string | null;
 
   constructor() {
     (this.btnCheck = document.querySelector(".checkBtn")),
+      (this.ContainerDetailsRaport = document.querySelector(
+        ".ContainerDetailsRaport"
+      )),
       (this.btnDetailsRaport = document.querySelector(".detailsBtn")),
       (this.vinCodeEl = document.querySelector("input[name=vinCode]")),
       (this.vin = null),
-      (this.vinCode = "");
-
-    this.startAppEvent();
+      (this.vinCode = ""),
+      this.startAppEvent();
   }
+
   startAppEvent = () => {
     if (this.btnCheck) {
       if (this.vinCodeEl != null) {
@@ -47,6 +51,13 @@ class App {
     (<HTMLInputElement>document.querySelector("input[name=vinCode]")).value =
       "";
   };
+  handleClickDetails = () => {
+    if (this.btnDetailsRaport) {
+      this.btnDetailsRaport.addEventListener<"click">("click", () =>
+        this.handleClickDetailsRaport()
+      );
+    }
+  };
   mergeVinData = (data: object) => {
     if (this.vinCode != null) {
       const vin = this.vinCode;
@@ -56,8 +67,7 @@ class App {
     }
   };
   handleClickDetailsRaport = () => {
-    console.log("ebebe");
-    // this.btnDetailsRaport?.setAttribute("display", "flex");
+    this.ContainerDetailsRaport?.setAttribute("style", `display:flex`);
   };
 
   handleVinInfo = (): void => {
@@ -75,6 +85,15 @@ class App {
     const testDuba: object | null = this.mergeVinData(dataExample);
 
     if (testDuba) new Ui(testDuba);
+
+    this.btnDetailsRaport = document.querySelector(".detailsBtn");
+    this.ContainerDetailsRaport = document.querySelector(
+      ".ContainerDetailsRaport"
+    );
+
+    this.handleClickDetails();
+
+    console.log(this.btnDetailsRaport);
 
     //   fetch(`http://api.carmd.com/v3.0/decode?vin=${this.vinCode}`, {
     //     method: "GET",

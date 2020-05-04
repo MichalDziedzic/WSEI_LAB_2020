@@ -161,7 +161,7 @@ var Ui = function Ui(data) {
     vinLocationIMG.className = "vinImg";
     var imgSrc = "../IMG/vinLocation.png";
     var describeBtn = "POKA\u017B SZCZEG\xD3\u0141Y ";
-    var btnDetails = "<button class=\"btn detailsBtn\">\n    <span>".concat(describeBtn, "<i class=\"fas fa-check\"></i></span>\n    </button>");
+    var btnDetails = "<button class=\"detailsBtn\">\n    <span>".concat(describeBtn, "<i class=\"fas fa-check\"></i></span>\n    </button>");
     infoRaport.innerHTML = "<ul>\n    <li>".concat(vin, "</li>\n    <li>").concat(engine, "</li>\n    <li>").concat(make, "</li>\n    <li>").concat(manufacturer, "</li>\n    <li>").concat(model, "</li>\n    <li>").concat(transmission, "</li>\n    <li>").concat(trim, "</li>\n    <li>").concat(years, "</li>\n    </ul>");
 
     if (aside != null) {
@@ -282,6 +282,14 @@ var App = function App() {
     document.querySelector("input[name=vinCode]").value = "";
   };
 
+  this.handleClickDetails = function () {
+    if (_this.btnDetailsRaport) {
+      _this.btnDetailsRaport.addEventListener("click", function () {
+        return _this.handleClickDetailsRaport();
+      });
+    }
+  };
+
   this.mergeVinData = function (data) {
     if (_this.vinCode != null) {
       var vin = _this.vinCode;
@@ -294,7 +302,9 @@ var App = function App() {
   };
 
   this.handleClickDetailsRaport = function () {
-    console.log("ebebe"); // this.btnDetailsRaport?.setAttribute("display", "flex");
+    var _a;
+
+    (_a = _this.ContainerDetailsRaport) === null || _a === void 0 ? void 0 : _a.setAttribute("style", "display:flex");
   };
 
   this.handleVinInfo = function () {
@@ -311,7 +321,13 @@ var App = function App() {
 
     var testDuba = _this.mergeVinData(dataExample);
 
-    if (testDuba) new Ui_1.default(testDuba); //   fetch(`http://api.carmd.com/v3.0/decode?vin=${this.vinCode}`, {
+    if (testDuba) new Ui_1.default(testDuba);
+    _this.btnDetailsRaport = document.querySelector(".detailsBtn");
+    _this.ContainerDetailsRaport = document.querySelector(".ContainerDetailsRaport");
+
+    _this.handleClickDetails();
+
+    console.log(_this.btnDetailsRaport); //   fetch(`http://api.carmd.com/v3.0/decode?vin=${this.vinCode}`, {
     //     method: "GET",
     //     headers: {
     //       authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
@@ -349,12 +365,11 @@ var App = function App() {
     }
   };
 
-  this.btnCheck = document.querySelector(".checkBtn"), this.btnDetailsRaport = document.querySelector(".detailsBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "";
-  this.startAppEvent();
+  this.btnCheck = document.querySelector(".checkBtn"), this.ContainerDetailsRaport = document.querySelector(".ContainerDetailsRaport"), this.btnDetailsRaport = document.querySelector(".detailsBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "", this.startAppEvent();
 };
 
 new App();
-},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16084/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8476/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -382,7 +397,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62113" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64306" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -558,5 +573,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16084/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8476/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map
