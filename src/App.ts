@@ -37,12 +37,25 @@ class App {
       throw new Error("Button not found");
     }
   };
-
+  validationInput = () => {};
   handleKeyUp = () => {
     this.vinCodeEl?.value.toUpperCase();
   };
   handleClickCheck = () => {
-    this.vinCode = this.vinCodeEl?.value;
+    if (this.vinCodeEl) {
+      const vinCodeUpper: string = this.vinCodeEl.value.toUpperCase();
+      if (
+        vinCodeUpper.length == 17 &&
+        vinCodeUpper.indexOf(" ") == -1 &&
+        vinCodeUpper.indexOf("I") == -1 &&
+        vinCodeUpper.indexOf("O") == -1 &&
+        vinCodeUpper.indexOf("Q") == -1
+      ) {
+        this.vinCode = this.vinCodeEl?.value;
+      } else {
+        throw new Error("inncorect vin format");
+      }
+    }
 
     console.log("chodzi" + this.vinCode);
 

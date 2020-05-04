@@ -265,6 +265,8 @@ var App = function App() {
     }
   };
 
+  this.validationInput = function () {};
+
   this.handleKeyUp = function () {
     var _a;
 
@@ -274,7 +276,16 @@ var App = function App() {
   this.handleClickCheck = function () {
     var _a;
 
-    _this.vinCode = (_a = _this.vinCodeEl) === null || _a === void 0 ? void 0 : _a.value;
+    if (_this.vinCodeEl) {
+      var vinCodeUpper = _this.vinCodeEl.value.toUpperCase();
+
+      if (vinCodeUpper.length == 17 && vinCodeUpper.indexOf(" ") == -1 && vinCodeUpper.indexOf("I") == -1 && vinCodeUpper.indexOf("O") == -1 && vinCodeUpper.indexOf("Q") == -1) {
+        _this.vinCode = (_a = _this.vinCodeEl) === null || _a === void 0 ? void 0 : _a.value;
+      } else {
+        throw new Error("inncorect vin format");
+      }
+    }
+
     console.log("chodzi" + _this.vinCode);
 
     _this.handleVinInfo();
