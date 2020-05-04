@@ -140,7 +140,8 @@ var Ui = function Ui(data) {
         model = _this$data.model,
         transmission = _this$data.transmission,
         trim = _this$data.trim,
-        years = _this$data.years;
+        years = _this$data.years,
+        vin = _this$data.vin;
     var aside = document.querySelector("aside");
     var main = document.createElement("main");
     var headerRaport = document.createElement("div");
@@ -148,15 +149,20 @@ var Ui = function Ui(data) {
     var infoRaport = document.createElement("div");
     var imgRaport = document.createElement("div");
     var detailsRaport = document.createElement("div");
+    var ContainerDetailsRaport = document.createElement("div");
     var elemHeaderRaport = document.createElement("h3");
     var vinLocationIMG = document.createElement("img");
     headerRaport.className = "headerRaport";
     mainRaport.className = "mainRaport";
     infoRaport.className = "infoRaport";
     imgRaport.className = "imgRaport";
+    ContainerDetailsRaport.className = "ContainerDetailsRaport";
+    detailsRaport.className = "detailsRaport";
     vinLocationIMG.className = "vinImg";
     var imgSrc = "../IMG/vinLocation.png";
-    infoRaport.innerHTML = "<ul>\n    <li>".concat(engine, "</li>\n    <li>").concat(make, "</li>\n    <li>").concat(manufacturer, "</li>\n    <li>").concat(model, "</li>\n    <li>").concat(transmission, "</li>\n    <li>").concat(trim, "</li>\n    <li>").concat(years, "</li>\n    </ul>");
+    var describeBtn = "POKA\u017B SZCZEG\xD3\u0141Y ";
+    var btnDetails = "<button class=\"btn detailsBtn\">\n    <span>".concat(describeBtn, "<i class=\"fas fa-check\"></i></span>\n    </button>");
+    infoRaport.innerHTML = "<ul>\n    <li>".concat(vin, "</li>\n    <li>").concat(engine, "</li>\n    <li>").concat(make, "</li>\n    <li>").concat(manufacturer, "</li>\n    <li>").concat(model, "</li>\n    <li>").concat(transmission, "</li>\n    <li>").concat(trim, "</li>\n    <li>").concat(years, "</li>\n    </ul>");
 
     if (aside != null) {
       aside.before(main);
@@ -165,7 +171,9 @@ var Ui = function Ui(data) {
       mainRaport.appendChild(infoRaport);
       infoRaport.after(imgRaport);
       mainRaport.after(detailsRaport);
+      detailsRaport.innerHTML = btnDetails;
       imgRaport.appendChild(vinLocationIMG);
+      main.after(ContainerDetailsRaport);
       headerRaport.appendChild(elemHeaderRaport);
       elemHeaderRaport.innerText = "TWÓJ RAPORT POJAZDU";
       var imgLocation = document.querySelector(".vinImg");
@@ -177,8 +185,31 @@ var Ui = function Ui(data) {
     }
   };
 
-  this.data = data;
-  this.printData();
+  this.updateData = function () {
+    //console.log(this.data);
+    var _this$data2 = _this.data,
+        engine = _this$data2.engine,
+        make = _this$data2.make,
+        manufacturer = _this$data2.manufacturer,
+        model = _this$data2.model,
+        transmission = _this$data2.transmission,
+        trim = _this$data2.trim,
+        years = _this$data2.years,
+        vin = _this$data2.vin;
+    var infoRaport = document.querySelector(".infoRaport");
+
+    if (infoRaport) {
+      infoRaport.innerHTML = "<ul>\n        <li>".concat(vin, "</li>\n          <li>").concat(engine, "</li>\n          <li>").concat(make, "</li>\n          <li>").concat(manufacturer, "</li>\n          <li>").concat(model, "</li>\n          <li>").concat(transmission, "</li>\n          <li>").concat(trim, "</li>\n          <li>").concat(years, "</li>\n          </ul>");
+    }
+  };
+
+  this.data = data, this.mainIsCreated = document.querySelector("main");
+
+  if (this.mainIsCreated != null && this.mainIsCreated != undefined) {
+    this.updateData();
+  } else {
+    this.printData();
+  }
 };
 
 exports.default = Ui;
@@ -251,6 +282,21 @@ var App = function App() {
     document.querySelector("input[name=vinCode]").value = "";
   };
 
+  this.mergeVinData = function (data) {
+    if (_this.vinCode != null) {
+      var vin = _this.vinCode;
+      return Object.assign({}, data, {
+        vin: vin
+      });
+    } else {
+      return null;
+    }
+  };
+
+  this.handleClickDetailsRaport = function () {
+    console.log("ebebe"); // this.btnDetailsRaport?.setAttribute("display", "flex");
+  };
+
   this.handleVinInfo = function () {
     var dataExample = {
       manufacturer: "Genral-Motors",
@@ -260,28 +306,30 @@ var App = function App() {
       transmission: "AUTOMATIC",
       trim: 127546,
       fuel: "gas",
-      year: 2015,
-      vinNum: _this.vinCode
+      year: 2015
     };
-    new Ui_1.default(dataExample);
-    fetch("http://api.carmd.com/v3.0/decode?vin=".concat(_this.vinCode), {
-      method: "GET",
-      headers: {
-        authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-        "partner-token": "fe1708c8fbc94a29a7885e04c837da04"
-      }
-    }).then(function (response) {
-      return response.json();
-    }).then(function (data) {
-      console.log(data);
 
-      _this.saveToLocalStorage(data);
+    var testDuba = _this.mergeVinData(dataExample);
 
-      new Ui_1.default(data);
-    }).catch(function (err) {
-      console.log(err);
-      return new Error("sry api not works");
-    });
+    if (testDuba) new Ui_1.default(testDuba); //   fetch(`http://api.carmd.com/v3.0/decode?vin=${this.vinCode}`, {
+    //     method: "GET",
+    //     headers: {
+    //       authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
+    //       "partner-token": "fe1708c8fbc94a29a7885e04c837da04",
+    //     },
+    //   })
+    //     .then((response) => {
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       console.log(data);
+    //       this.saveToLocalStorage(data);
+    //       new Ui(data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       return new Error("sry api not works");
+    //     });
   };
 
   this.saveToLocalStorage = function (data) {
@@ -301,13 +349,12 @@ var App = function App() {
     }
   };
 
-  this.btnCheck = document.querySelector(".checkBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "";
+  this.btnCheck = document.querySelector(".checkBtn"), this.btnDetailsRaport = document.querySelector(".detailsBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "";
   this.startAppEvent();
-  this.getItemsFromLocalStorage();
 };
 
 new App();
-},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/15184/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16084/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -335,7 +382,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59093" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62113" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -511,5 +558,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/15184/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16084/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

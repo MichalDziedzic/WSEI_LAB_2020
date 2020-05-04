@@ -3,17 +3,19 @@ import Ui from "./Ui";
 
 class App {
   btnCheck: HTMLElement | null;
+  btnDetailsRaport: HTMLElement | null;
   vinCodeEl: HTMLInputElement | null;
   vinCode: string | null | undefined;
   vin: string | null;
 
   constructor() {
     (this.btnCheck = document.querySelector(".checkBtn")),
+      (this.btnDetailsRaport = document.querySelector(".detailsBtn")),
       (this.vinCodeEl = document.querySelector("input[name=vinCode]")),
       (this.vin = null),
       (this.vinCode = "");
+
     this.startAppEvent();
-    this.getItemsFromLocalStorage();
   }
   startAppEvent = () => {
     if (this.btnCheck) {
@@ -45,6 +47,18 @@ class App {
     (<HTMLInputElement>document.querySelector("input[name=vinCode]")).value =
       "";
   };
+  mergeVinData = (data: object) => {
+    if (this.vinCode != null) {
+      const vin = this.vinCode;
+      return Object.assign({}, data, { vin });
+    } else {
+      return null;
+    }
+  };
+  handleClickDetailsRaport = () => {
+    console.log("ebebe");
+    // this.btnDetailsRaport?.setAttribute("display", "flex");
+  };
 
   handleVinInfo = (): void => {
     const dataExample: object = {
@@ -56,28 +70,31 @@ class App {
       trim: 127546,
       fuel: "gas",
       year: 2015,
-      vinNum: this.vinCode,
     };
-    new Ui(dataExample);
-    fetch(`http://api.carmd.com/v3.0/decode?vin=${this.vinCode}`, {
-      method: "GET",
-      headers: {
-        authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-        "partner-token": "fe1708c8fbc94a29a7885e04c837da04",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        this.saveToLocalStorage(data);
-        new Ui(data);
-      })
-      .catch((err) => {
-        console.log(err);
-        return new Error("sry api not works");
-      });
+
+    const testDuba: object | null = this.mergeVinData(dataExample);
+
+    if (testDuba) new Ui(testDuba);
+
+    //   fetch(`http://api.carmd.com/v3.0/decode?vin=${this.vinCode}`, {
+    //     method: "GET",
+    //     headers: {
+    //       authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
+    //       "partner-token": "fe1708c8fbc94a29a7885e04c837da04",
+    //     },
+    //   })
+    //     .then((response) => {
+    //       return response.json();
+    //     })
+    //     .then((data) => {
+    //       console.log(data);
+    //       this.saveToLocalStorage(data);
+    //       new Ui(data);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //       return new Error("sry api not works");
+    //     });
   };
   saveToLocalStorage = (data: object) => {
     if (this.vinCode) localStorage.setItem(this.vinCode, JSON.stringify(data));

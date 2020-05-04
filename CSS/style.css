@@ -58,7 +58,8 @@ nav {
 #InputVin {
   height: 25px;
 }
-.btn {
+.btn,
+.detailsBtn {
   height: 31px;
   background: white;
   border: 1px solid black;
@@ -135,6 +136,12 @@ main {
   object-fit: cover;
   height: 55vh;
   width: 90%;
+}
+.ContainerDetailsRaport {
+  min-height: 40vh;
+  width: 100%;
+  background: orange;
+  display: none;
 }
 aside {
   background: seagreen;

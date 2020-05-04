@@ -1,9 +1,14 @@
 export default class Ui {
   data: object;
+  mainIsCreated: HTMLElement | null;
 
   constructor(data: object) {
-    this.data = data;
-    this.printData();
+    (this.data = data), (this.mainIsCreated = document.querySelector("main"));
+    if (this.mainIsCreated != null && this.mainIsCreated != undefined) {
+      this.updateData();
+    } else {
+      this.printData();
+    }
   }
   printData = () => {
     console.log(this.data);
@@ -15,6 +20,7 @@ export default class Ui {
       transmission,
       trim,
       years,
+      vin,
     } = this.data;
 
     const aside: HTMLElement | null = document.querySelector("aside");
@@ -25,6 +31,7 @@ export default class Ui {
     const infoRaport: HTMLElement = document.createElement("div");
     const imgRaport: HTMLElement = document.createElement("div");
     const detailsRaport: HTMLElement = document.createElement("div");
+    const ContainerDetailsRaport: HTMLElement = document.createElement("div");
 
     const elemHeaderRaport: HTMLElement = document.createElement("h3");
     const vinLocationIMG: HTMLElement = document.createElement("img");
@@ -33,10 +40,18 @@ export default class Ui {
     mainRaport.className = "mainRaport";
     infoRaport.className = "infoRaport";
     imgRaport.className = "imgRaport";
+    ContainerDetailsRaport.className = "ContainerDetailsRaport";
+
+    detailsRaport.className = "detailsRaport";
     vinLocationIMG.className = "vinImg";
     const imgSrc: string = `../IMG/vinLocation.png`;
+    const describeBtn: string = `POKAŻ SZCZEGÓŁY `;
+    const btnDetails: string = `<button class="detailsBtn">
+    <span>${describeBtn}<i class="fas fa-check"></i></span>
+    </button>`;
 
     infoRaport.innerHTML = `<ul>
+    <li>${vin}</li>
     <li>${engine}</li>
     <li>${make}</li>
     <li>${manufacturer}</li>
@@ -53,7 +68,9 @@ export default class Ui {
       mainRaport.appendChild(infoRaport);
       infoRaport.after(imgRaport);
       mainRaport.after(detailsRaport);
+      detailsRaport.innerHTML = btnDetails;
       imgRaport.appendChild(vinLocationIMG);
+      main.after(ContainerDetailsRaport);
       headerRaport.appendChild(elemHeaderRaport);
       elemHeaderRaport.innerText = "TWÓJ RAPORT POJAZDU";
 
@@ -64,6 +81,33 @@ export default class Ui {
         console.log("testImg");
         imgLocation.setAttribute("src", "../IMG/vinLocation.png");
       }
+    }
+  };
+  updateData = () => {
+    //console.log(this.data);
+    const {
+      engine,
+      make,
+      manufacturer,
+      model,
+      transmission,
+      trim,
+      years,
+      vin,
+    } = this.data;
+
+    let infoRaport: HTMLElement | null = document.querySelector(".infoRaport");
+    if (infoRaport) {
+      infoRaport.innerHTML = `<ul>
+        <li>${vin}</li>
+          <li>${engine}</li>
+          <li>${make}</li>
+          <li>${manufacturer}</li>
+          <li>${model}</li>
+          <li>${transmission}</li>
+          <li>${trim}</li>
+          <li>${years}</li>
+          </ul>`;
     }
   };
 }
