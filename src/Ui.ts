@@ -19,7 +19,7 @@ export default class Ui {
       model,
       transmission,
       trim,
-      years,
+      year,
       vin,
     } = this.data;
 
@@ -58,7 +58,7 @@ export default class Ui {
     <li>${model}</li>
     <li>${transmission}</li>
     <li>${trim}</li>
-    <li>${years}</li>
+    <li>${year}</li>
     </ul>`;
 
     if (aside != null) {
@@ -92,7 +92,7 @@ export default class Ui {
       model,
       transmission,
       trim,
-      years,
+      year,
       vin,
     } = this.data;
 
@@ -106,7 +106,7 @@ export default class Ui {
           <li>${model}</li>
           <li>${transmission}</li>
           <li>${trim}</li>
-          <li>${years}</li>
+          <li>${year}</li>
           </ul>`;
     }
   };

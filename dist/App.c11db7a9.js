@@ -140,7 +140,7 @@ var Ui = function Ui(data) {
         model = _this$data.model,
         transmission = _this$data.transmission,
         trim = _this$data.trim,
-        years = _this$data.years,
+        year = _this$data.year,
         vin = _this$data.vin;
     var aside = document.querySelector("aside");
     var main = document.createElement("main");
@@ -162,7 +162,7 @@ var Ui = function Ui(data) {
     var imgSrc = "../IMG/vinLocation.png";
     var describeBtn = "POKA\u017B SZCZEG\xD3\u0141Y ";
     var btnDetails = "<button class=\"detailsBtn\">\n    <span>".concat(describeBtn, "<i class=\"fas fa-check\"></i></span>\n    </button>");
-    infoRaport.innerHTML = "<ul>\n    <li>".concat(vin, "</li>\n    <li>").concat(engine, "</li>\n    <li>").concat(make, "</li>\n    <li>").concat(manufacturer, "</li>\n    <li>").concat(model, "</li>\n    <li>").concat(transmission, "</li>\n    <li>").concat(trim, "</li>\n    <li>").concat(years, "</li>\n    </ul>");
+    infoRaport.innerHTML = "<ul>\n    <li>".concat(vin, "</li>\n    <li>").concat(engine, "</li>\n    <li>").concat(make, "</li>\n    <li>").concat(manufacturer, "</li>\n    <li>").concat(model, "</li>\n    <li>").concat(transmission, "</li>\n    <li>").concat(trim, "</li>\n    <li>").concat(year, "</li>\n    </ul>");
 
     if (aside != null) {
       aside.before(main);
@@ -194,12 +194,12 @@ var Ui = function Ui(data) {
         model = _this$data2.model,
         transmission = _this$data2.transmission,
         trim = _this$data2.trim,
-        years = _this$data2.years,
+        year = _this$data2.year,
         vin = _this$data2.vin;
     var infoRaport = document.querySelector(".infoRaport");
 
     if (infoRaport) {
-      infoRaport.innerHTML = "<ul>\n        <li>".concat(vin, "</li>\n          <li>").concat(engine, "</li>\n          <li>").concat(make, "</li>\n          <li>").concat(manufacturer, "</li>\n          <li>").concat(model, "</li>\n          <li>").concat(transmission, "</li>\n          <li>").concat(trim, "</li>\n          <li>").concat(years, "</li>\n          </ul>");
+      infoRaport.innerHTML = "<ul>\n        <li>".concat(vin, "</li>\n          <li>").concat(engine, "</li>\n          <li>").concat(make, "</li>\n          <li>").concat(manufacturer, "</li>\n          <li>").concat(model, "</li>\n          <li>").concat(transmission, "</li>\n          <li>").concat(trim, "</li>\n          <li>").concat(year, "</li>\n          </ul>");
     }
   };
 
@@ -288,7 +288,12 @@ var App = function App() {
 
     console.log("chodzi" + _this.vinCode);
 
-    _this.handleVinInfo();
+    _this.handleVinInfo("img"); //
+
+
+    _this.handleVinInfo("maintanceList");
+
+    _this.handleVinInfo("carData");
 
     document.querySelector("input[name=vinCode]").value = "";
   };
@@ -301,15 +306,8 @@ var App = function App() {
     }
   };
 
-  this.mergeVinData = function (data) {
-    if (_this.vinCode != null) {
-      var vin = _this.vinCode;
-      return Object.assign({}, data, {
-        vin: vin
-      });
-    } else {
-      return null;
-    }
+  this.mergeObjectData = function (data, data1) {
+    return Object.assign({}, data, data1);
   };
 
   this.handleClickDetailsRaport = function () {
@@ -318,45 +316,74 @@ var App = function App() {
     (_a = _this.ContainerDetailsRaport) === null || _a === void 0 ? void 0 : _a.setAttribute("style", "display:flex");
   };
 
-  this.handleVinInfo = function () {
-    var dataExample = {
-      manufacturer: "Genral-Motors",
-      make: "Mazda",
-      model: "mx-5",
-      engine: "2,4",
-      transmission: "AUTOMATIC",
-      trim: 127546,
-      fuel: "gas",
-      year: 2015
-    };
-
-    var testDuba = _this.mergeVinData(dataExample);
-
-    if (testDuba) new Ui_1.default(testDuba);
+  this.newGetRapportEl = function () {
     _this.btnDetailsRaport = document.querySelector(".detailsBtn");
     _this.ContainerDetailsRaport = document.querySelector(".ContainerDetailsRaport");
+  };
 
-    _this.handleClickDetails();
+  this.handleVinInfo = function (param) {
+    var apiArray = ["http://api.carmd.com/v3.0/image?vin", "http://api.carmd.com/v3.0/maintlist?vin", "http://api.carmd.com/v3.0/decode?vin"];
+    var test = "";
 
-    console.log(_this.btnDetailsRaport); //   fetch(`http://api.carmd.com/v3.0/decode?vin=${this.vinCode}`, {
-    //     method: "GET",
-    //     headers: {
-    //       authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-    //       "partner-token": "fe1708c8fbc94a29a7885e04c837da04",
-    //     },
-    //   })
-    //     .then((response) => {
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       console.log(data);
-    //       this.saveToLocalStorage(data);
-    //       new Ui(data);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       return new Error("sry api not works");
-    //     });
+    switch (param) {
+      case "img":
+        test = apiArray[0];
+        break;
+
+      case "maintanceList":
+        test = apiArray[1];
+        break;
+
+      case "carData":
+        test = apiArray[2];
+        break;
+    }
+
+    fetch("".concat(test, "=").concat(_this.vinCode), {
+      method: "GET",
+      headers: {
+        authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
+        "partner-token": "fe1708c8fbc94a29a7885e04c837da04"
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      var data = response.data,
+          message = response.message;
+      console.log(response); // this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
+      // console.log(`test dubatest to : ${this.testDuba}`);
+
+      switch (param) {
+        case "img":
+          _this.testDuba = _this.mergeObjectData({
+            image: data.image
+          }, _this.testDuba);
+          console.log("wszystko jasne" + _this.testDuba);
+          break;
+
+        case "maintanceList":
+          //this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
+          break;
+
+        case "carData":
+          _this.testDuba = _this.mergeObjectData(data, {
+            vin: _this.vinCode
+          });
+
+          _this.saveToLocalStorage(_this.testDuba);
+
+          if (_this.testDuba) new Ui_1.default(_this.testDuba);
+
+          _this.newGetRapportEl();
+
+          _this.handleClickDetails();
+
+          break;
+      }
+    }).catch(function (err) {
+      console.log(err);
+      return new Error("sry api not works");
+    });
   };
 
   this.saveToLocalStorage = function (data) {
@@ -376,11 +403,11 @@ var App = function App() {
     }
   };
 
-  this.btnCheck = document.querySelector(".checkBtn"), this.ContainerDetailsRaport = document.querySelector(".ContainerDetailsRaport"), this.btnDetailsRaport = document.querySelector(".detailsBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "", this.startAppEvent();
+  this.btnCheck = document.querySelector(".checkBtn"), this.ContainerDetailsRaport = document.querySelector(".ContainerDetailsRaport"), this.btnDetailsRaport = document.querySelector(".detailsBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "", this.testDuba = {}, this.startAppEvent();
 };
 
 new App();
-},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8476/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/3376/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -408,7 +435,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64306" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57329" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -584,5 +611,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8476/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/3376/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

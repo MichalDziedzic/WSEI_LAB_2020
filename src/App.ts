@@ -8,6 +8,7 @@ class App {
   vinCodeEl: HTMLInputElement | null;
   vinCode: string | null | undefined;
   vin: string | null;
+  testDuba: object;
 
   constructor() {
     (this.btnCheck = document.querySelector(".checkBtn")),
@@ -18,6 +19,7 @@ class App {
       (this.vinCodeEl = document.querySelector("input[name=vinCode]")),
       (this.vin = null),
       (this.vinCode = ""),
+      (this.testDuba = {}),
       this.startAppEvent();
   }
 
@@ -58,8 +60,10 @@ class App {
     }
 
     console.log("chodzi" + this.vinCode);
-
-    this.handleVinInfo();
+    this.handleVinInfo("img");
+    //
+    this.handleVinInfo("maintanceList");
+    this.handleVinInfo("carData");
 
     (<HTMLInputElement>document.querySelector("input[name=vinCode]")).value =
       "";
@@ -71,62 +75,83 @@ class App {
       );
     }
   };
-  mergeVinData = (data: object) => {
-    if (this.vinCode != null) {
-      const vin = this.vinCode;
-      return Object.assign({}, data, { vin });
-    } else {
-      return null;
-    }
+  mergeObjectData = (data: object, data1: object) => {
+    return Object.assign({}, data, data1);
   };
   handleClickDetailsRaport = () => {
     this.ContainerDetailsRaport?.setAttribute("style", `display:flex`);
   };
-
-  handleVinInfo = (): void => {
-    const dataExample: object = {
-      manufacturer: "Genral-Motors",
-      make: "Mazda",
-      model: "mx-5",
-      engine: "2,4",
-      transmission: "AUTOMATIC",
-      trim: 127546,
-      fuel: "gas",
-      year: 2015,
-    };
-
-    const testDuba: object | null = this.mergeVinData(dataExample);
-
-    if (testDuba) new Ui(testDuba);
-
+  newGetRapportEl = () => {
     this.btnDetailsRaport = document.querySelector(".detailsBtn");
+
     this.ContainerDetailsRaport = document.querySelector(
       ".ContainerDetailsRaport"
     );
+  };
 
-    this.handleClickDetails();
+  handleVinInfo = (param: string): void => {
+    const apiArray: Array<string> = [
+      "http://api.carmd.com/v3.0/image?vin",
+      "http://api.carmd.com/v3.0/maintlist?vin",
+      "http://api.carmd.com/v3.0/decode?vin",
+    ];
 
-    console.log(this.btnDetailsRaport);
+    let test: string = "";
 
-    //   fetch(`http://api.carmd.com/v3.0/decode?vin=${this.vinCode}`, {
-    //     method: "GET",
-    //     headers: {
-    //       authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-    //       "partner-token": "fe1708c8fbc94a29a7885e04c837da04",
-    //     },
-    //   })
-    //     .then((response) => {
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       console.log(data);
-    //       this.saveToLocalStorage(data);
-    //       new Ui(data);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //       return new Error("sry api not works");
-    //     });
+    switch (param) {
+      case "img":
+        test = apiArray[0];
+        break;
+      case "maintanceList":
+        test = apiArray[1];
+        break;
+      case "carData":
+        test = apiArray[2];
+        break;
+    }
+
+    fetch(`${test}=${this.vinCode}`, {
+      method: "GET",
+      headers: {
+        authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
+        "partner-token": "fe1708c8fbc94a29a7885e04c837da04",
+      },
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        const { data, message } = response;
+        console.log(response);
+        // this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
+        // console.log(`test dubatest to : ${this.testDuba}`);
+        switch (param) {
+          case "img":
+            this.testDuba = this.mergeObjectData(
+              { image: data.image },
+              this.testDuba
+            ) as object;
+            console.log("wszystko jasne" + this.testDuba);
+            break;
+          case "maintanceList":
+            //this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
+            break;
+          case "carData":
+            this.testDuba = this.mergeObjectData(data, {
+              vin: this.vinCode,
+            }) as object;
+            this.saveToLocalStorage(this.testDuba);
+            if (this.testDuba) new Ui(this.testDuba);
+
+            this.newGetRapportEl();
+            this.handleClickDetails();
+            break;
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return new Error("sry api not works");
+      });
   };
   saveToLocalStorage = (data: object) => {
     if (this.vinCode) localStorage.setItem(this.vinCode, JSON.stringify(data));
