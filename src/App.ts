@@ -59,9 +59,8 @@ class App {
       }
     }
 
-    console.log("chodzi" + this.vinCode);
     this.handleVinInfo("img");
-    //
+
     this.handleVinInfo("maintanceList");
     this.handleVinInfo("carData");
 
@@ -113,8 +112,8 @@ class App {
     fetch(`${test}=${this.vinCode}`, {
       method: "GET",
       headers: {
-        authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-        "partner-token": "fe1708c8fbc94a29a7885e04c837da04",
+        authorization: "Basic ZDIwMjE3OTMtNzM1Zi00YzIyLWI2NmEtNWRiZjRkMmIyMDEy", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", // ,"Basic NWYwYThhNWEtYjAxMy00YTQwLWFhZWUtZTM5OTQzNzJkZmU4", "Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZGRiZTVlZDAtYTM2Ni00NzVjLWFlOWItNTZhMGU4MWQ3Zjhj", //"Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
+        "partner-token": "543fafc5bd9b472ea5d6614e0b9a56d1", //"63e713fbbc4a4532b1e5edd6f25f39a3", "c0937ea58143414796ec5c98cbb9bfd8", //"fe1708c8fbc94a29a7885e04c837da04",
       },
     })
       .then((response) => {
@@ -122,31 +121,31 @@ class App {
       })
       .then((response) => {
         const { data, message } = response;
-        console.log(response);
-        // this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
-        // console.log(`test dubatest to : ${this.testDuba}`);
+
         switch (param) {
           case "img":
             this.testDuba = this.mergeObjectData(
-              { image: data.image },
+              { img: data.image },
               this.testDuba
             ) as object;
-            console.log("wszystko jasne" + this.testDuba);
+
             break;
           case "maintanceList":
-            //this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
+            this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
             break;
           case "carData":
-            this.testDuba = this.mergeObjectData(data, {
-              vin: this.vinCode,
-            }) as object;
-            this.saveToLocalStorage(this.testDuba);
-            if (this.testDuba) new Ui(this.testDuba);
+            this.testDuba = this.mergeObjectData(this.testDuba, data) as object;
 
             this.newGetRapportEl();
             this.handleClickDetails();
             break;
         }
+        this.testDuba = this.mergeObjectData(this.testDuba, {
+          vin: this.vinCode,
+        }) as object;
+
+        this.saveToLocalStorage(this.testDuba);
+        if (this.testDuba) new Ui(this.testDuba);
       })
       .catch((err) => {
         console.log(err);

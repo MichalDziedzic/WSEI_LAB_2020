@@ -11,7 +11,7 @@ export default class Ui {
     }
   }
   printData = () => {
-    console.log(this.data);
+    // console.log(this.data);
     const {
       engine,
       make,
@@ -21,6 +21,7 @@ export default class Ui {
       trim,
       year,
       vin,
+      img,
     } = this.data;
 
     const aside: HTMLElement | null = document.querySelector("aside");
@@ -78,8 +79,8 @@ export default class Ui {
         ".vinImg"
       );
       if (imgLocation != null) {
-        console.log("testImg");
-        imgLocation.setAttribute("src", "../IMG/vinLocation.png");
+        // console.log("testImg");
+        imgLocation.setAttribute("src", img);
       }
     }
   };
@@ -94,6 +95,7 @@ export default class Ui {
       trim,
       year,
       vin,
+      img,
     } = this.data;
 
     let infoRaport: HTMLElement | null = document.querySelector(".infoRaport");

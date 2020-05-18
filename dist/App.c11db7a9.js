@@ -132,7 +132,7 @@ var Ui = function Ui(data) {
   _classCallCheck(this, Ui);
 
   this.printData = function () {
-    console.log(_this.data);
+    // console.log(this.data);
     var _this$data = _this.data,
         engine = _this$data.engine,
         make = _this$data.make,
@@ -141,7 +141,8 @@ var Ui = function Ui(data) {
         transmission = _this$data.transmission,
         trim = _this$data.trim,
         year = _this$data.year,
-        vin = _this$data.vin;
+        vin = _this$data.vin,
+        img = _this$data.img;
     var aside = document.querySelector("aside");
     var main = document.createElement("main");
     var headerRaport = document.createElement("div");
@@ -179,8 +180,8 @@ var Ui = function Ui(data) {
       var imgLocation = document.querySelector(".vinImg");
 
       if (imgLocation != null) {
-        console.log("testImg");
-        imgLocation.setAttribute("src", "../IMG/vinLocation.png");
+        // console.log("testImg");
+        imgLocation.setAttribute("src", img);
       }
     }
   };
@@ -195,7 +196,8 @@ var Ui = function Ui(data) {
         transmission = _this$data2.transmission,
         trim = _this$data2.trim,
         year = _this$data2.year,
-        vin = _this$data2.vin;
+        vin = _this$data2.vin,
+        img = _this$data2.img;
     var infoRaport = document.querySelector(".infoRaport");
 
     if (infoRaport) {
@@ -286,10 +288,7 @@ var App = function App() {
       }
     }
 
-    console.log("chodzi" + _this.vinCode);
-
-    _this.handleVinInfo("img"); //
-
+    _this.handleVinInfo("img");
 
     _this.handleVinInfo("maintanceList");
 
@@ -342,37 +341,28 @@ var App = function App() {
     fetch("".concat(test, "=").concat(_this.vinCode), {
       method: "GET",
       headers: {
-        authorization: "Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-        "partner-token": "fe1708c8fbc94a29a7885e04c837da04"
+        authorization: "Basic ZDIwMjE3OTMtNzM1Zi00YzIyLWI2NmEtNWRiZjRkMmIyMDEy",
+        "partner-token": "543fafc5bd9b472ea5d6614e0b9a56d1"
       }
     }).then(function (response) {
       return response.json();
     }).then(function (response) {
       var data = response.data,
           message = response.message;
-      console.log(response); // this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
-      // console.log(`test dubatest to : ${this.testDuba}`);
 
       switch (param) {
         case "img":
           _this.testDuba = _this.mergeObjectData({
-            image: data.image
+            img: data.image
           }, _this.testDuba);
-          console.log("wszystko jasne" + _this.testDuba);
           break;
 
         case "maintanceList":
-          //this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
+          _this.testDuba = _this.mergeObjectData(data, _this.testDuba);
           break;
 
         case "carData":
-          _this.testDuba = _this.mergeObjectData(data, {
-            vin: _this.vinCode
-          });
-
-          _this.saveToLocalStorage(_this.testDuba);
-
-          if (_this.testDuba) new Ui_1.default(_this.testDuba);
+          _this.testDuba = _this.mergeObjectData(_this.testDuba, data);
 
           _this.newGetRapportEl();
 
@@ -380,6 +370,14 @@ var App = function App() {
 
           break;
       }
+
+      _this.testDuba = _this.mergeObjectData(_this.testDuba, {
+        vin: _this.vinCode
+      });
+
+      _this.saveToLocalStorage(_this.testDuba);
+
+      if (_this.testDuba) new Ui_1.default(_this.testDuba);
     }).catch(function (err) {
       console.log(err);
       return new Error("sry api not works");
@@ -407,7 +405,7 @@ var App = function App() {
 };
 
 new App();
-},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/3376/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8644/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -435,7 +433,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57329" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63386" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -611,5 +609,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/3376/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8644/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map
