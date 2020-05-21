@@ -71,17 +71,27 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: black;
 }
 
 .projects li:hover,
 .products li:hover {
   background-color: rgb(197, 173, 181);
+  cursor: pointer;
 }
 
 .projects a,
 .products a {
-  color: black;
+  color: white;
   text-decoration: none;
+}
+
+.vinHistory-test {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 15px 0 15px;
 }
 
 .dropdown button,

@@ -341,8 +341,8 @@ var App = function App() {
     fetch("".concat(test, "=").concat(_this.vinCode), {
       method: "GET",
       headers: {
-        authorization: "Basic ZDIwMjE3OTMtNzM1Zi00YzIyLWI2NmEtNWRiZjRkMmIyMDEy",
-        "partner-token": "543fafc5bd9b472ea5d6614e0b9a56d1"
+        authorization: "Basic ZTY2YzE0ZDgtMDYzMS00NDM0LTlkMDMtY2JmNzJiZjkwMDkz",
+        "partner-token": "41b91927b6104c9199daf05ff511368f"
       }
     }).then(function (response) {
       return response.json();
@@ -405,7 +405,7 @@ var App = function App() {
 };
 
 new App();
-},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8644/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8040/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -433,7 +433,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63386" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51714" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -609,5 +609,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8644/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8040/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

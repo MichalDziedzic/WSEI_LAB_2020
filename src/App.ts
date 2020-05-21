@@ -112,8 +112,8 @@ class App {
     fetch(`${test}=${this.vinCode}`, {
       method: "GET",
       headers: {
-        authorization: "Basic ZDIwMjE3OTMtNzM1Zi00YzIyLWI2NmEtNWRiZjRkMmIyMDEy", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", // ,"Basic NWYwYThhNWEtYjAxMy00YTQwLWFhZWUtZTM5OTQzNzJkZmU4", "Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZGRiZTVlZDAtYTM2Ni00NzVjLWFlOWItNTZhMGU4MWQ3Zjhj", //"Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-        "partner-token": "543fafc5bd9b472ea5d6614e0b9a56d1", //"63e713fbbc4a4532b1e5edd6f25f39a3", "c0937ea58143414796ec5c98cbb9bfd8", //"fe1708c8fbc94a29a7885e04c837da04",
+        authorization: "Basic ZTY2YzE0ZDgtMDYzMS00NDM0LTlkMDMtY2JmNzJiZjkwMDkz", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZDIwMjE3OTMtNzM1Zi00YzIyLWI2NmEtNWRiZjRkMmIyMDEy", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", // ,"Basic NWYwYThhNWEtYjAxMy00YTQwLWFhZWUtZTM5OTQzNzJkZmU4", "Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZGRiZTVlZDAtYTM2Ni00NzVjLWFlOWItNTZhMGU4MWQ3Zjhj", //"Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
+        "partner-token": "41b91927b6104c9199daf05ff511368f", // "63e713fbbc4a4532b1e5edd6f25f39a3", // "543fafc5bd9b472ea5d6614e0b9a56d1", //"63e713fbbc4a4532b1e5edd6f25f39a3", "c0937ea58143414796ec5c98cbb9bfd8", //"fe1708c8fbc94a29a7885e04c837da04",
       },
     })
       .then((response) => {
