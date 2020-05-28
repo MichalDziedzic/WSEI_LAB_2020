@@ -117,7 +117,42 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../src/Ui.ts":[function(require,module,exports) {
+})({"../src/VinHistoryUI.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var VinHistoryUI = function VinHistoryUI() {
+  var _this = this;
+
+  _classCallCheck(this, VinHistoryUI);
+
+  this.DisplayVinHeader = function (HistoryVin) {
+    var vin = HistoryVin.vin;
+    var li = document.createElement("li");
+    var shortDescVin = document.createElement("p");
+    var HeaderHistoryVin = document.createElement("div");
+    shortDescVin.innerHTML = "testVin-HISTORY";
+    HeaderHistoryVin.className = "vinHistory-test";
+    HeaderHistoryVin.setAttribute("id", "key-test");
+
+    if (_this.listVinEl) {
+      _this.listVinEl.appendChild(li);
+
+      HeaderHistoryVin.innerHTML = " <p>".concat(vin, "</p><a href='usun'>X</a>");
+      li.appendChild(HeaderHistoryVin);
+    }
+  };
+
+  this.listVinEl = document.querySelector(".hitoryVin-Bar");
+};
+
+exports.default = VinHistoryUI;
+},{}],"../src/Ui.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -242,6 +277,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var VinHistoryUI_1 = __importDefault(require("./VinHistoryUI"));
+
 var Ui_1 = __importDefault(require("./Ui"));
 
 var App = function App() {
@@ -250,6 +287,11 @@ var App = function App() {
   _classCallCheck(this, App);
 
   this.startAppEvent = function () {
+    // const testUIHIS = new HistoryUI();
+    // testUIHIS.DisplayVinHeader("1GNALDEK9FZ108495");
+    // console.log(testUIHIS);
+    _this.getItemsFromLocalStorage();
+
     if (_this.btnCheck) {
       if (_this.vinCodeEl != null) {
         _this.vinCodeEl.addEventListener("keyup", function () {
@@ -398,6 +440,8 @@ var App = function App() {
 
       console.log(key, value);
       console.log(JSON.parse(value));
+      var testUIHIS = new VinHistoryUI_1.default();
+      testUIHIS.DisplayVinHeader(JSON.parse(value));
     }
   };
 
@@ -405,7 +449,7 @@ var App = function App() {
 };
 
 new App();
-},{"./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/2312/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/2312/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

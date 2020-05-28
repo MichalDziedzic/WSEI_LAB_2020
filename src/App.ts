@@ -1,4 +1,4 @@
-import InfoVin from "./InfoVin";
+import HistoryUI from "./VinHistoryUI";
 import Ui from "./Ui";
 
 class App {
@@ -24,6 +24,11 @@ class App {
   }
 
   startAppEvent = () => {
+    // const testUIHIS = new HistoryUI();
+    // testUIHIS.DisplayVinHeader("1GNALDEK9FZ108495");
+    // console.log(testUIHIS);
+    this.getItemsFromLocalStorage();
+
     if (this.btnCheck) {
       if (this.vinCodeEl != null) {
         this.vinCodeEl.addEventListener<"keyup">("keyup", () =>
@@ -160,7 +165,12 @@ class App {
 
     for (const [key, value] of Object.entries(items)) {
       console.log(key, value);
+
       console.log(JSON.parse(value));
+
+      const testUIHIS = new HistoryUI();
+
+      testUIHIS.DisplayVinHeader(JSON.parse(value));
     }
   };
 }
