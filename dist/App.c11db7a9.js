@@ -117,7 +117,58 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../src/VinHistoryUI.ts":[function(require,module,exports) {
+})({"../src/VinHistory.ts":[function(require,module,exports) {
+"use strict"; // import Ui from "./Ui";
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+}); // console.log(" działą w pliku  z klasa infoVin");
+// //1GNALDEK9FZ108495 example number vin
+
+var VinHistory = function VinHistory() {
+  _classCallCheck(this, VinHistory);
+
+  this.saveItemToLocalStorage = function (vinCode, data) {
+    localStorage.setItem(vinCode, JSON.stringify(data));
+  };
+
+  this.getItemsFromLocalStorage = function () {
+    var items = Object.assign({}, localStorage);
+
+    if (items.length != 0) {
+      for (var _i = 0, _Object$entries = Object.entries(items); _i < _Object$entries.length; _i++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+            key = _Object$entries$_i[0],
+            value = _Object$entries$_i[1];
+
+        console.log(key, value);
+        console.log("w vinHistory " + JSON.parse(value)); //const testUIHIS = new HistoryUI();
+        //testUIHIS.DisplayVinHeader(JSON.parse(value));
+
+        return JSON.parse(value);
+      }
+    } else {
+      return false;
+    }
+  };
+};
+
+exports.default = VinHistory;
+},{}],"../src/VinHistoryUI.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -253,18 +304,6 @@ exports.default = Ui;
 },{}],"../src/App.ts":[function(require,module,exports) {
 "use strict";
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -276,6 +315,8 @@ var __importDefault = this && this.__importDefault || function (mod) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var VinHistory_1 = __importDefault(require("./VinHistory"));
 
 var VinHistoryUI_1 = __importDefault(require("./VinHistoryUI"));
 
@@ -290,7 +331,7 @@ var App = function App() {
     // const testUIHIS = new HistoryUI();
     // testUIHIS.DisplayVinHeader("1GNALDEK9FZ108495");
     // console.log(testUIHIS);
-    _this.getItemsFromLocalStorage();
+    _this.handleDataFromLocal();
 
     if (_this.btnCheck) {
       if (_this.vinCodeEl != null) {
@@ -417,39 +458,38 @@ var App = function App() {
         vin: _this.vinCode
       });
 
-      _this.saveToLocalStorage(_this.testDuba);
+      if (_this.testDuba) {
+        _this.saveDataToLocal(_this.testDuba);
 
-      if (_this.testDuba) new Ui_1.default(_this.testDuba);
+        new Ui_1.default(_this.testDuba);
+      }
     }).catch(function (err) {
       console.log(err);
       return new Error("sry api not works");
     });
   };
 
-  this.saveToLocalStorage = function (data) {
-    if (_this.vinCode) localStorage.setItem(_this.vinCode, JSON.stringify(data));
+  this.saveDataToLocal = function (data) {
+    if (_this.vinCode) _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
   };
 
-  this.getItemsFromLocalStorage = function () {
-    var items = Object.assign({}, localStorage);
+  this.handleDataFromLocal = function () {
+    var testData = _this.VinHistory.getItemsFromLocalStorage();
 
-    for (var _i = 0, _Object$entries = Object.entries(items); _i < _Object$entries.length; _i++) {
-      var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
-          key = _Object$entries$_i[0],
-          value = _Object$entries$_i[1];
-
-      console.log(key, value);
-      console.log(JSON.parse(value));
-      var testUIHIS = new VinHistoryUI_1.default();
-      testUIHIS.DisplayVinHeader(JSON.parse(value));
+    if (testData) {
+      _this.HistoryUi.DisplayVinHeader(testData);
+    } else {
+      console.log("your histroy vin not found!");
     }
   };
 
-  this.btnCheck = document.querySelector(".checkBtn"), this.ContainerDetailsRaport = document.querySelector(".ContainerDetailsRaport"), this.btnDetailsRaport = document.querySelector(".detailsBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "", this.testDuba = {}, this.startAppEvent();
+  this.btnCheck = document.querySelector(".checkBtn"), this.ContainerDetailsRaport = document.querySelector(".ContainerDetailsRaport"), this.btnDetailsRaport = document.querySelector(".detailsBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "", this.testDuba = {}, this.VinHistory = new VinHistory_1.default();
+  this.HistoryUi = new VinHistoryUI_1.default();
+  this.startAppEvent();
 };
 
 new App();
-},{"./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/2312/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16984/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -477,7 +517,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60893" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51060" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -653,5 +693,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/2312/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16984/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

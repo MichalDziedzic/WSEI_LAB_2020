@@ -1,3 +1,4 @@
+import VinHistory from "./VinHistory";
 import HistoryUI from "./VinHistoryUI";
 import Ui from "./Ui";
 
@@ -8,6 +9,8 @@ class App {
   vinCodeEl: HTMLInputElement | null;
   vinCode: string | null | undefined;
   vin: string | null;
+  VinHistory: VinHistory;
+  HistoryUi: HistoryUI;
   testDuba: object;
 
   constructor() {
@@ -20,14 +23,16 @@ class App {
       (this.vin = null),
       (this.vinCode = ""),
       (this.testDuba = {}),
-      this.startAppEvent();
+      (this.VinHistory = new VinHistory());
+    this.HistoryUi = new HistoryUI();
+    this.startAppEvent();
   }
 
   startAppEvent = () => {
     // const testUIHIS = new HistoryUI();
     // testUIHIS.DisplayVinHeader("1GNALDEK9FZ108495");
     // console.log(testUIHIS);
-    this.getItemsFromLocalStorage();
+    this.handleDataFromLocal();
 
     if (this.btnCheck) {
       if (this.vinCodeEl != null) {
@@ -149,28 +154,27 @@ class App {
           vin: this.vinCode,
         }) as object;
 
-        this.saveToLocalStorage(this.testDuba);
-        if (this.testDuba) new Ui(this.testDuba);
+        if (this.testDuba) {
+          this.saveDataToLocal(this.testDuba);
+          new Ui(this.testDuba);
+        }
       })
       .catch((err) => {
         console.log(err);
         return new Error("sry api not works");
       });
   };
-  saveToLocalStorage = (data: object) => {
-    if (this.vinCode) localStorage.setItem(this.vinCode, JSON.stringify(data));
+  saveDataToLocal = (data: object) => {
+    if (this.vinCode)
+      this.VinHistory.saveItemToLocalStorage(this.vinCode, data);
   };
-  getItemsFromLocalStorage = () => {
-    const items = { ...localStorage };
+  handleDataFromLocal = () => {
+    const testData: object = this.VinHistory.getItemsFromLocalStorage();
 
-    for (const [key, value] of Object.entries(items)) {
-      console.log(key, value);
-
-      console.log(JSON.parse(value));
-
-      const testUIHIS = new HistoryUI();
-
-      testUIHIS.DisplayVinHeader(JSON.parse(value));
+    if (testData) {
+      this.HistoryUi.DisplayVinHeader(testData);
+    } else {
+      console.log("your histroy vin not found!");
     }
   };
 }
