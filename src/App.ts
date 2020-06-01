@@ -30,9 +30,36 @@ class App {
   }
 
   startAppEvent = () => {
+    //const ElemHistoryVin = document.querySelector(".hitoryVin-Bar");
+
+    //console.log(ElemHistoryVin);
+
+    // console.log(item);
+
     // const testUIHIS = new HistoryUI();
     // testUIHIS.DisplayVinHeader("1GNALDEK9FZ108495");
     // console.log(testUIHIS);
+    // const listVinEl: HTMLElement | null = document.querySelector(
+    //   ".hitoryVin-Bar"
+    // );
+    // console.log(listVinEl);
+
+    // listVinEl?.addEventListener<"click">("click", (e) => console.log(e.target));
+
+    // const element1 = document.querySelector(".a-class");
+    // const element2 = document.querySelector(".another-class");
+
+    // body.addEventListener('click', event => {
+    //   if (event.target !== element1 && event.target !== element2) {
+    //     return
+    //   }
+    //   //handle click
+    // }
+    // document.querySelectorAll(".vinHistory-test").forEach((item) => {
+    //   item.addEventListener("click", (e) => {
+    //     console.log(e.target);
+    //   });
+    // });
 
     if (this.btnCheck) {
       if (this.vinCodeEl != null) {
@@ -171,7 +198,7 @@ class App {
   };
   handleDataFromLocal = () => {
     const testData = this.VinHistory.getItemsFromLocalStorage();
-    console.log(testData);
+    //console.log(testData);
 
     if (testData) {
       this.HistoryUi.DisplayVinHeader(testData);

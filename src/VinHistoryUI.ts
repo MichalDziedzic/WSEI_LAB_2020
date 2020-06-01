@@ -1,13 +1,15 @@
 export default class VinHistoryUI {
   listVinEl: HTMLElement | null;
+  ElemHistoryVin: null | NodeListOf<Element>;
   constructor() {
     this.listVinEl = document.querySelector(".hitoryVin-Bar");
+    this.ElemHistoryVin = null;
   }
-
   DisplayVinHeader = (HistoryVin: Array<object>) => {
     HistoryVin.map((el) => {
       const { vin } = el;
       const li: HTMLElement = document.createElement("li");
+      li.addEventListener("mousedown", (e) => this.handleMouseDownListElem(e));
       const shortDescVin: HTMLElement = document.createElement("p");
       const HeaderHistoryVin: HTMLElement = document.createElement("div");
 
@@ -21,5 +23,10 @@ export default class VinHistoryUI {
         li.appendChild(HeaderHistoryVin);
       }
     });
+  };
+  handleMouseDownListElem = (e: Event) => {
+    let id = e.toElement.id;
+
+    console.log(id);
   };
 }

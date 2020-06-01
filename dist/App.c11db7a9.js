@@ -147,8 +147,8 @@ var VinHistory = function VinHistory() {
   };
 
   this.getItemsFromLocalStorage = function () {
-    var items = Object.assign({}, localStorage);
-    console.log(items);
+    var items = Object.assign({}, localStorage); //console.log(items);
+
     var tabtest = [];
 
     if (items.length != 0) {
@@ -185,6 +185,9 @@ var VinHistoryUI = function VinHistoryUI() {
     HistoryVin.map(function (el) {
       var vin = el.vin;
       var li = document.createElement("li");
+      li.addEventListener("mousedown", function (e) {
+        return _this.handleMouseDownListElem(e);
+      });
       var shortDescVin = document.createElement("p");
       var HeaderHistoryVin = document.createElement("div");
       shortDescVin.innerHTML = "testVin-HISTORY";
@@ -200,7 +203,13 @@ var VinHistoryUI = function VinHistoryUI() {
     });
   };
 
+  this.handleMouseDownListElem = function (e) {
+    var id = e.toElement.id;
+    console.log(id);
+  };
+
   this.listVinEl = document.querySelector(".hitoryVin-Bar");
+  this.ElemHistoryVin = null;
 };
 
 exports.default = VinHistoryUI;
@@ -329,9 +338,30 @@ var App = function App() {
   _classCallCheck(this, App);
 
   this.startAppEvent = function () {
+    //const ElemHistoryVin = document.querySelector(".hitoryVin-Bar");
+    //console.log(ElemHistoryVin);
+    // console.log(item);
     // const testUIHIS = new HistoryUI();
     // testUIHIS.DisplayVinHeader("1GNALDEK9FZ108495");
     // console.log(testUIHIS);
+    // const listVinEl: HTMLElement | null = document.querySelector(
+    //   ".hitoryVin-Bar"
+    // );
+    // console.log(listVinEl);
+    // listVinEl?.addEventListener<"click">("click", (e) => console.log(e.target));
+    // const element1 = document.querySelector(".a-class");
+    // const element2 = document.querySelector(".another-class");
+    // body.addEventListener('click', event => {
+    //   if (event.target !== element1 && event.target !== element2) {
+    //     return
+    //   }
+    //   //handle click
+    // }
+    // document.querySelectorAll(".vinHistory-test").forEach((item) => {
+    //   item.addEventListener("click", (e) => {
+    //     console.log(e.target);
+    //   });
+    // });
     if (_this.btnCheck) {
       if (_this.vinCodeEl != null) {
         _this.vinCodeEl.addEventListener("keyup", function () {
@@ -473,9 +503,8 @@ var App = function App() {
   };
 
   this.handleDataFromLocal = function () {
-    var testData = _this.VinHistory.getItemsFromLocalStorage();
+    var testData = _this.VinHistory.getItemsFromLocalStorage(); //console.log(testData);
 
-    console.log(testData);
 
     if (testData) {
       _this.HistoryUi.DisplayVinHeader(testData);
@@ -491,7 +520,7 @@ var App = function App() {
 };
 
 new App();
-},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13480/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13476/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -519,7 +548,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62246" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50625" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -695,5 +724,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13480/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13476/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map
