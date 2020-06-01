@@ -25,6 +25,7 @@ class App {
       (this.testDuba = {}),
       (this.VinHistory = new VinHistory());
     this.HistoryUi = new HistoryUI();
+    this.handleDataFromLocal();
     this.startAppEvent();
   }
 
@@ -32,7 +33,6 @@ class App {
     // const testUIHIS = new HistoryUI();
     // testUIHIS.DisplayVinHeader("1GNALDEK9FZ108495");
     // console.log(testUIHIS);
-    this.handleDataFromLocal();
 
     if (this.btnCheck) {
       if (this.vinCodeEl != null) {
@@ -167,14 +167,16 @@ class App {
   saveDataToLocal = (data: object) => {
     if (this.vinCode)
       this.VinHistory.saveItemToLocalStorage(this.vinCode, data);
+    // this.handleDataFromLocal();
   };
   handleDataFromLocal = () => {
-    const testData: object = this.VinHistory.getItemsFromLocalStorage();
+    const testData = this.VinHistory.getItemsFromLocalStorage();
+    console.log(testData);
 
     if (testData) {
       this.HistoryUi.DisplayVinHeader(testData);
     } else {
-      console.log("your histroy vin not found!");
+      console.log("your histry vin not found!");
     }
   };
 }

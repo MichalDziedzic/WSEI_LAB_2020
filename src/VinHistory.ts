@@ -11,16 +11,16 @@ export default class VinHistory {
 
   getItemsFromLocalStorage = () => {
     const items = { ...localStorage };
+    console.log(items);
+    let tabtest: Array<object> = [];
+
     if (items.length != 0) {
-      for (const [key, value] of Object.entries(items)) {
-        console.log(key, value);
-        console.log("w vinHistory " + JSON.parse(value));
-        //const testUIHIS = new HistoryUI();
-        //testUIHIS.DisplayVinHeader(JSON.parse(value));
-        return JSON.parse(value);
-      }
+      Object.entries(items).forEach(([key, value]) => {
+        tabtest.push(JSON.parse(value));
+      });
+      return tabtest;
     } else {
-      return false;
+      return [];
     }
   };
 }

@@ -4,20 +4,22 @@ export default class VinHistoryUI {
     this.listVinEl = document.querySelector(".hitoryVin-Bar");
   }
 
-  DisplayVinHeader = (HistoryVin: object) => {
-    const { vin } = HistoryVin;
-    const li: HTMLElement = document.createElement("li");
-    const shortDescVin: HTMLElement = document.createElement("p");
-    const HeaderHistoryVin: HTMLElement = document.createElement("div");
+  DisplayVinHeader = (HistoryVin: Array<object>) => {
+    HistoryVin.map((el) => {
+      const { vin } = el;
+      const li: HTMLElement = document.createElement("li");
+      const shortDescVin: HTMLElement = document.createElement("p");
+      const HeaderHistoryVin: HTMLElement = document.createElement("div");
 
-    shortDescVin.innerHTML = "testVin-HISTORY";
-    HeaderHistoryVin.className = "vinHistory-test";
-    HeaderHistoryVin.setAttribute("id", "key-test");
+      shortDescVin.innerHTML = "testVin-HISTORY";
+      HeaderHistoryVin.className = "vinHistory-test";
+      HeaderHistoryVin.setAttribute("id", vin);
 
-    if (this.listVinEl) {
-      this.listVinEl.appendChild(li);
-      HeaderHistoryVin.innerHTML = ` <p>${vin}</p><a href='usun'>X</a>`;
-      li.appendChild(HeaderHistoryVin);
-    }
+      if (this.listVinEl) {
+        this.listVinEl.appendChild(li);
+        HeaderHistoryVin.innerHTML = ` <p>${vin}</p><a href='usun'>X</a>`;
+        li.appendChild(HeaderHistoryVin);
+      }
+    });
   };
 }
