@@ -132,6 +132,12 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 Object.defineProperty(exports, "__esModule", {
@@ -147,7 +153,8 @@ var VinHistory = function VinHistory() {
   };
 
   this.getItemsFromLocalStorage = function () {
-    var items = Object.assign({}, localStorage); //console.log(items);
+    var items = _objectSpread({}, localStorage); //console.log(items);
+
 
     var tabtest = [];
 
@@ -182,7 +189,7 @@ var Ui = function Ui(data) {
   _classCallCheck(this, Ui);
 
   this.printData = function () {
-    // console.log(this.data);
+    console.log(_this.data);
     var _this$data = _this.data,
         engine = _this$data.engine,
         make = _this$data.make,
@@ -253,6 +260,9 @@ var Ui = function Ui(data) {
     if (infoRaport) {
       infoRaport.innerHTML = "<ul>\n        <li>".concat(vin, "</li>\n          <li>").concat(engine, "</li>\n          <li>").concat(make, "</li>\n          <li>").concat(manufacturer, "</li>\n          <li>").concat(model, "</li>\n          <li>").concat(transmission, "</li>\n          <li>").concat(trim, "</li>\n          <li>").concat(year, "</li>\n          </ul>");
     }
+
+    var imgLocation = document.querySelector(".vinImg");
+    imgLocation ? imgLocation.setAttribute("src", img) : null;
   };
 
   this.data = data, this.mainIsCreated = document.querySelector("main");
@@ -316,11 +326,12 @@ var VinHistoryUI = function VinHistoryUI() {
     console.log(id);
     var testduba = new VinHistory_1.default().getItemsFromLocalStorage();
     console.log(testduba);
-    var xp = testduba.filter(function (el) {
+    var catchElemList = testduba.filter(function (el) {
       return el.vin == id;
     });
-    console.log(xp);
-    new Ui_1.default(xp);
+    catchElemList.map(function (el) {
+      return new Ui_1.default(el);
+    });
   };
 
   this.listVinEl = document.querySelector(".hitoryVin-Bar");
@@ -505,6 +516,8 @@ var App = function App() {
       });
 
       if (_this.testDuba) {
+        console.log(_this.testDuba);
+
         _this.saveDataToLocal(_this.testDuba);
 
         new Ui_1.default(_this.testDuba);

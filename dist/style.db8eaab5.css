@@ -175,7 +175,7 @@ aside {
 }
 
 main {
-  background: palevioletred;
+  background: white;
 }
 .headerRaport {
   width: 100%;
@@ -213,7 +213,6 @@ main {
 }
 .imgRaport > img {
   object-fit: cover;
-  height: 55vh;
   width: 90%;
 }
 .ContainerDetailsRaport {

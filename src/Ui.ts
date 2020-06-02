@@ -111,5 +111,9 @@ export default class Ui {
           <li>${year}</li>
           </ul>`;
     }
+    const imgLocation: HTMLImageElement | null = document.querySelector(
+      ".vinImg"
+    );
+    imgLocation ? imgLocation.setAttribute("src", img) : null;
   };
 }

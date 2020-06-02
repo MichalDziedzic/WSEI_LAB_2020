@@ -35,8 +35,8 @@ export default class VinHistoryUI {
     let testduba: Array<object> = new vinHistory().getItemsFromLocalStorage();
     console.log(testduba);
 
-    const xp = testduba.filter((el) => el.vin == id);
-    console.log(xp);
-    new Ui(xp);
+    const catchElemList: Array<object> = testduba.filter((el) => el.vin == id);
+
+    catchElemList.map((el) => new Ui(el));
   };
 }

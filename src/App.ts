@@ -182,6 +182,7 @@ class App {
         }) as object;
 
         if (this.testDuba) {
+          console.log(this.testDuba);
           this.saveDataToLocal(this.testDuba);
           new Ui(this.testDuba);
         }
