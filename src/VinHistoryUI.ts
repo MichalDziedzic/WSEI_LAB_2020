@@ -1,3 +1,5 @@
+import vinHistory from "./VinHistory";
+import Ui from "./Ui";
 export default class VinHistoryUI {
   listVinEl: HTMLElement | null;
   ElemHistoryVin: null | NodeListOf<Element>;
@@ -9,9 +11,11 @@ export default class VinHistoryUI {
     HistoryVin.map((el) => {
       const { vin } = el;
       const li: HTMLElement = document.createElement("li");
-      li.addEventListener("mousedown", (e) => this.handleMouseDownListElem(e));
       const shortDescVin: HTMLElement = document.createElement("p");
       const HeaderHistoryVin: HTMLElement = document.createElement("div");
+      HeaderHistoryVin.addEventListener("mousedown", (e) =>
+        this.handleMouseDownListElem(e)
+      );
 
       shortDescVin.innerHTML = "testVin-HISTORY";
       HeaderHistoryVin.className = "vinHistory-test";
@@ -28,5 +32,11 @@ export default class VinHistoryUI {
     let id = e.toElement.id;
 
     console.log(id);
+    let testduba: Array<object> = new vinHistory().getItemsFromLocalStorage();
+    console.log(testduba);
+
+    const xp = testduba.filter((el) => el.vin == id);
+    console.log(xp);
+    new Ui(xp);
   };
 }

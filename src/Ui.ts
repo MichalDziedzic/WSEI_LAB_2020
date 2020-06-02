@@ -11,7 +11,7 @@ export default class Ui {
     }
   }
   printData = () => {
-    // console.log(this.data);
+    console.log(this.data);
     const {
       engine,
       make,

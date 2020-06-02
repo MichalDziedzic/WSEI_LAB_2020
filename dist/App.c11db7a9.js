@@ -167,52 +167,6 @@ var VinHistory = function VinHistory() {
 };
 
 exports.default = VinHistory;
-},{}],"../src/VinHistoryUI.ts":[function(require,module,exports) {
-"use strict";
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var VinHistoryUI = function VinHistoryUI() {
-  var _this = this;
-
-  _classCallCheck(this, VinHistoryUI);
-
-  this.DisplayVinHeader = function (HistoryVin) {
-    HistoryVin.map(function (el) {
-      var vin = el.vin;
-      var li = document.createElement("li");
-      li.addEventListener("mousedown", function (e) {
-        return _this.handleMouseDownListElem(e);
-      });
-      var shortDescVin = document.createElement("p");
-      var HeaderHistoryVin = document.createElement("div");
-      shortDescVin.innerHTML = "testVin-HISTORY";
-      HeaderHistoryVin.className = "vinHistory-test";
-      HeaderHistoryVin.setAttribute("id", vin);
-
-      if (_this.listVinEl) {
-        _this.listVinEl.appendChild(li);
-
-        HeaderHistoryVin.innerHTML = " <p>".concat(vin, "</p><a href='usun'>X</a>");
-        li.appendChild(HeaderHistoryVin);
-      }
-    });
-  };
-
-  this.handleMouseDownListElem = function (e) {
-    var id = e.toElement.id;
-    console.log(id);
-  };
-
-  this.listVinEl = document.querySelector(".hitoryVin-Bar");
-  this.ElemHistoryVin = null;
-};
-
-exports.default = VinHistoryUI;
 },{}],"../src/Ui.ts":[function(require,module,exports) {
 "use strict";
 
@@ -311,7 +265,70 @@ var Ui = function Ui(data) {
 };
 
 exports.default = Ui;
-},{}],"../src/App.ts":[function(require,module,exports) {
+},{}],"../src/VinHistoryUI.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var VinHistory_1 = __importDefault(require("./VinHistory"));
+
+var Ui_1 = __importDefault(require("./Ui"));
+
+var VinHistoryUI = function VinHistoryUI() {
+  var _this = this;
+
+  _classCallCheck(this, VinHistoryUI);
+
+  this.DisplayVinHeader = function (HistoryVin) {
+    HistoryVin.map(function (el) {
+      var vin = el.vin;
+      var li = document.createElement("li");
+      var shortDescVin = document.createElement("p");
+      var HeaderHistoryVin = document.createElement("div");
+      HeaderHistoryVin.addEventListener("mousedown", function (e) {
+        return _this.handleMouseDownListElem(e);
+      });
+      shortDescVin.innerHTML = "testVin-HISTORY";
+      HeaderHistoryVin.className = "vinHistory-test";
+      HeaderHistoryVin.setAttribute("id", vin);
+
+      if (_this.listVinEl) {
+        _this.listVinEl.appendChild(li);
+
+        HeaderHistoryVin.innerHTML = " <p>".concat(vin, "</p><a href='usun'>X</a>");
+        li.appendChild(HeaderHistoryVin);
+      }
+    });
+  };
+
+  this.handleMouseDownListElem = function (e) {
+    var id = e.toElement.id;
+    console.log(id);
+    var testduba = new VinHistory_1.default().getItemsFromLocalStorage();
+    console.log(testduba);
+    var xp = testduba.filter(function (el) {
+      return el.vin == id;
+    });
+    console.log(xp);
+    new Ui_1.default(xp);
+  };
+
+  this.listVinEl = document.querySelector(".hitoryVin-Bar");
+  this.ElemHistoryVin = null;
+};
+
+exports.default = VinHistoryUI;
+},{"./VinHistory":"../src/VinHistory.ts","./Ui":"../src/Ui.ts"}],"../src/App.ts":[function(require,module,exports) {
 "use strict";
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -520,7 +537,7 @@ var App = function App() {
 };
 
 new App();
-},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13476/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8628/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -548,7 +565,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50625" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61488" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -724,5 +741,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/13476/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/8628/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map
