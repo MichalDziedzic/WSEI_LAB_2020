@@ -29,7 +29,9 @@ export default class VinHistoryUI {
     });
   };
   handleMouseDownListElem = (e: Event) => {
-    let id = e.toElement.id;
+    console.log(e);
+    let id = (e.target as Element).id;
+    console.log(id);
 
     console.log(id);
     let testduba: Array<object> = new vinHistory().getItemsFromLocalStorage();
