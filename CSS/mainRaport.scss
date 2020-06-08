@@ -1,3 +1,4 @@
+@import "./colors";
 .firstPage {
   width: 100%;
   height: 100vh;
@@ -24,7 +25,7 @@
 .btn,
 .detailsBtn {
   height: 31px;
-  background: white;
+  background: $smoke;
   border: 1px solid black;
   border-radius: 2px;
 }
@@ -33,6 +34,10 @@
   min-height: 15vh;
   align-items: flex-end;
 }
+// #carServices {
+//   width: 50px;
+//   height: 50px;
+// }
 .vinArticle {
   @include flexCenter(flex-start, column, stretch);
   min-height: 55vh;
@@ -44,6 +49,7 @@
   }
   h3 {
     font-size: 25px;
+    color: $blk;
   }
 }
 
@@ -51,10 +57,11 @@ main,
 aside {
   width: 100%;
   min-height: 100vh;
+  background: $softPink;
 }
 
 main {
-  background: white;
+  background: $softPink;
 }
 .headerRaport {
   width: 100%;
@@ -62,9 +69,16 @@ main {
   justify-content: center;
   align-items: center;
   min-height: 20vh;
-  background: yellow;
-  h3 {
+  background: $blk;
+  color: $brightPink;
+  p {
     font-size: 38px;
+    color: red($color: #000000);
+  }
+  i {
+    font-size: 48px;
+    padding-left: 30px;
+    padding-right: 10px;
   }
 }
 
@@ -74,6 +88,14 @@ main {
   width: 50%;
   font-size: 16px;
 }
+.infoRaport {
+  @include flexCenter(flex-start, column, center);
+  padding: 100px 0 50px 0;
+}
+.NameCarHeader {
+  font-size: 25px;
+  padding-bottom: 35px;
+}
 .mainRaport {
   display: flex;
   width: 100%;
@@ -82,16 +104,30 @@ main {
 .detailsRaport {
   @include flexCenter(center, row, center);
   min-height: 20vh;
-  background: rebeccapurple;
+  background: black;
 }
 .imgRaport {
-  background: white;
   img {
     object-fit: cover;
     width: 90%;
+    border-radius: 8px;
+    box-shadow: 8px 8px 10px black;
   }
 }
-
+.infoRaportWrapper {
+  ul,
+  li {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1.5;
+    i {
+      padding-right: 20px;
+    }
+  }
+}
+.NameCarHeader {
+  font-weight: 450;
+}
 .ContainerDetailsRaport {
   min-height: 40vh;
   width: 100%;

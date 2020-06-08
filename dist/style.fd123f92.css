@@ -1,42 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
-
-body {
-  margin: 0 auto;
-  padding: 0 0 0 0;
-  font-family: "Lato", sans-serif;
-  box-sizing: border-box;
-}
-#wrapper {
-  display: flex;
-  flex-direction: column;
-}
-header {
-  display: flex;
-  justify-content: space-between;
-  background: black;
-  color: white;
-  font-size: 40px;
-  min-height: 10vh;
-  max-width: 100%;
-}
-header > h1 {
-  padding: 15px 10px 15px 20px;
-}
-section {
-  width: 100%;
-}
-nav {
-  max-width: 20%;
-  width: 15%;
-  font-size: 15px;
-  min-height: 10vh;
-}
 .dropdown {
-  height: 10vh;
   display: flex;
-  max-width: 100%;
   justify-content: space-around;
   align-items: center;
+  flex-direction: row;
+  height: 10vh;
+  max-width: 100%;
   min-height: 100%;
 }
 
@@ -51,8 +20,8 @@ nav {
   position: absolute;
   display: flex;
   justify-content: space-around;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   width: 300px;
   height: 200px;
   background: white;
@@ -64,19 +33,21 @@ nav {
   transform: translateY(-25px);
   transition: all 0.4s ease;
 }
+
 .projects li,
 .products li {
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
   background: black;
 }
 
 .projects li:hover,
 .products li:hover {
-  background-color: rgb(197, 173, 181);
+  background-color: #c5adb5;
   cursor: pointer;
 }
 
@@ -88,8 +59,9 @@ nav {
 
 .vinHistory-test {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
   width: 100%;
   padding: 0 15px 0 15px;
   height: 100%;
@@ -112,7 +84,6 @@ nav {
   transform: translateY(-10px);
 }
 
-/* --------------------- */
 .firstPage {
   width: 100%;
   height: 100vh;
@@ -124,108 +95,204 @@ nav {
   display: flex;
   flex-direction: column;
 }
+
 .vinHeader,
 .vinFinder {
   width: 100%;
   display: flex;
   justify-content: center;
+  align-items: stretch;
+  flex-direction: row;
 }
+
 .vinFinder {
-  /* margin: 10px 0 20px 0; */
   min-height: 20vh;
   align-items: center;
 }
+
 #InputVin {
   height: 25px;
 }
+
 .btn,
 .detailsBtn {
   height: 31px;
-  background: white;
+  background: #c39ea0;
   border: 1px solid black;
   border-radius: 2px;
 }
+
 .vinHeader {
   font-size: 38px;
-
   min-height: 15vh;
   align-items: flex-end;
 }
+
 .vinArticle {
   display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
   flex-direction: column;
-
   min-height: 55vh;
   padding: 50px;
 }
-
-.vinArticle > p {
+.vinArticle p {
   width: 100%;
   line-height: 1.3;
   padding: 30px 0 30px 0;
 }
-
-.vinArticle > h3 {
+.vinArticle h3 {
   font-size: 25px;
+  color: black;
 }
+
 main,
 aside {
   width: 100%;
   min-height: 100vh;
+  background: #f8e5e5;
 }
 
 main {
-  background: white;
+  background: #f8e5e5;
 }
+
 .headerRaport {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 20vh;
-  background: yellow;
+  background: black;
+  color: #fa255e;
 }
-.headerRaport > h3 {
+.headerRaport p {
   font-size: 38px;
+  color: 0;
 }
+.headerRaport i {
+  font-size: 48px;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
 .infoRaport,
 .imgRaport {
-  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
+  width: 50%;
   font-size: 16px;
 }
+
+.infoRaport {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 100px 0 50px 0;
+}
+
+.NameCarHeader {
+  font-size: 25px;
+  padding-bottom: 35px;
+}
+
 .mainRaport {
   display: flex;
   width: 100%;
   min-height: 60vh;
 }
+
 .detailsRaport {
-  min-height: 20vh;
-  background: rebeccapurple;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
+  min-height: 20vh;
+  background: black;
 }
-.imgRaport {
-  background: white;
-}
-.imgRaport > img {
+
+.imgRaport img {
   object-fit: cover;
   width: 90%;
+  border-radius: 8px;
+  box-shadow: 8px 8px 10px black;
 }
+
+.infoRaportWrapper ul,
+.infoRaportWrapper li {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.infoRaportWrapper ul i,
+.infoRaportWrapper li i {
+  padding-right: 20px;
+}
+
+.NameCarHeader {
+  font-weight: 450;
+}
+
 .ContainerDetailsRaport {
   min-height: 40vh;
   width: 100%;
   background: orange;
   display: none;
 }
-aside {
-  background: seagreen;
+
+body {
+  margin: 0 auto;
+  padding: 0 0 0 0;
+  font-family: "Lato", sans-serif;
+  box-sizing: border-box;
 }
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  background: black;
+  color: #f8e5e5;
+  font-size: 40px;
+  min-height: 10vh;
+  max-width: 100%;
+}
+header h1 {
+  padding: 15px 10px 15px 20px;
+}
+
+section {
+  width: 100%;
+  background: #f8e5e5;
+}
+
+nav {
+  max-width: 20%;
+  width: 15%;
+  font-size: 15px;
+  min-height: 10vh;
+}
+nav i {
+  color: #f8e5e5;
+}
+
+aside {
+  background: #c39ea0;
+}
+
 footer {
-  background-color: gray;
-  color: azure;
+  background-color: black;
+  color: #f8e5e5;
   min-height: 100px;
 }
+
+/*# sourceMappingURL=/style.fd123f92.css.map */

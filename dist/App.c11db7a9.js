@@ -189,7 +189,7 @@ var Ui = function Ui(data) {
   _classCallCheck(this, Ui);
 
   this.printData = function () {
-    console.log(_this.data);
+    // console.log(this.data);
     var _this$data = _this.data,
         engine = _this$data.engine,
         make = _this$data.make,
@@ -199,7 +199,12 @@ var Ui = function Ui(data) {
         trim = _this$data.trim,
         year = _this$data.year,
         vin = _this$data.vin,
-        img = _this$data.img;
+        img = _this$data.img; // if (this.mainIsCreated != null && this.mainIsCreated != undefined) {
+    //   this.updateData();
+    // } else {
+    //   this.printData();
+    // }
+
     var aside = document.querySelector("aside");
     var main = document.createElement("main");
     var headerRaport = document.createElement("div");
@@ -208,19 +213,23 @@ var Ui = function Ui(data) {
     var imgRaport = document.createElement("div");
     var detailsRaport = document.createElement("div");
     var ContainerDetailsRaport = document.createElement("div");
-    var elemHeaderRaport = document.createElement("h3");
+    var nameCarHeader = document.createElement("h3");
+    var infoRaportWrapper = document.createElement("div");
     var vinLocationIMG = document.createElement("img");
     headerRaport.className = "headerRaport";
     mainRaport.className = "mainRaport";
     infoRaport.className = "infoRaport";
     imgRaport.className = "imgRaport";
     ContainerDetailsRaport.className = "ContainerDetailsRaport";
+    nameCarHeader.className = "NameCarHeader";
+    infoRaportWrapper.className = "infoRaportWrapper";
     detailsRaport.className = "detailsRaport";
     vinLocationIMG.className = "vinImg";
     var imgSrc = "../IMG/vinLocation.png";
     var describeBtn = "POKA\u017B SZCZEG\xD3\u0141Y ";
     var btnDetails = "<button class=\"detailsBtn\">\n    <span>".concat(describeBtn, "<i class=\"fas fa-check\"></i></span>\n    </button>");
-    infoRaport.innerHTML = "<ul>\n    <li>".concat(vin, "</li>\n    <li>").concat(engine, "</li>\n    <li>").concat(make, "</li>\n    <li>").concat(manufacturer, "</li>\n    <li>").concat(model, "</li>\n    <li>").concat(transmission, "</li>\n    <li>").concat(trim, "</li>\n    <li>").concat(year, "</li>\n    </ul>");
+    nameCarHeader.innerText = "".concat(make, " ").concat(model);
+    infoRaportWrapper.innerHTML = "<ul>\n    <li>".concat(vin, "</li>\n      <li>").concat(make, "</li>\n      <li><i class='fas fa-industry'></i>").concat(manufacturer, "</li>\n      <li><i class=\"fas fa-car\"></i>").concat(model, "</li>\n      <li><img src='./IMG/car.png' alt='car_transmission' height='100px' width='100px'>").concat(transmission, "</li>\n      <li><i class=\"fas fa-code-branch\"></i>equipment ").concat(trim, "</li>\n      <li><i class=\"fas fa-calendar-alt\"></i>").concat(year, "</li>\n      </ul>"); //`<img src='../IMG/car.png' alt='carv_service' id='carServices'>`
 
     if (aside != null) {
       aside.before(main);
@@ -229,11 +238,12 @@ var Ui = function Ui(data) {
       mainRaport.appendChild(infoRaport);
       infoRaport.after(imgRaport);
       mainRaport.after(detailsRaport);
+      infoRaport.appendChild(nameCarHeader);
+      nameCarHeader.after(infoRaportWrapper);
       detailsRaport.innerHTML = btnDetails;
       imgRaport.appendChild(vinLocationIMG);
       main.after(ContainerDetailsRaport);
-      headerRaport.appendChild(elemHeaderRaport);
-      elemHeaderRaport.innerText = "TWÓJ RAPORT POJAZDU";
+      headerRaport.innerHTML = "<p>TW\xD3J RAPORT POJAZDU</p><i class='fas fa-info-circle'></i>";
       var imgLocation = document.querySelector(".vinImg");
 
       if (imgLocation != null) {
@@ -255,10 +265,12 @@ var Ui = function Ui(data) {
         year = _this$data2.year,
         vin = _this$data2.vin,
         img = _this$data2.img;
-    var infoRaport = document.querySelector(".infoRaport");
+    var infoRaportWrapper = document.querySelector(".infoRaportWrapper");
+    var nameCarHeader = document.querySelector(".NameCarHeader");
 
-    if (infoRaport) {
-      infoRaport.innerHTML = "<ul>\n        <li>".concat(vin, "</li>\n          <li>").concat(engine, "</li>\n          <li>").concat(make, "</li>\n          <li>").concat(manufacturer, "</li>\n          <li>").concat(model, "</li>\n          <li>").concat(transmission, "</li>\n          <li>").concat(trim, "</li>\n          <li>").concat(year, "</li>\n          </ul>");
+    if (infoRaportWrapper && nameCarHeader) {
+      nameCarHeader.innerText = "".concat(make, " ").concat(model);
+      infoRaportWrapper.innerHTML = "<ul>\n        <li>".concat(vin, "</li>\n          <li><i class='fas fa-industry'></i>").concat(manufacturer, "</li>\n          <li><i class=\"fas fa-car\"></i>").concat(model, "</li>\n          <li><img src='./IMG/car.png' alt='car_transmission' height='100px' width='100px'>").concat(transmission, "</li>\n          <li><i class=\"fas fa-code-branch\"></i>equipment ").concat(trim, "</li>\n          <li><i class=\"fas fa-calendar-alt\"></i>").concat(year, "</li>\n          </ul>");
     }
 
     var imgLocation = document.querySelector(".vinImg");
@@ -552,7 +564,7 @@ var App = function App() {
 };
 
 new App();
-},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/19880/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/20564/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -580,7 +592,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58089" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60347" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -756,5 +768,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/19880/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/20564/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

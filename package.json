@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/MichalDziedzic/WSEI_LAB_2020#readme",
   "devDependencies": {
+    "sass": "^1.26.8",
     "typescript": "^3.8.3"
   },
   "dependencies": {

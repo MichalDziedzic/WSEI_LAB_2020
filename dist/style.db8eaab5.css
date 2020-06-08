@@ -236,7 +236,12 @@ main {
   background: yellow;
 }
 
-.headerRaport h3 {
+.headerRaport p {
+  font-size: 38px;
+  color: 0;
+}
+
+.headerRaport i {
   font-size: 38px;
 }
 
