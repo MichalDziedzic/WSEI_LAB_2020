@@ -73,7 +73,7 @@ export default class Ui {
       imgRaport.appendChild(vinLocationIMG);
       main.after(ContainerDetailsRaport);
       headerRaport.appendChild(elemHeaderRaport);
-      elemHeaderRaport.innerText = "TWÓJ RAPORT POJAZDU";
+      elemHeaderRaport.innerHTML = "TWÓJ RAPORT POJAZDU";
 
       const imgLocation: HTMLImageElement | null = document.querySelector(
         ".vinImg"

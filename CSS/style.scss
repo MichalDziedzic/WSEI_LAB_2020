@@ -20,10 +20,11 @@ header {
   font-size: 40px;
   min-height: 10vh;
   max-width: 100%;
+  h1 {
+    padding: 15px 10px 15px 20px;
+  }
 }
-header > h1 {
-  padding: 15px 10px 15px 20px;
-}
+
 section {
   width: 100%;
 }
