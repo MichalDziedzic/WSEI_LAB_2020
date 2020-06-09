@@ -2,6 +2,7 @@
 
 @import "./HistoryNav";
 @import "./mainRaport";
+@import "./aside.scss";
 body {
   margin: 0 auto;
   padding: 0 0 0 0;
@@ -40,7 +41,12 @@ nav {
 }
 
 aside {
-  background: $smoke;
+  background: rgb(195, 158, 160);
+  background: linear-gradient(
+    0deg,
+    rgba(195, 158, 160, 1) 0%,
+    rgba(248, 229, 229, 1) 90%
+  );
 }
 footer {
   background-color: $blk;

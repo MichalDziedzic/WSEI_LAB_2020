@@ -1,0 +1,32 @@
+.exampleHeader {
+  width: 100%;
+  background: $blk;
+  color: $smoke;
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    font-size: 1.8rem;
+  }
+}
+.asideSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  .feftBar {
+    line-height: 1.8rem;
+    font-size: 15px;
+    padding: 50px;
+    h3 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      padding-bottom: 50px;
+    }
+  }
+}
+.feftBar,
+.rightBar {
+  width: 50%;
+}

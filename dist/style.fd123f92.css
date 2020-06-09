@@ -127,6 +127,9 @@
   min-height: 15vh;
   align-items: flex-end;
 }
+.vinHeader p {
+  font-size: 2 rem;
+}
 
 .vinArticle {
   display: flex;
@@ -243,6 +246,41 @@ main {
   display: none;
 }
 
+.exampleHeader {
+  width: 100%;
+  background: black;
+  color: #c39ea0;
+  min-height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.exampleHeader p {
+  font-size: 1.8rem;
+}
+
+.asideSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+.asideSection .feftBar {
+  line-height: 1.8rem;
+  font-size: 15px;
+  padding: 50px;
+}
+.asideSection .feftBar h3 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  padding-bottom: 50px;
+}
+
+.feftBar,
+.rightBar {
+  width: 50%;
+}
+
 body {
   margin: 0 auto;
   padding: 0 0 0 0;
@@ -287,6 +325,7 @@ nav i {
 
 aside {
   background: #c39ea0;
+  background: linear-gradient(0deg, #c39ea0 0%, #f8e5e5 90%);
 }
 
 footer {
