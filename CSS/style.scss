@@ -30,6 +30,7 @@ section {
   width: 100%;
   background: $softPink;
 }
+
 nav {
   max-width: 20%;
   width: 15%;
@@ -39,7 +40,12 @@ nav {
     color: $softPink;
   }
 }
-
+.vinHeader {
+  p {
+    font-weight: 600;
+  }
+  // background-image: image("../IMG/car_empty.png");
+}
 aside {
   background: rgb(195, 158, 160);
   background: linear-gradient(
@@ -49,7 +55,43 @@ aside {
   );
 }
 footer {
-  background-color: $blk;
+  background: $blk;
   color: $softPink;
-  min-height: 100px;
+  min-height: 20vh;
+  display: flex;
+  font-size: 1.2rem;
+  align-items: center;
+}
+.footerWrapper {
+  color: $softPink;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  font-size: 1.2rem;
+}
+
+.infofooter {
+  ul {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+  }
+  li {
+    padding-right: 30px;
+    a {
+      text-decoration: none;
+      color: $softPink;
+    }
+  }
+}
+
+.socialMedia {
+  padding-top: 20px;
+
+  a {
+    font-size: 1.8rem;
+    padding: 0 20px 20px 0;
+    color: $brightPink;
+  }
 }
