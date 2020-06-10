@@ -1,24 +1,29 @@
 import VinHistory from "./VinHistory";
 import HistoryUI from "./VinHistoryUI";
 import Ui from "./Ui";
-
-class App {
+interface ApiObject {
+  engine: string;
+  make: string;
+  manufacturer: string;
+  model: string;
+  transmission: string;
+  trim: string;
+  year: string;
+  vin: string;
+  img: string;
+}
+interface App {
   btnCheck: HTMLElement | null;
-  btnDetailsRaport: HTMLElement | null;
-  ContainerDetailsRaport: HTMLElement | null;
   vinCodeEl: HTMLInputElement | null;
   vinCode: string | null | undefined;
   vin: string | null;
   VinHistory: VinHistory;
   HistoryUi: HistoryUI;
-  testDuba: object;
-
+  testDuba: object | ApiObject;
+}
+class App {
   constructor() {
     (this.btnCheck = document.querySelector(".checkBtn")),
-      (this.ContainerDetailsRaport = document.querySelector(
-        ".ContainerDetailsRaport"
-      )),
-      (this.btnDetailsRaport = document.querySelector(".detailsBtn")),
       (this.vinCodeEl = document.querySelector("input[name=vinCode]")),
       (this.vin = null),
       (this.vinCode = ""),
@@ -30,37 +35,6 @@ class App {
   }
 
   startAppEvent = () => {
-    //const ElemHistoryVin = document.querySelector(".hitoryVin-Bar");
-
-    //console.log(ElemHistoryVin);
-
-    // console.log(item);
-
-    // const testUIHIS = new HistoryUI();
-    // testUIHIS.DisplayVinHeader("1GNALDEK9FZ108495");
-    // console.log(testUIHIS);
-    // const listVinEl: HTMLElement | null = document.querySelector(
-    //   ".hitoryVin-Bar"
-    // );
-    // console.log(listVinEl);
-
-    // listVinEl?.addEventListener<"click">("click", (e) => console.log(e.target));
-
-    // const element1 = document.querySelector(".a-class");
-    // const element2 = document.querySelector(".another-class");
-
-    // body.addEventListener('click', event => {
-    //   if (event.target !== element1 && event.target !== element2) {
-    //     return
-    //   }
-    //   //handle click
-    // }
-    // document.querySelectorAll(".vinHistory-test").forEach((item) => {
-    //   item.addEventListener("click", (e) => {
-    //     console.log(e.target);
-    //   });
-    // });
-
     if (this.btnCheck) {
       if (this.vinCodeEl != null) {
         this.vinCodeEl.addEventListener<"keyup">("keyup", () =>
@@ -104,25 +78,9 @@ class App {
     (<HTMLInputElement>document.querySelector("input[name=vinCode]")).value =
       "";
   };
-  handleClickDetails = () => {
-    if (this.btnDetailsRaport) {
-      this.btnDetailsRaport.addEventListener<"click">("click", () =>
-        this.handleClickDetailsRaport()
-      );
-    }
-  };
+
   mergeObjectData = (data: object, data1: object) => {
     return Object.assign({}, data, data1);
-  };
-  handleClickDetailsRaport = () => {
-    this.ContainerDetailsRaport?.setAttribute("style", `display:flex`);
-  };
-  newGetRapportEl = () => {
-    this.btnDetailsRaport = document.querySelector(".detailsBtn");
-
-    this.ContainerDetailsRaport = document.querySelector(
-      ".ContainerDetailsRaport"
-    );
   };
 
   handleVinInfo = (param: string): void => {
@@ -173,8 +131,6 @@ class App {
           case "carData":
             this.testDuba = this.mergeObjectData(this.testDuba, data) as object;
 
-            this.newGetRapportEl();
-            this.handleClickDetails();
             break;
         }
         this.testDuba = this.mergeObjectData(this.testDuba, {
@@ -184,7 +140,7 @@ class App {
         if (this.testDuba) {
           console.log(this.testDuba);
           this.saveDataToLocal(this.testDuba);
-          new Ui(this.testDuba);
+          new Ui(this.testDuba as ApiObject);
         }
       })
       .catch((err) => {
@@ -195,11 +151,9 @@ class App {
   saveDataToLocal = (data: object) => {
     if (this.vinCode)
       this.VinHistory.saveItemToLocalStorage(this.vinCode, data);
-    // this.handleDataFromLocal();
   };
   handleDataFromLocal = () => {
     const testData = this.VinHistory.getItemsFromLocalStorage();
-    //console.log(testData);
 
     if (testData) {
       this.HistoryUi.DisplayVinHeader(testData);

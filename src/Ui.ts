@@ -1,8 +1,27 @@
-export default class Ui {
-  data: object;
+interface ApiObject {
+  engine: string;
+  make: string;
+  manufacturer: string;
+  model: string;
+  transmission: string;
+  trim: string;
+  year: string;
+  vin: string;
+  img: string;
+}
+
+interface CarData {
+  data: ApiObject;
+  mainIsCreated: HTMLElement | null;
+}
+
+type htmlElem = HTMLElement | null | HTMLButtonElement;
+
+export default class Ui implements CarData {
+  data: ApiObject;
   mainIsCreated: HTMLElement | null;
 
-  constructor(data: object) {
+  constructor(data: ApiObject) {
     (this.data = data), (this.mainIsCreated = document.querySelector("main"));
     if (this.mainIsCreated != null && this.mainIsCreated != undefined) {
       this.updateData();
@@ -10,6 +29,7 @@ export default class Ui {
       this.printData();
     }
   }
+  createElem = (elem: string): HTMLElement => document.createElement(`${elem}`);
   printData = () => {
     // console.log(this.data);
     const {
@@ -30,19 +50,20 @@ export default class Ui {
     //   this.printData();
     // }
 
-    const aside: HTMLElement | null = document.querySelector("aside");
-    const main: HTMLElement = document.createElement("main");
+    const aside: htmlElem = document.querySelector("aside");
+    const main: htmlElem = this.createElem("main");
 
-    const headerRaport: HTMLElement = document.createElement("div");
-    const mainRaport: HTMLElement = document.createElement("div");
-    const infoRaport: HTMLElement = document.createElement("div");
-    const imgRaport: HTMLElement = document.createElement("div");
-    const detailsRaport: HTMLElement = document.createElement("div");
-    const ContainerDetailsRaport: HTMLElement = document.createElement("div");
-    const nameCarHeader: HTMLElement = document.createElement("h3");
-    const infoRaportWrapper: HTMLElement = document.createElement("div");
+    const headerRaport: htmlElem = this.createElem("div");
+    const mainRaport: htmlElem = this.createElem("div");
+    const infoRaport: htmlElem = this.createElem("div");
+    const imgRaport: htmlElem = this.createElem("div");
+    const detailsRaport: htmlElem = this.createElem("div");
+    const ContainerDetailsRaport: htmlElem = this.createElem("div");
+    const nameCarHeader: htmlElem = this.createElem("h3");
+    const infoRaportWrapper: htmlElem = this.createElem("div");
+    const detailsBtn: htmlElem = this.createElem("button");
 
-    const vinLocationIMG: HTMLElement = document.createElement("img");
+    const vinLocationIMG: htmlElem = this.createElem("img");
 
     headerRaport.className = "headerRaport";
     mainRaport.className = "mainRaport";
@@ -54,11 +75,11 @@ export default class Ui {
 
     detailsRaport.className = "detailsRaport";
     vinLocationIMG.className = "vinImg";
+    detailsBtn.className = "detailsBtn";
+    detailsBtn.innerHTML = `Check <i class="fas fa-check"></i>`;
+
     const imgSrc: string = `../IMG/vinLocation.png`;
-    const describeBtn: string = `POKAŻ SZCZEGÓŁY `;
-    const btnDetails: string = `<button class="detailsBtn">
-    <span>${describeBtn}<i class="fas fa-check"></i></span>
-    </button>`;
+
     nameCarHeader.innerText = `${make} ${model}`;
     infoRaportWrapper.innerHTML = `<ul>
     <li>${vin}</li>
@@ -69,7 +90,7 @@ export default class Ui {
       <li><i class="fas fa-code-branch"></i>equipment ${trim}</li>
       <li><i class="fas fa-calendar-alt"></i>${year}</li>
       </ul>`;
-    //`<img src='../IMG/car.png' alt='carv_service' id='carServices'>`
+
     if (aside != null) {
       aside.before(main);
       main.appendChild(headerRaport);
@@ -81,17 +102,19 @@ export default class Ui {
       infoRaport.appendChild(nameCarHeader);
       nameCarHeader.after(infoRaportWrapper);
 
-      detailsRaport.innerHTML = btnDetails;
+      detailsRaport.appendChild(detailsBtn);
       imgRaport.appendChild(vinLocationIMG);
       main.after(ContainerDetailsRaport);
 
       headerRaport.innerHTML = `<p>TWÓJ RAPORT POJAZDU</p><i class='fas fa-info-circle'></i>`;
 
+      detailsBtn.addEventListener("click", () => {
+        ContainerDetailsRaport.setAttribute("style", `display:flex`);
+      });
       const imgLocation: HTMLImageElement | null = document.querySelector(
         ".vinImg"
       );
       if (imgLocation != null) {
-        // console.log("testImg");
         imgLocation.setAttribute("src", img);
       }
     }

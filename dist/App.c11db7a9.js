@@ -188,6 +188,10 @@ var Ui = function Ui(data) {
 
   _classCallCheck(this, Ui);
 
+  this.createElem = function (elem) {
+    return document.createElement("".concat(elem));
+  };
+
   this.printData = function () {
     // console.log(this.data);
     var _this$data = _this.data,
@@ -206,16 +210,29 @@ var Ui = function Ui(data) {
     // }
 
     var aside = document.querySelector("aside");
-    var main = document.createElement("main");
-    var headerRaport = document.createElement("div");
-    var mainRaport = document.createElement("div");
-    var infoRaport = document.createElement("div");
-    var imgRaport = document.createElement("div");
-    var detailsRaport = document.createElement("div");
-    var ContainerDetailsRaport = document.createElement("div");
-    var nameCarHeader = document.createElement("h3");
-    var infoRaportWrapper = document.createElement("div");
-    var vinLocationIMG = document.createElement("img");
+
+    var main = _this.createElem("main");
+
+    var headerRaport = _this.createElem("div");
+
+    var mainRaport = _this.createElem("div");
+
+    var infoRaport = _this.createElem("div");
+
+    var imgRaport = _this.createElem("div");
+
+    var detailsRaport = _this.createElem("div");
+
+    var ContainerDetailsRaport = _this.createElem("div");
+
+    var nameCarHeader = _this.createElem("h3");
+
+    var infoRaportWrapper = _this.createElem("div");
+
+    var detailsBtn = _this.createElem("button");
+
+    var vinLocationIMG = _this.createElem("img");
+
     headerRaport.className = "headerRaport";
     mainRaport.className = "mainRaport";
     infoRaport.className = "infoRaport";
@@ -225,11 +242,11 @@ var Ui = function Ui(data) {
     infoRaportWrapper.className = "infoRaportWrapper";
     detailsRaport.className = "detailsRaport";
     vinLocationIMG.className = "vinImg";
+    detailsBtn.className = "detailsBtn";
+    detailsBtn.innerHTML = "Check <i class=\"fas fa-check\"></i>";
     var imgSrc = "../IMG/vinLocation.png";
-    var describeBtn = "POKA\u017B SZCZEG\xD3\u0141Y ";
-    var btnDetails = "<button class=\"detailsBtn\">\n    <span>".concat(describeBtn, "<i class=\"fas fa-check\"></i></span>\n    </button>");
     nameCarHeader.innerText = "".concat(make, " ").concat(model);
-    infoRaportWrapper.innerHTML = "<ul>\n    <li>".concat(vin, "</li>\n      <li>").concat(make, "</li>\n      <li><i class='fas fa-industry'></i>").concat(manufacturer, "</li>\n      <li><i class=\"fas fa-car\"></i>").concat(model, "</li>\n      <li><img src='./IMG/car.png' alt='car_transmission' height='100px' width='100px'>").concat(transmission, "</li>\n      <li><i class=\"fas fa-code-branch\"></i>equipment ").concat(trim, "</li>\n      <li><i class=\"fas fa-calendar-alt\"></i>").concat(year, "</li>\n      </ul>"); //`<img src='../IMG/car.png' alt='carv_service' id='carServices'>`
+    infoRaportWrapper.innerHTML = "<ul>\n    <li>".concat(vin, "</li>\n      <li>").concat(make, "</li>\n      <li><i class='fas fa-industry'></i>").concat(manufacturer, "</li>\n      <li><i class=\"fas fa-car\"></i>").concat(model, "</li>\n      <li><img src='./IMG/car.png' alt='car_transmission' height='100px' width='100px'>").concat(transmission, "</li>\n      <li><i class=\"fas fa-code-branch\"></i>equipment ").concat(trim, "</li>\n      <li><i class=\"fas fa-calendar-alt\"></i>").concat(year, "</li>\n      </ul>");
 
     if (aside != null) {
       aside.before(main);
@@ -240,14 +257,16 @@ var Ui = function Ui(data) {
       mainRaport.after(detailsRaport);
       infoRaport.appendChild(nameCarHeader);
       nameCarHeader.after(infoRaportWrapper);
-      detailsRaport.innerHTML = btnDetails;
+      detailsRaport.appendChild(detailsBtn);
       imgRaport.appendChild(vinLocationIMG);
       main.after(ContainerDetailsRaport);
       headerRaport.innerHTML = "<p>TW\xD3J RAPORT POJAZDU</p><i class='fas fa-info-circle'></i>";
+      detailsBtn.addEventListener("click", function () {
+        ContainerDetailsRaport.setAttribute("style", "display:flex");
+      });
       var imgLocation = document.querySelector(".vinImg");
 
       if (imgLocation != null) {
-        // console.log("testImg");
         imgLocation.setAttribute("src", img);
       }
     }
@@ -380,30 +399,6 @@ var App = function App() {
   _classCallCheck(this, App);
 
   this.startAppEvent = function () {
-    //const ElemHistoryVin = document.querySelector(".hitoryVin-Bar");
-    //console.log(ElemHistoryVin);
-    // console.log(item);
-    // const testUIHIS = new HistoryUI();
-    // testUIHIS.DisplayVinHeader("1GNALDEK9FZ108495");
-    // console.log(testUIHIS);
-    // const listVinEl: HTMLElement | null = document.querySelector(
-    //   ".hitoryVin-Bar"
-    // );
-    // console.log(listVinEl);
-    // listVinEl?.addEventListener<"click">("click", (e) => console.log(e.target));
-    // const element1 = document.querySelector(".a-class");
-    // const element2 = document.querySelector(".another-class");
-    // body.addEventListener('click', event => {
-    //   if (event.target !== element1 && event.target !== element2) {
-    //     return
-    //   }
-    //   //handle click
-    // }
-    // document.querySelectorAll(".vinHistory-test").forEach((item) => {
-    //   item.addEventListener("click", (e) => {
-    //     console.log(e.target);
-    //   });
-    // });
     if (_this.btnCheck) {
       if (_this.vinCodeEl != null) {
         _this.vinCodeEl.addEventListener("keyup", function () {
@@ -451,27 +446,8 @@ var App = function App() {
     document.querySelector("input[name=vinCode]").value = "";
   };
 
-  this.handleClickDetails = function () {
-    if (_this.btnDetailsRaport) {
-      _this.btnDetailsRaport.addEventListener("click", function () {
-        return _this.handleClickDetailsRaport();
-      });
-    }
-  };
-
   this.mergeObjectData = function (data, data1) {
     return Object.assign({}, data, data1);
-  };
-
-  this.handleClickDetailsRaport = function () {
-    var _a;
-
-    (_a = _this.ContainerDetailsRaport) === null || _a === void 0 ? void 0 : _a.setAttribute("style", "display:flex");
-  };
-
-  this.newGetRapportEl = function () {
-    _this.btnDetailsRaport = document.querySelector(".detailsBtn");
-    _this.ContainerDetailsRaport = document.querySelector(".ContainerDetailsRaport");
   };
 
   this.handleVinInfo = function (param) {
@@ -517,11 +493,6 @@ var App = function App() {
 
         case "carData":
           _this.testDuba = _this.mergeObjectData(_this.testDuba, data);
-
-          _this.newGetRapportEl();
-
-          _this.handleClickDetails();
-
           break;
       }
 
@@ -543,12 +514,11 @@ var App = function App() {
   };
 
   this.saveDataToLocal = function (data) {
-    if (_this.vinCode) _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data); // this.handleDataFromLocal();
+    if (_this.vinCode) _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
   };
 
   this.handleDataFromLocal = function () {
-    var testData = _this.VinHistory.getItemsFromLocalStorage(); //console.log(testData);
-
+    var testData = _this.VinHistory.getItemsFromLocalStorage();
 
     if (testData) {
       _this.HistoryUi.DisplayVinHeader(testData);
@@ -557,14 +527,14 @@ var App = function App() {
     }
   };
 
-  this.btnCheck = document.querySelector(".checkBtn"), this.ContainerDetailsRaport = document.querySelector(".ContainerDetailsRaport"), this.btnDetailsRaport = document.querySelector(".detailsBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "", this.testDuba = {}, this.VinHistory = new VinHistory_1.default();
+  this.btnCheck = document.querySelector(".checkBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "", this.testDuba = {}, this.VinHistory = new VinHistory_1.default();
   this.HistoryUi = new VinHistoryUI_1.default();
   this.handleDataFromLocal();
   this.startAppEvent();
 };
 
 new App();
-},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/508/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/4572/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -592,7 +562,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49853" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58393" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -768,5 +738,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/508/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/4572/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map
