@@ -149,6 +149,15 @@ var VinHistory = function VinHistory() {
   _classCallCheck(this, VinHistory);
 
   this.saveItemToLocalStorage = function (vinCode, data) {
+    // const items = { ...localStorage };
+    // Object.entries(items).forEach(([key, value]) => {
+    //   if (vinCode === key) {
+    //     console.log(`${key} chujowo!`);
+    //     return false;
+    //   } else {
+    //     console.log(`${key} ok!`);
+    //   }
+    // });
     localStorage.setItem(vinCode, JSON.stringify(data));
   };
 
@@ -349,6 +358,8 @@ var VinHistoryUI = function VinHistoryUI() {
         HeaderHistoryVin.innerHTML = " <p>".concat(vin, "</p><a href='usun'>X</a>");
         li.appendChild(HeaderHistoryVin);
       }
+
+      return true;
     });
   };
 
@@ -360,8 +371,9 @@ var VinHistoryUI = function VinHistoryUI() {
     var testduba = new VinHistory_1.default().getItemsFromLocalStorage();
     console.log(testduba);
     var catchElemList = testduba.filter(function (el) {
-      return el.vin == id;
+      return el.vin === id;
     });
+    console.log(catchElemList);
     catchElemList.map(function (el) {
       return new Ui_1.default(el);
     });
@@ -503,7 +515,8 @@ var App = function App() {
       if (_this.testDuba) {
         console.log(_this.testDuba);
 
-        _this.saveDataToLocal(_this.testDuba);
+        _this.saveDataToLocal(_this.testDuba); // this.handleDataFromLocal();
+
 
         new Ui_1.default(_this.testDuba);
       }
@@ -514,7 +527,9 @@ var App = function App() {
   };
 
   this.saveDataToLocal = function (data) {
-    if (_this.vinCode) _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
+    if (_this.vinCode) {
+      var saveToLocal = _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
+    }
   };
 
   this.handleDataFromLocal = function () {
@@ -534,7 +549,7 @@ var App = function App() {
 };
 
 new App();
-},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/4572/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/12824/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -562,7 +577,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58393" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54772" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -738,5 +753,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/4572/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/12824/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

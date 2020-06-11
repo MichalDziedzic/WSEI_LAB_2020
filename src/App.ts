@@ -84,7 +84,7 @@ class App {
   };
 
   handleVinInfo = (param: string): void => {
-    const apiArray: Array<string> = [
+    const apiArray: string[] = [
       "http://api.carmd.com/v3.0/image?vin",
       "http://api.carmd.com/v3.0/maintlist?vin",
       "http://api.carmd.com/v3.0/decode?vin",
@@ -140,6 +140,7 @@ class App {
         if (this.testDuba) {
           console.log(this.testDuba);
           this.saveDataToLocal(this.testDuba);
+          // this.handleDataFromLocal();
           new Ui(this.testDuba as ApiObject);
         }
       })
@@ -149,8 +150,12 @@ class App {
       });
   };
   saveDataToLocal = (data: object) => {
-    if (this.vinCode)
-      this.VinHistory.saveItemToLocalStorage(this.vinCode, data);
+    if (this.vinCode) {
+      let saveToLocal = this.VinHistory.saveItemToLocalStorage(
+        this.vinCode,
+        data
+      );
+    }
   };
   handleDataFromLocal = () => {
     const testData = this.VinHistory.getItemsFromLocalStorage();

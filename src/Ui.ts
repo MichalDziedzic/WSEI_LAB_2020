@@ -17,9 +17,9 @@ interface CarData {
 
 type htmlElem = HTMLElement | null | HTMLButtonElement;
 
-export default class Ui implements CarData {
+export default class Ui {
   data: ApiObject;
-  mainIsCreated: HTMLElement | null;
+  mainIsCreated: htmlElem;
 
   constructor(data: ApiObject) {
     (this.data = data), (this.mainIsCreated = document.querySelector("main"));

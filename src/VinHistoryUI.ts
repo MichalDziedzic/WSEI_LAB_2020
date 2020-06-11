@@ -1,5 +1,31 @@
 import vinHistory from "./VinHistory";
 import Ui from "./Ui";
+interface CarData {
+  [index: number]: {
+    engine: string;
+    make: string;
+    manufacturer: string;
+    model: string;
+    transmission: string;
+    trim: string;
+    year: string;
+    vin: string;
+    img: string;
+  };
+}
+
+interface carObj {
+  engine: string;
+  make: string;
+  manufacturer: string;
+  model: string;
+  transmission: string;
+  trim: string;
+  year: string;
+  vin: string;
+  img: string;
+}
+
 export default class VinHistoryUI {
   listVinEl: HTMLElement | null;
   ElemHistoryVin: null | NodeListOf<Element>;
@@ -26,6 +52,7 @@ export default class VinHistoryUI {
         HeaderHistoryVin.innerHTML = ` <p>${vin}</p><a href='usun'>X</a>`;
         li.appendChild(HeaderHistoryVin);
       }
+      return true;
     });
   };
   handleMouseDownListElem = (e: Event) => {
@@ -37,8 +64,9 @@ export default class VinHistoryUI {
     let testduba: Array<object> = new vinHistory().getItemsFromLocalStorage();
     console.log(testduba);
 
-    const catchElemList: Array<object> = testduba.filter((el) => el.vin == id);
+    const catchElemList: Array<object> = testduba.filter((el) => el.vin === id);
 
+    console.log(catchElemList);
     catchElemList.map((el) => new Ui(el));
   };
 }
