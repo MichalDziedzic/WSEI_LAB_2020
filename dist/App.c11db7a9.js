@@ -144,6 +144,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 }); // console.log(" działą w pliku  z klasa infoVin");
 // //1GNALDEK9FZ108495 example number vin
+//
+//
 
 var VinHistory = function VinHistory() {
   var _this = this;
