@@ -1,5 +1,29 @@
 import vinHistory from "./VinHistory";
 import Ui from "./Ui";
+interface ApiObject {
+  engine: string;
+  make: string;
+  manufacturer: string;
+  model: string;
+  transmission: string;
+  trim: string;
+  year: number;
+  vin: string;
+  img: string;
+}
+export default interface CarData {
+  [index: number]: {
+    engine: string;
+    make: string;
+    manufacturer: string;
+    model: string;
+    transmission: string;
+    trim: string;
+    year: number;
+    vin: string;
+    img: string;
+  };
+}
 export default class VinHistoryUI {
   listVinEl: HTMLElement | null;
   ElemHistoryVin: null | NodeListOf<Element>;
@@ -7,7 +31,7 @@ export default class VinHistoryUI {
     this.listVinEl = document.querySelector(".hitoryVin-Bar");
     this.ElemHistoryVin = null;
   }
-  DisplayVinHeader = (HistoryVin: Array<object>) => {
+  DisplayVinHeader = (HistoryVin: CarData[]) => {
     HistoryVin.map((el) => {
       const { vin } = el;
       const li: HTMLElement = document.createElement("li");

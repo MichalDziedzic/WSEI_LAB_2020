@@ -118,7 +118,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"../src/VinHistory.ts":[function(require,module,exports) {
-"use strict"; // import Ui from "./Ui";
+"use strict";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -146,17 +146,36 @@ Object.defineProperty(exports, "__esModule", {
 // //1GNALDEK9FZ108495 example number vin
 
 var VinHistory = function VinHistory() {
+  var _this = this;
+
   _classCallCheck(this, VinHistory);
 
   this.saveItemToLocalStorage = function (vinCode, data) {
-    localStorage.setItem(vinCode, JSON.stringify(data));
+    var CopyVinsArray = _this.vinsDB; // do zmiany
+
+    var bagno = CopyVinsArray.some(function (el) {
+      return el.vin === vinCode;
+    });
+
+    if (bagno != true) {
+      localStorage.setItem(vinCode, JSON.stringify(data));
+    }
+
+    return bagno;
   };
 
   this.getItemsFromLocalStorage = function () {
-    var items = _objectSpread({}, localStorage); //console.log(items);
+    if (_this.vinsDB != undefined) {
+      return _this.vinsDB;
+    } else {
+      return [];
+    }
+  };
 
+  this.handleVinsFromLocal = function () {
+    var items = _objectSpread({}, localStorage);
 
-    var tabtest = [];
+    var VinsArrayFromLocal = [];
 
     if (items.length != 0) {
       Object.entries(items).forEach(function (_ref) {
@@ -164,13 +183,14 @@ var VinHistory = function VinHistory() {
             key = _ref2[0],
             value = _ref2[1];
 
-        tabtest.push(JSON.parse(value));
+        VinsArrayFromLocal.push(JSON.parse(value)); ////  zamiast push  użycie jakiegos unshift() ?
       });
-      return tabtest;
-    } else {
-      return [];
+      return VinsArrayFromLocal;
     }
   };
+
+  this.vinsDB = this.handleVinsFromLocal();
+  console.log(this.vinsDB);
 };
 
 exports.default = VinHistory;
@@ -471,8 +491,8 @@ var App = function App() {
     fetch("".concat(test, "=").concat(_this.vinCode), {
       method: "GET",
       headers: {
-        authorization: "Basic ZTY2YzE0ZDgtMDYzMS00NDM0LTlkMDMtY2JmNzJiZjkwMDkz",
-        "partner-token": "41b91927b6104c9199daf05ff511368f"
+        authorization: "Basic MjBjMGU2ZDgtNDNlOS00M2Q0LWE5ZGUtZWUxYmQ5YTQxODJj",
+        "partner-token": "edbbd5fad81b4865a3e6268136f0d7fc"
       }
     }).then(function (response) {
       return response.json();
@@ -514,11 +534,19 @@ var App = function App() {
   };
 
   this.saveDataToLocal = function (data) {
-    if (_this.vinCode) _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
+    if (_this.vinCode) {
+      var test1 = _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
+
+      console.log(test1); // if (xd === false) {
+      //   console.log("coś poszło nie tak");
+      // }
+    }
   };
 
   this.handleDataFromLocal = function () {
     var testData = _this.VinHistory.getItemsFromLocalStorage();
+
+    console.log(testData);
 
     if (testData) {
       _this.HistoryUi.DisplayVinHeader(testData);

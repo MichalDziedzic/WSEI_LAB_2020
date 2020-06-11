@@ -5,7 +5,7 @@ interface ApiObject {
   model: string;
   transmission: string;
   trim: string;
-  year: string;
+  year: number;
   vin: string;
   img: string;
 }

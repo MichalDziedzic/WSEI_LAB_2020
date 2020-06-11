@@ -1,6 +1,7 @@
 import VinHistory from "./VinHistory";
 import HistoryUI from "./VinHistoryUI";
 import Ui from "./Ui";
+import CarData from "./VinHistoryUI";
 interface ApiObject {
   engine: string;
   make: string;
@@ -8,10 +9,11 @@ interface ApiObject {
   model: string;
   transmission: string;
   trim: string;
-  year: string;
+  year: number;
   vin: string;
   img: string;
 }
+
 interface App {
   btnCheck: HTMLElement | null;
   vinCodeEl: HTMLInputElement | null;
@@ -107,8 +109,8 @@ class App {
     fetch(`${test}=${this.vinCode}`, {
       method: "GET",
       headers: {
-        authorization: "Basic ZTY2YzE0ZDgtMDYzMS00NDM0LTlkMDMtY2JmNzJiZjkwMDkz", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZDIwMjE3OTMtNzM1Zi00YzIyLWI2NmEtNWRiZjRkMmIyMDEy", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", // ,"Basic NWYwYThhNWEtYjAxMy00YTQwLWFhZWUtZTM5OTQzNzJkZmU4", "Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZGRiZTVlZDAtYTM2Ni00NzVjLWFlOWItNTZhMGU4MWQ3Zjhj", //"Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-        "partner-token": "41b91927b6104c9199daf05ff511368f", // "63e713fbbc4a4532b1e5edd6f25f39a3", // "543fafc5bd9b472ea5d6614e0b9a56d1", //"63e713fbbc4a4532b1e5edd6f25f39a3", "c0937ea58143414796ec5c98cbb9bfd8", //"fe1708c8fbc94a29a7885e04c837da04",
+        authorization: "Basic MjBjMGU2ZDgtNDNlOS00M2Q0LWE5ZGUtZWUxYmQ5YTQxODJj", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZDIwMjE3OTMtNzM1Zi00YzIyLWI2NmEtNWRiZjRkMmIyMDEy", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", // ,"Basic NWYwYThhNWEtYjAxMy00YTQwLWFhZWUtZTM5OTQzNzJkZmU4", "Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZGRiZTVlZDAtYTM2Ni00NzVjLWFlOWItNTZhMGU4MWQ3Zjhj", //"Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
+        "partner-token": "edbbd5fad81b4865a3e6268136f0d7fc", //"41b91927b6104c9199daf05ff511368f", // "63e713fbbc4a4532b1e5edd6f25f39a3", // "543fafc5bd9b472ea5d6614e0b9a56d1", //"63e713fbbc4a4532b1e5edd6f25f39a3", "c0937ea58143414796ec5c98cbb9bfd8", //"fe1708c8fbc94a29a7885e04c837da04",
       },
     })
       .then((response) => {
@@ -149,11 +151,21 @@ class App {
       });
   };
   saveDataToLocal = (data: object) => {
-    if (this.vinCode)
-      this.VinHistory.saveItemToLocalStorage(this.vinCode, data);
+    if (this.vinCode) {
+      let test1: boolean = this.VinHistory.saveItemToLocalStorage(
+        this.vinCode,
+        data
+      );
+
+      console.log(test1);
+      // if (xd === false) {
+      //   console.log("coś poszło nie tak");
+      // }
+    }
   };
   handleDataFromLocal = () => {
-    const testData = this.VinHistory.getItemsFromLocalStorage();
+    const testData: CarData[] = this.VinHistory.getItemsFromLocalStorage() as CarData[];
+    console.log(testData);
 
     if (testData) {
       this.HistoryUi.DisplayVinHeader(testData);
