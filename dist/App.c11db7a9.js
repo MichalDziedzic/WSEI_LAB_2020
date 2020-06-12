@@ -422,32 +422,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var VinHistory_1 = __importDefault(require("./VinHistory"));
 
-var Ui_1 = __importDefault(require("./Ui")); // import CarData from "./VinHistoryUI";
-// interface ApiObject {
-//   engine: string;
-//   make: string;
-//   manufacturer: string;
-//   model: string;
-//   transmission: string;
-//   trim: string;
-//   year: number;
-//   vin: string;
-//   img: string;
-// }
-// export default interface CarData {
-//   [index: number]: {
-//     engine: string;
-//     make: string;
-//     manufacturer: string;
-//     model: string;
-//     transmission: string;
-//     trim: string;
-//     year: number;
-//     vin: string;
-//     img: string;
-//   };
-// }
-
+var Ui_1 = __importDefault(require("./Ui"));
 
 var VinHistoryUI = function VinHistoryUI() {
   var _this = this;

@@ -1,32 +1,7 @@
 import vinHistory from "./VinHistory";
 import Ui from "./Ui";
 import CarData from "./Interfaces";
-// import CarData from "./VinHistoryUI";
 
-// interface ApiObject {
-//   engine: string;
-//   make: string;
-//   manufacturer: string;
-//   model: string;
-//   transmission: string;
-//   trim: string;
-//   year: number;
-//   vin: string;
-//   img: string;
-// }
-// export default interface CarData {
-//   [index: number]: {
-//     engine: string;
-//     make: string;
-//     manufacturer: string;
-//     model: string;
-//     transmission: string;
-//     trim: string;
-//     year: number;
-//     vin: string;
-//     img: string;
-//   };
-// }
 export default class VinHistoryUI {
   listVinEl: HTMLElement | null;
   ElemHistoryVin: null | NodeListOf<Element>;
