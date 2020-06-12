@@ -8,7 +8,6 @@ export default class VinHistory {
   vinsDB: Object[] | undefined | CarData;
   constructor() {
     this.vinsDB = this.handleVinsFromLocal();
-    console.log(this.vinsDB);
   }
   public saveItemToLocalStorage = (vinCode: string, data: object): boolean => {
     let CopyVinsArray = this.vinsDB as Object[]; // do zmiany
@@ -21,13 +20,6 @@ export default class VinHistory {
     return bagno;
   };
 
-  public getItemsFromLocalStorage = () => {
-    if (this.vinsDB != undefined) {
-      return this.vinsDB;
-    } else {
-      return [];
-    }
-  };
   handleVinsFromLocal = () => {
     const items = { ...localStorage };
 

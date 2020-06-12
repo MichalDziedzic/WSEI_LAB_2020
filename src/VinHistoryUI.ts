@@ -65,4 +65,12 @@ export default class VinHistoryUI {
 
     catchElemList.map((el) => new Ui(el));
   };
+  ClearVinHistoryList = () => {
+    let menuList: HTMLElement | null = document.querySelector(".hitoryVin-Bar");
+    if (menuList != null) {
+      while (menuList.firstChild) {
+        menuList.removeChild(menuList.firstChild);
+      }
+    }
+  };
 }

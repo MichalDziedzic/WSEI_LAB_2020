@@ -166,14 +166,6 @@ var VinHistory = function VinHistory() {
     return bagno;
   };
 
-  this.getItemsFromLocalStorage = function () {
-    if (_this.vinsDB != undefined) {
-      return _this.vinsDB;
-    } else {
-      return [];
-    }
-  };
-
   this.handleVinsFromLocal = function () {
     var items = _objectSpread({}, localStorage);
 
@@ -192,7 +184,6 @@ var VinHistory = function VinHistory() {
   };
 
   this.vinsDB = this.handleVinsFromLocal();
-  console.log(this.vinsDB);
 };
 
 exports.default = VinHistory;
@@ -389,6 +380,16 @@ var VinHistoryUI = function VinHistoryUI() {
     });
   };
 
+  this.ClearVinHistoryList = function () {
+    var menuList = document.querySelector(".hitoryVin-Bar");
+
+    if (menuList != null) {
+      while (menuList.firstChild) {
+        menuList.removeChild(menuList.firstChild);
+      }
+    }
+  };
+
   this.listVinEl = document.querySelector(".hitoryVin-Bar");
   this.ElemHistoryVin = null;
 };
@@ -493,8 +494,8 @@ var App = function App() {
     fetch("".concat(test, "=").concat(_this.vinCode), {
       method: "GET",
       headers: {
-        authorization: "Basic MjBjMGU2ZDgtNDNlOS00M2Q0LWE5ZGUtZWUxYmQ5YTQxODJj",
-        "partner-token": "edbbd5fad81b4865a3e6268136f0d7fc"
+        authorization: "Basic YzY0YTBiODUtODRhMS00MGJhLWFhMDctZjU1YWViYmZjMWJm",
+        "partner-token": "7446882dca314bd89b247caa63e85778"
       }
     }).then(function (response) {
       return response.json();
@@ -535,25 +536,31 @@ var App = function App() {
     });
   };
 
-  this.saveDataToLocal = function (data) {
-    if (_this.vinCode) {
-      var test1 = _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
-
-      console.log(test1); // if (xd === false) {
-      //   console.log("coś poszło nie tak");
-      // }
-    }
-  };
-
   this.handleDataFromLocal = function () {
-    var testData = _this.VinHistory.getItemsFromLocalStorage();
-
-    console.log(testData);
+    var testData = _this.VinHistory.handleVinsFromLocal();
 
     if (testData) {
       _this.HistoryUi.DisplayVinHeader(testData);
     } else {
       console.log("your histry vin not found!");
+    }
+  };
+
+  this.saveDataToLocal = function (data) {
+    if (_this.vinCode) {
+      var test1 = _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
+
+      console.log({
+        test1: test1
+      }, "bagnoo");
+
+      if (test1 === true) {
+        throw new Error("your car  stay in  localstorage");
+      } else {
+        _this.HistoryUi.ClearVinHistoryList();
+
+        _this.handleDataFromLocal();
+      }
     }
   };
 
@@ -564,7 +571,7 @@ var App = function App() {
 };
 
 new App();
-},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/18504/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16376/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -592,7 +599,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64199" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52777" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -768,5 +775,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/18504/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16376/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map
