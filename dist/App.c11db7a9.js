@@ -240,8 +240,7 @@ var VinHistory = function VinHistory() {
   _classCallCheck(this, VinHistory);
 
   this.saveItemToLocalStorage = function (vinCode, data) {
-    var CopyVinsArray = _this.vinsDB; // do zmiany
-
+    var CopyVinsArray = _this.vinsDB;
     var bagno = CopyVinsArray.some(function (el) {
       return el.vin === vinCode;
     });
@@ -423,7 +422,32 @@ Object.defineProperty(exports, "__esModule", {
 
 var VinHistory_1 = __importDefault(require("./VinHistory"));
 
-var Ui_1 = __importDefault(require("./Ui"));
+var Ui_1 = __importDefault(require("./Ui")); // import CarData from "./VinHistoryUI";
+// interface ApiObject {
+//   engine: string;
+//   make: string;
+//   manufacturer: string;
+//   model: string;
+//   transmission: string;
+//   trim: string;
+//   year: number;
+//   vin: string;
+//   img: string;
+// }
+// export default interface CarData {
+//   [index: number]: {
+//     engine: string;
+//     make: string;
+//     manufacturer: string;
+//     model: string;
+//     transmission: string;
+//     trim: string;
+//     year: number;
+//     vin: string;
+//     img: string;
+//   };
+// }
+
 
 var VinHistoryUI = function VinHistoryUI() {
   var _this = this;
@@ -434,20 +458,26 @@ var VinHistoryUI = function VinHistoryUI() {
     HistoryVin.map(function (el) {
       var vin = el.vin;
       var li = document.createElement("li");
-      var shortDescVin = document.createElement("p");
+      var paragrafVin = document.createElement("p");
       var HeaderHistoryVin = document.createElement("div");
+      HeaderHistoryVin.className = "vinHistory-test";
+      HeaderHistoryVin.setAttribute("id", vin);
+      var vinDescribeHeader = document.createTextNode("".concat(vin));
+      var aEl = document.createElement("a");
+      aEl.className = "delete";
+      var deleteDescribe = document.createTextNode("x");
       HeaderHistoryVin.addEventListener("mousedown", function (e) {
         return _this.handleMouseDownListElem(e);
       });
-      shortDescVin.innerHTML = "testVin-HISTORY";
-      HeaderHistoryVin.className = "vinHistory-test";
-      HeaderHistoryVin.setAttribute("id", vin);
+      paragrafVin.appendChild(vinDescribeHeader);
+      aEl.appendChild(deleteDescribe);
 
       if (_this.listVinEl) {
         _this.listVinEl.appendChild(li);
 
-        HeaderHistoryVin.innerHTML = " <p>".concat(vin, "</p><a href='usun'>X</a>");
         li.appendChild(HeaderHistoryVin);
+        HeaderHistoryVin.appendChild(paragrafVin);
+        paragrafVin.after(aEl);
       }
     });
   };
@@ -457,7 +487,7 @@ var VinHistoryUI = function VinHistoryUI() {
     var id = e.target.id;
     console.log(id);
     console.log(id);
-    var testduba = new VinHistory_1.default().getItemsFromLocalStorage();
+    var testduba = new VinHistory_1.default().handleVinsFromLocal();
     console.log(testduba);
     var catchElemList = testduba.filter(function (el) {
       return el.vin == id;
@@ -577,8 +607,7 @@ var App = function App() {
 
   this.saveDataToLocal = function (data) {
     if (_this.vinCode) {
-      var test1 = _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data); // console.log({ test1 }, "bagnoo");
-
+      var test1 = _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
 
       if (test1 === true) {
         throw new Error("your car  stay in  localstorage");
@@ -598,7 +627,7 @@ var App = function App() {
 };
 
 new App();
-},{"./Api":"../src/Api.ts","./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16376/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Api":"../src/Api.ts","./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/5032/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -626,7 +655,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52777" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56449" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -802,5 +831,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16376/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
+},{}]},{},["C:/Users/Michal/AppData/Roaming/npm-cache/_npx/5032/node_modules/parcel/src/builtins/hmr-runtime.js","../src/App.ts"], null)
 //# sourceMappingURL=/App.c11db7a9.js.map

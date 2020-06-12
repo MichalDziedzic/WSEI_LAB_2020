@@ -1,29 +1,32 @@
 import vinHistory from "./VinHistory";
 import Ui from "./Ui";
-interface ApiObject {
-  engine: string;
-  make: string;
-  manufacturer: string;
-  model: string;
-  transmission: string;
-  trim: string;
-  year: number;
-  vin: string;
-  img: string;
-}
-export default interface CarData {
-  [index: number]: {
-    engine: string;
-    make: string;
-    manufacturer: string;
-    model: string;
-    transmission: string;
-    trim: string;
-    year: number;
-    vin: string;
-    img: string;
-  };
-}
+import CarData from "./Interfaces";
+// import CarData from "./VinHistoryUI";
+
+// interface ApiObject {
+//   engine: string;
+//   make: string;
+//   manufacturer: string;
+//   model: string;
+//   transmission: string;
+//   trim: string;
+//   year: number;
+//   vin: string;
+//   img: string;
+// }
+// export default interface CarData {
+//   [index: number]: {
+//     engine: string;
+//     make: string;
+//     manufacturer: string;
+//     model: string;
+//     transmission: string;
+//     trim: string;
+//     year: number;
+//     vin: string;
+//     img: string;
+//   };
+// }
 export default class VinHistoryUI {
   listVinEl: HTMLElement | null;
   ElemHistoryVin: null | NodeListOf<Element>;
@@ -35,20 +38,28 @@ export default class VinHistoryUI {
     HistoryVin.map((el) => {
       const { vin } = el;
       const li: HTMLElement = document.createElement("li");
-      const shortDescVin: HTMLElement = document.createElement("p");
+      const paragrafVin: HTMLElement = document.createElement("p");
       const HeaderHistoryVin: HTMLElement = document.createElement("div");
+      HeaderHistoryVin.className = "vinHistory-test";
+      HeaderHistoryVin.setAttribute("id", vin);
+      const vinDescribeHeader = document.createTextNode(`${vin}`);
+
+      const aEl: HTMLElement = document.createElement("a");
+      aEl.className = "delete";
+      const deleteDescribe = document.createTextNode("x");
+
       HeaderHistoryVin.addEventListener("mousedown", (e) =>
         this.handleMouseDownListElem(e)
       );
 
-      shortDescVin.innerHTML = "testVin-HISTORY";
-      HeaderHistoryVin.className = "vinHistory-test";
-      HeaderHistoryVin.setAttribute("id", vin);
+      paragrafVin.appendChild(vinDescribeHeader);
+      aEl.appendChild(deleteDescribe);
 
       if (this.listVinEl) {
         this.listVinEl.appendChild(li);
-        HeaderHistoryVin.innerHTML = ` <p>${vin}</p><a href='usun'>X</a>`;
         li.appendChild(HeaderHistoryVin);
+        HeaderHistoryVin.appendChild(paragrafVin);
+        paragrafVin.after(aEl);
       }
     });
   };
@@ -58,7 +69,7 @@ export default class VinHistoryUI {
     console.log(id);
 
     console.log(id);
-    let testduba: Array<object> = new vinHistory().getItemsFromLocalStorage();
+    let testduba: Array<object> = new vinHistory().handleVinsFromLocal();
     console.log(testduba);
 
     const catchElemList: Array<object> = testduba.filter((el) => el.vin == id);

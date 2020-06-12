@@ -1,4 +1,4 @@
-import CarData from "./VinHistoryUI";
+import CarData from "./Interfaces";
 
 // console.log(" działą w pliku  z klasa infoVin");
 // //1GNALDEK9FZ108495 example number vin
@@ -10,7 +10,7 @@ export default class VinHistory {
     this.vinsDB = this.handleVinsFromLocal();
   }
   public saveItemToLocalStorage = (vinCode: string, data: object): boolean => {
-    let CopyVinsArray = this.vinsDB as Object[]; // do zmiany
+    let CopyVinsArray = this.vinsDB as Object[];
 
     let bagno: boolean = CopyVinsArray.some((el) => el.vin === vinCode);
 

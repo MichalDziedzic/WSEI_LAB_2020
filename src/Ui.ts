@@ -1,23 +1,13 @@
-interface ApiObject {
-  engine: string;
-  make: string;
-  manufacturer: string;
-  model: string;
-  transmission: string;
-  trim: string;
-  year: number;
-  vin: string;
-  img: string;
-}
+import ApiObject from "./Interfaces";
 
-interface CarData {
+interface CarDataUi {
   data: ApiObject;
   mainIsCreated: HTMLElement | null;
 }
 
 type htmlElem = HTMLElement | null | HTMLButtonElement;
 
-export default class Ui implements CarData {
+export default class Ui implements CarDataUi {
   data: ApiObject;
   mainIsCreated: HTMLElement | null;
 

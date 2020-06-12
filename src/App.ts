@@ -3,18 +3,7 @@ import VinHistory from "./VinHistory";
 import HistoryUI from "./VinHistoryUI";
 import Ui from "./Ui";
 import CarData from "./VinHistoryUI";
-
-interface ApiObject {
-  engine: string;
-  make: string;
-  manufacturer: string;
-  model: string;
-  transmission: string;
-  trim: string;
-  year: number;
-  vin: string;
-  img: string;
-}
+import ApiObject from "./Interfaces";
 
 interface App {
   btnCheck: HTMLElement | null;
@@ -107,7 +96,6 @@ class App {
         this.vinCode,
         data
       );
-      // console.log({ test1 }, "bagnoo");
 
       if (test1 === true) {
         throw new Error("your car  stay in  localstorage");
