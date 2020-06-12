@@ -117,7 +117,94 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../src/VinHistory.ts":[function(require,module,exports) {
+})({"../src/Api.ts":[function(require,module,exports) {
+"use strict";
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Api = function Api(vinCode) {
+  var _this = this;
+
+  _classCallCheck(this, Api);
+
+  this.mergeObjectData = function (data, data1) {
+    return Object.assign({}, data, data1);
+  };
+
+  this.handleVinInfo = function (param) {
+    var apiArray = ["http://api.carmd.com/v3.0/image?vin", "http://api.carmd.com/v3.0/maintlist?vin", "http://api.carmd.com/v3.0/decode?vin"];
+    var test = "";
+
+    switch (param) {
+      case "img":
+        test = apiArray[0];
+        break;
+
+      case "maintanceList":
+        test = apiArray[1];
+        break;
+
+      case "carData":
+        test = apiArray[2];
+        break;
+    }
+
+    fetch("".concat(test, "=").concat(_this.vin), {
+      method: "GET",
+      headers: {
+        authorization: "Basic YmZkZTkzMWEtNWI4NS00NTg5LTkxYmEtYWVkZjRhMWQzNmZi",
+        "partner-token": "38300df0932f4ae697b9822965d7f129"
+      }
+    }).then(function (response) {
+      return response.json();
+    }).then(function (response) {
+      var data = response.data,
+          message = response.message;
+
+      switch (param) {
+        case "img":
+          _this.testDuba = _this.mergeObjectData({
+            img: data.image
+          }, _this.testDuba);
+          break;
+
+        case "maintanceList":
+          _this.testDuba = _this.mergeObjectData(data, _this.testDuba);
+          break;
+
+        case "carData":
+          _this.testDuba = _this.mergeObjectData(_this.testDuba, data);
+          break;
+      }
+
+      _this.testDuba = _this.mergeObjectData(_this.testDuba, {
+        vin: _this.vin
+      });
+
+      if (_this.testDuba) {//console.log(this.testDuba);
+        //   this.saveDataToLocal(this.testDuba);
+        //   new Ui(this.testDuba as ApiObject);
+      }
+    }).catch(function (err) {
+      console.log(err);
+      return new Error("sry api not works");
+    });
+  };
+
+  this.handleApiData = function () {
+    return _this.testDuba;
+  };
+
+  this.vin = vinCode;
+  this.testDuba = {}; //this.vinsDB = this.handleVinsFromLocal();
+};
+
+exports.default = Api;
+},{}],"../src/VinHistory.ts":[function(require,module,exports) {
 "use strict";
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -410,6 +497,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var Api_1 = __importDefault(require("./Api"));
+
 var VinHistory_1 = __importDefault(require("./VinHistory"));
 
 var VinHistoryUI_1 = __importDefault(require("./VinHistoryUI"));
@@ -460,80 +549,20 @@ var App = function App() {
       }
     }
 
-    _this.handleVinInfo("img");
+    if (_this.vinCode) {
+      var API = new Api_1.default(_this.vinCode);
+      API.handleVinInfo("img");
+      API.handleVinInfo("maintanceList");
+      API.handleVinInfo("carData");
+      setTimeout(function () {
+        console.log(API.testDuba);
+        new Ui_1.default(API.testDuba);
 
-    _this.handleVinInfo("maintanceList");
-
-    _this.handleVinInfo("carData");
-
-    document.querySelector("input[name=vinCode]").value = "";
-  };
-
-  this.mergeObjectData = function (data, data1) {
-    return Object.assign({}, data, data1);
-  };
-
-  this.handleVinInfo = function (param) {
-    var apiArray = ["http://api.carmd.com/v3.0/image?vin", "http://api.carmd.com/v3.0/maintlist?vin", "http://api.carmd.com/v3.0/decode?vin"];
-    var test = "";
-
-    switch (param) {
-      case "img":
-        test = apiArray[0];
-        break;
-
-      case "maintanceList":
-        test = apiArray[1];
-        break;
-
-      case "carData":
-        test = apiArray[2];
-        break;
+        _this.saveDataToLocal(API.testDuba);
+      }, 1500);
     }
 
-    fetch("".concat(test, "=").concat(_this.vinCode), {
-      method: "GET",
-      headers: {
-        authorization: "Basic YzY0YTBiODUtODRhMS00MGJhLWFhMDctZjU1YWViYmZjMWJm",
-        "partner-token": "7446882dca314bd89b247caa63e85778"
-      }
-    }).then(function (response) {
-      return response.json();
-    }).then(function (response) {
-      var data = response.data,
-          message = response.message;
-
-      switch (param) {
-        case "img":
-          _this.testDuba = _this.mergeObjectData({
-            img: data.image
-          }, _this.testDuba);
-          break;
-
-        case "maintanceList":
-          _this.testDuba = _this.mergeObjectData(data, _this.testDuba);
-          break;
-
-        case "carData":
-          _this.testDuba = _this.mergeObjectData(_this.testDuba, data);
-          break;
-      }
-
-      _this.testDuba = _this.mergeObjectData(_this.testDuba, {
-        vin: _this.vinCode
-      });
-
-      if (_this.testDuba) {
-        console.log(_this.testDuba);
-
-        _this.saveDataToLocal(_this.testDuba);
-
-        new Ui_1.default(_this.testDuba);
-      }
-    }).catch(function (err) {
-      console.log(err);
-      return new Error("sry api not works");
-    });
+    document.querySelector("input[name=vinCode]").value = "";
   };
 
   this.handleDataFromLocal = function () {
@@ -548,11 +577,8 @@ var App = function App() {
 
   this.saveDataToLocal = function (data) {
     if (_this.vinCode) {
-      var test1 = _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data);
+      var test1 = _this.VinHistory.saveItemToLocalStorage(_this.vinCode, data); // console.log({ test1 }, "bagnoo");
 
-      console.log({
-        test1: test1
-      }, "bagnoo");
 
       if (test1 === true) {
         throw new Error("your car  stay in  localstorage");
@@ -562,7 +588,8 @@ var App = function App() {
         _this.handleDataFromLocal();
       }
     }
-  };
+  }; // this.Api=new Api();
+
 
   this.btnCheck = document.querySelector(".checkBtn"), this.vinCodeEl = document.querySelector("input[name=vinCode]"), this.vin = null, this.vinCode = "", this.testDuba = {}, this.VinHistory = new VinHistory_1.default();
   this.HistoryUi = new VinHistoryUI_1.default();
@@ -571,7 +598,7 @@ var App = function App() {
 };
 
 new App();
-},{"./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16376/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Api":"../src/Api.ts","./VinHistory":"../src/VinHistory.ts","./VinHistoryUI":"../src/VinHistoryUI.ts","./Ui":"../src/Ui.ts"}],"C:/Users/Michal/AppData/Roaming/npm-cache/_npx/16376/node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
