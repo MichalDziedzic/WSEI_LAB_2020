@@ -2,6 +2,7 @@ import ApiObject from "./Interfaces";
 interface CarDataUi {
   data: ApiObject;
   mainIsCreated: HTMLElement | null;
+  handleBtnClickIsActive: boolean;
 }
 
 type htmlElem = HTMLElement | null | HTMLButtonElement;
@@ -14,6 +15,7 @@ export default class Ui implements CarDataUi {
   cylinderIcon: string;
   literIcon: string;
   turboIcon: string;
+  handleBtnClickIsActive: boolean;
 
   constructor(data: ApiObject) {
     this.TransmissionIcon =
@@ -25,6 +27,7 @@ export default class Ui implements CarDataUi {
 
     this.literIcon = `<img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMnB0IiB2aWV3Qm94PSItMTcgMCA1MTEgNTEyIiB3aWR0aD0iNTEycHQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0ibTQyMy41OTc2NTYgMGMtMjQuNjEzMjgxIDAtNDUuNDQ5MjE4IDE2LjQ3MjY1Ni01Mi4xNTYyNSAzOWgtMzU1Ljk0MTQwNmMtNS45ODgyODEgMC0xMS4zOTg0MzggMy41NTg1OTQtMTMuNzY5NTMxIDkuMDU0Njg4LTIuMzc1IDUuNS0xLjI1IDExLjg3ODkwNiAyLjg1NTQ2OSAxNi4yMzQzNzRsNzcuMjY1NjI0IDgxLjk1MzEyNnYyODkuODU1NDY4YzAgNDEuODUxNTYzIDMzLjkzNzUgNzUuOTAyMzQ0IDc1LjY1NjI1IDc1LjkwMjM0NGgxNjZjNDEuNzE4NzUgMCA3NS42NTYyNS0zNC4wNTA3ODEgNzUuNjU2MjUtNzUuOTAyMzQ0di0zODEuNTA3ODEyYzAtMTMuNTU4NTk0IDEwLjk2MDkzOC0yNC41ODk4NDQgMjQuNDMzNTk0LTI0LjU4OTg0NHMyNC40Mjk2ODggMTEuMDMxMjUgMjQuNDI5Njg4IDI0LjU4OTg0NHYyMDAuMTMyODEyYzAgOC4yODUxNTYgNi43MTg3NSAxNSAxNSAxNSA4LjI4NTE1NiAwIDE1LTYuNzE0ODQ0IDE1LTE1di0yMDAuMTMyODEyYzAtMzAuMTAxNTYzLTI0LjQxNzk2OS01NC41ODk4NDQtNTQuNDI5Njg4LTU0LjU4OTg0NHptLTg1LjQ0NTMxMiA0MTYuMjM4MjgxYzAgOC4yODEyNS02LjcxODc1IDE1LTE1IDE1LTguMjg1MTU2IDAtMTUtNi43MTg3NS0xNS0xNXYtMTUuMDAzOTA2aC0xMDYuMzE2NDA2Yy04LjI4NTE1NyAwLTE1LTYuNzE0ODQ0LTE1LTE1czYuNzE0ODQzLTE1IDE1LTE1aDEwNi4zMTY0MDZ2LTMwLjkwNjI1aC00NS42NTYyNWMtOC4yODUxNTYgMC0xNS02LjcxNDg0NC0xNS0xNSAwLTguMjgxMjUgNi43MTQ4NDQtMTUgMTUtMTVoNDUuNjU2MjV2LTMwLjkwMjM0NGgtNDUuNjU2MjVjLTguMjg1MTU2IDAtMTUtNi43MTQ4NDMtMTUtMTUgMC04LjI4NTE1NiA2LjcxNDg0NC0xNSAxNS0xNWg0NS42NTYyNXYtMzAuOTA2MjVoLTEwNi4zMTY0MDZjLTguMjg1MTU3IDAtMTUtNi43MTQ4NDMtMTUtMTUgMC04LjI4NTE1NiA2LjcxNDg0My0xNSAxNS0xNWgxMDYuMzE2NDA2di0xNWMwLTguMjg1MTU2IDYuNzE0ODQ0LTE1IDE1LTE1IDguMjgxMjUgMCAxNSA2LjcxNDg0NCAxNSAxNXptMCAwIi8+PC9zdmc+" />`;
     this.turboIcon = `<img src="data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDY0IDY0IiB3aWR0aD0iNTEyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxnIGlkPSJ0dXJibyI+PHBhdGggZD0ibTIyLjM5IDI0LjMyYTQuMDE4IDQuMDE4IDAgMCAxIC4yNC0uNDYgOS41OTIgOS41OTIgMCAwIDAgLTcuOC00LjUyIDE0IDE0IDAgMCAwIC0xLjcgNS4wOCA4Ljk0OSA4Ljk0OSAwIDAgMSAzLjgyLTEuMTggMTEuNjgzIDExLjY4MyAwIDAgMSA1LjQ0IDEuMDh6Ii8+PHBhdGggZD0ibTI1LjA4IDMwLjg1YTQuMDE4IDQuMDE4IDAgMCAxIC0uNDYtLjI0IDkuNTkyIDkuNTkyIDAgMCAwIC00LjUyIDcuOCAxNCAxNCAwIDAgMCA1LjA4IDEuNyA4Ljk0OSA4Ljk0OSAwIDAgMSAtMS4xOC0zLjgyIDExLjY4MyAxMS42ODMgMCAwIDEgMS4wOC01LjQ0eiIvPjxwYXRoIGQ9Im0yMy45OCAyMi4yOGE0LjQzNCA0LjQzNCAwIDAgMSAuNDItLjI5IDkuNjkgOS42OSAwIDAgMCAtMS41MS00Ljg3IDkuOCA5LjggMCAwIDAgLTIuOTctMi45NCAxMy44MjUgMTMuODI1IDAgMCAwIC0zLjgxIDMuMjkgMTEuNDg1IDExLjQ4NSAwIDAgMSAzLjY5IDEuMTUgMTEuOCAxMS44IDAgMCAxIDQuMTggMy42NnoiLz48cGF0aCBkPSJtMjMuMDQgMjkuMjZjLS4xLS4xNC0uMi0uMjgtLjI5LS40MmE5LjY2MiA5LjY2MiAwIDAgMCAtNC44NyAxLjUxIDkuOCA5LjggMCAwIDAgLTIuOTQgMi45NyAxNC4xMDcgMTQuMTA3IDAgMCAwIDMuMjggMy44MSAxMS40MjYgMTEuNDI2IDAgMCAxIDEuMTYtMy42OSAxMS43MDkgMTEuNzA5IDAgMCAxIDMuNjYtNC4xOHoiLz48cGF0aCBkPSJtMjguOTIgMjEuNjNhNC4wMTggNC4wMTggMCAwIDEgLjQ2LjI0IDkuNTkyIDkuNTkyIDAgMCAwIDQuNTItNy44IDE0IDE0IDAgMCAwIC01LjA4LTEuNyA4Ljk0OSA4Ljk0OSAwIDAgMSAxLjE4IDMuODIgMTEuNjgzIDExLjY4MyAwIDAgMSAtMS4wOCA1LjQ0eiIvPjxwYXRoIGQ9Im0yNS45NiA0OC45MmMtMS4xNi0uMS0yLjMuNzItMy40Mi40N2wtMS4zMSAyLjYzIDEyLjA2IDMuNTEgMi4zNy01LjYyYy01LjM1LS41NS05LjQ2LS45Ny05LjctLjk5eiIvPjxwYXRoIGQ9Im0yNCA0Ni4yNGgydjIwaC0yeiIgdHJhbnNmb3JtPSJtYXRyaXgoLjI4IC0uOTYgLjk2IC4yOCAtMzUuOTkgNjQuNDkzKSIvPjxjaXJjbGUgY3g9IjI3IiBjeT0iMjYuMjQiIHI9IjMiLz48cGF0aCBkPSJtMjQuNTcgMTYuMDRhMTEuNTg5IDExLjU4OSAwIDAgMSAxLjc5IDUuMjZjLjE3LS4wMi4zNC0uMDQuNTItLjA1YTkuNzEyIDkuNzEyIDAgMCAwIDEuMTItNC45NiA4LjY1NiA4LjY1NiAwIDAgMCAtMS41NS00LjAyIDEzLjkxNiAxMy45MTYgMCAwIDAgLTQuNDguOTIgMTEuNTY4IDExLjU2OCAwIDAgMSAyLjYgMi44NXoiLz48cGF0aCBkPSJtMjkuNDMgMzYuNDRhMTEuNTg2IDExLjU4NiAwIDAgMSAtMS43OS01LjI3IDQuMzUgNC4zNSAwIDAgMSAtLjUyLjA2IDkuNzEyIDkuNzEyIDAgMCAwIC0xLjEyIDQuOTYgOC42NTYgOC42NTYgMCAwIDAgMS41NSA0LjAyIDEzLjkxNiAxMy45MTYgMCAwIDAgNC40OC0uOTIgMTEuNTY4IDExLjU2OCAwIDAgMSAtMi42LTIuODV6Ii8+PHBhdGggZD0ibTIyLjA3IDI2Ljg5YTQuNzc2IDQuNzc2IDAgMCAxIC0uMDYtLjUzIDkuNjg3IDkuNjg3IDAgMCAwIC00Ljk2LTEuMTIgOC42NTYgOC42NTYgMCAwIDAgLTQuMDIgMS41NSAxMy45MTYgMTMuOTE2IDAgMCAwIC45MiA0LjQ4IDExLjQ3MiAxMS40NzIgMCAwIDEgOC4xMi00LjM4eiIvPjxwYXRoIGQ9Im01MiA1Mi42OGMuOC4wOSAxLjQ4LjE2IDIgLjIxdi0xMy44OWgtMnoiLz48cGF0aCBkPSJtNTYgMzJoNHYyNGgtNHoiLz48cGF0aCBkPSJtNDYgMzdoMS43MWEyMi45OTMgMjIuOTkzIDAgMCAwIC0xOS4xNy0zMi45NWMtLjUyLS4wMy0xLjA0LS4wNS0xLjU2LS4wNWEyMi43NzEgMjIuNzcxIDAgMCAwIC0xNS43IDYuMjEgMjMgMjMgMCAwIDAgMTMuODQgMzkuNzFjLjQ4LjA0IDE2LjQzIDEuNjkgMjQuODggMi41NnYtMTMuNDhoLTR6bS0xOSA1LjI0YTE2IDE2IDAgMSAxIDE2LTE2IDE2LjAyMSAxNi4wMjEgMCAwIDEgLTE2IDE2eiIvPjxwYXRoIGQ9Im0zMC4wMiAzMC4xOWEzLjE4OCAzLjE4OCAwIDAgMSAtLjQyLjMgOS42OSA5LjY5IDAgMCAwIDEuNTEgNC44NyA5LjggOS44IDAgMCAwIDIuOTcgMi45NCAxNC4wNTMgMTQuMDUzIDAgMCAwIDMuOC0zLjI3IDExLjUwNyAxMS41MDcgMCAwIDEgLTcuODYtNC44NHoiLz48cGF0aCBkPSJtMzYuNTEgMjkuMjVhMTEuNjM0IDExLjYzNCAwIDAgMSAtNC45LTEuMDkgNC4wMTggNC4wMTggMCAwIDEgLS4yNC40NiA5LjU5MiA5LjU5MiAwIDAgMCA3LjggNC41MiAxNCAxNCAwIDAgMCAxLjctNS4wOCA4Ljk0OSA4Ljk0OSAwIDAgMSAtMy44MiAxLjE4Yy0uMTguMDEtLjM2LjAxLS41NC4wMXoiLz48cGF0aCBkPSJtMzEuOTMgMjUuNmE0LjM1IDQuMzUgMCAwIDEgLjA2LjUyIDkuNTg3IDkuNTg3IDAgMCAwIDQuOTYgMS4xMiA4LjY1NiA4LjY1NiAwIDAgMCA0LjAyLTEuNTUgMTMuODYxIDEzLjg2MSAwIDAgMCAtLjkyLTQuNDggMTEuNTIyIDExLjUyMiAwIDAgMSAtOC4xMiA0LjM5eiIvPjxwYXRoIGQ9Im0zNS43OCAxNS4zNWExMS40MjYgMTEuNDI2IDAgMCAxIC0xLjE2IDMuNjkgMTEuOCAxMS44IDAgMCAxIC0zLjY2IDQuMThjLjEuMTMuMi4yOC4yOS40MmE5LjYzNSA5LjYzNSAwIDAgMCA0Ljg3LTEuNTEgOS44IDkuOCAwIDAgMCAyLjk0LTIuOTcgMTQuMTA3IDE0LjEwNyAwIDAgMCAtMy4yOC0zLjgxeiIvPjwvZz48L3N2Zz4=" />`;
+    this.handleBtnClickIsActive = false;
     (this.data = data), (this.mainIsCreated = document.querySelector("main"));
     if (this.mainIsCreated != null && this.mainIsCreated != undefined) {
       this.updateData();
@@ -33,6 +36,14 @@ export default class Ui implements CarDataUi {
     }
   }
   createElem = (elem: string): HTMLElement => document.createElement(`${elem}`);
+  handleBtnClick = (ContainerDetailsRaport: htmlElem) => {
+    if (ContainerDetailsRaport) {
+      !this.handleBtnClickIsActive
+        ? ContainerDetailsRaport.setAttribute("style", `display:flex`)
+        : ContainerDetailsRaport.setAttribute("style", `display:none`);
+      this.handleBtnClickIsActive = !this.handleBtnClickIsActive;
+    }
+  };
   setListDataElem = (): string => {
     const {
       make,
@@ -137,9 +148,9 @@ export default class Ui implements CarDataUi {
       engineDesc.after(engineDetails);
       engineDetails.after(carRaportPDF);
 
-      detailsBtn.addEventListener("click", () => {
-        ContainerDetailsRaport.setAttribute("style", `display:flex`);
-      });
+      detailsBtn.addEventListener("click", () =>
+        this.handleBtnClick(ContainerDetailsRaport)
+      );
       const imgLocation: HTMLImageElement | null = document.querySelector(
         ".vinImg"
       );
@@ -150,17 +161,22 @@ export default class Ui implements CarDataUi {
   };
   updateData = () => {
     const { make, model, img, engine } = this.data;
+    let ContainerDetailsRaport: htmlElem = document.querySelector(
+      ".ContainerDetailsRaport"
+    );
+    //this.handleBtnClickIsActive = true;
 
-    let infoRaportWrapper: HTMLElement | null = document.querySelector(
+    this.handleBtnClickIsActive = true;
+    this.handleBtnClick(ContainerDetailsRaport);
+
+    this.handleBtnClickIsActive = false;
+
+    let infoRaportWrapper: htmlElem = document.querySelector(
       ".infoRaportWrapper"
     );
-    let nameCarHeader: HTMLElement | null = document.querySelector(
-      ".NameCarHeader"
-    );
+    let nameCarHeader: htmlElem = document.querySelector(".NameCarHeader");
 
-    let engineDataBar: HTMLElement | null = document.querySelector(
-      ".engineDataBar"
-    );
+    let engineDataBar: htmlElem = document.querySelector(".engineDataBar");
     if (infoRaportWrapper && nameCarHeader && engineDataBar) {
       nameCarHeader.innerText = `${make} ${model}`;
       infoRaportWrapper.innerHTML = this.setListDataElem();
