@@ -47,7 +47,7 @@
 
 .projects li:hover,
 .products li:hover {
-  background-color: #c5adb5;
+  background-color: #fa255e;
   cursor: pointer;
 }
 
@@ -82,53 +82,6 @@
   opacity: 1;
   pointer-events: all;
   transform: translateY(-10px);
-}
-
-.firstPage {
-  width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-}
-
-.vinDecoder {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.vinHeader,
-.vinFinder {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  flex-direction: row;
-}
-
-.vinFinder {
-  min-height: 20vh;
-  align-items: center;
-}
-
-#InputVin {
-  height: 25px;
-}
-
-.btn,
-.detailsBtn {
-  height: 31px;
-  background: #c39ea0;
-  border: 1px solid black;
-  border-radius: 2px;
-}
-
-.vinHeader {
-  font-size: 38px;
-  min-height: 15vh;
-  align-items: flex-end;
-}
-.vinHeader p {
-  font-size: 2 rem;
 }
 
 .ContainerDetailsRaport {
@@ -217,24 +170,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.vinArticle {
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  flex-direction: column;
-  min-height: 55vh;
-  padding: 50px;
-}
-.vinArticle p {
-  width: 100%;
-  line-height: 1.3;
-  padding: 30px 0 30px 0;
-}
-.vinArticle h3 {
-  font-size: 25px;
-  color: #fa255e;
 }
 
 main,
@@ -418,6 +353,112 @@ nav i {
 
 .vinHeader p {
   font-weight: 600;
+}
+
+.firstPage {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+.vinDecoder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.vinHeader,
+.vinFinder {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: row;
+}
+
+.vinFinder {
+  min-height: 20vh;
+  align-items: center;
+}
+
+.vinWrapper {
+  width: 500px;
+  position: absolute;
+  transition: 0.5s;
+}
+.vinWrapper input {
+  transition: 0.5s;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 20px;
+  height: 50px;
+}
+.vinWrapper input[type=text] {
+  background: #fa255e;
+  width: 340px;
+  border: none;
+  outline: none;
+  padding: 0 0 0 25px;
+  border-radius: 25px 0 0 25px;
+  position: relative;
+}
+
+.btn,
+.detailsBtn {
+  font-size: 20px;
+  height: 50px;
+  left: -5px;
+  position: relative;
+  background: #c39ea0;
+  border: 1px solid black;
+  width: 150px;
+  border-radius: 0 25px 25px 0;
+  border: none;
+  outline: none;
+  transition: 0.5s;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.detailsBtn {
+  border-radius: 25px 25px;
+}
+
+.btn:hover {
+  background: black;
+  color: #fa255e;
+}
+
+.detailsBtn:hover {
+  background: #fa255e;
+  color: black;
+}
+
+.vinHeader {
+  font-size: 38px;
+  min-height: 15vh;
+  align-items: flex-end;
+}
+.vinHeader p {
+  font-size: 2 rem;
+}
+
+.vinArticle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+  min-height: 55vh;
+  padding: 50px;
+}
+.vinArticle p {
+  width: 100%;
+  line-height: 1.3;
+  padding: 30px 0 30px 0;
+}
+.vinArticle h3 {
+  font-size: 30px;
+  color: #fa255e;
 }
 
 aside {
