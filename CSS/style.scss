@@ -13,7 +13,10 @@ body {
   display: flex;
   flex-direction: column;
 }
-
+// #liter {
+//   height: 10px;
+//   width: 10px;
+// }
 header {
   @include flexCenter(space-between, row, center);
   background: black;
@@ -54,6 +57,7 @@ aside {
     rgba(248, 229, 229, 1) 90%
   );
 }
+
 footer {
   background: $blk;
   color: $softPink;

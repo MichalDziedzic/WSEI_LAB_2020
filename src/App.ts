@@ -15,6 +15,8 @@ interface App {
   testDuba: object | ApiObject;
 }
 class App {
+
+
   constructor() {
     // this.Api=new Api();
     (this.btnCheck = document.querySelector(".checkBtn")),
@@ -108,3 +110,5 @@ class App {
 }
 
 new App();
+
+

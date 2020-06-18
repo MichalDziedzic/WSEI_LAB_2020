@@ -131,6 +131,94 @@
   font-size: 2 rem;
 }
 
+.ContainerDetailsRaport {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 20vh;
+}
+.ContainerDetailsRaport div {
+  display: flex;
+}
+
+.engineDetails {
+  background: #c39ea0;
+  justify-content: center;
+  align-items: center;
+  width: 33.33%;
+}
+.engineDetails img {
+  width: 70px;
+}
+
+.engineIcons img {
+  width: 70px;
+  padding: 20px;
+}
+
+.engineSpec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 33.33%;
+}
+
+.engineDataBar {
+  padding-top: 10px;
+}
+.engineDataBar p {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.engineIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.engineIcon img {
+  width: 50px;
+}
+
+.engineDesc {
+  background-color: #fa255e;
+  justify-content: center;
+  font-size: 3em;
+  align-items: center;
+  width: 33.33%;
+}
+.engineDesc img {
+  width: 100px;
+  padding-left: 20px;
+}
+.engineDesc div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carRaportPDF {
+  background-color: #fa255e;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  width: 33.33%;
+}
+.carRaportPDF i {
+  font-size: 100px;
+  cursor: pointer;
+  padding-left: 10px;
+}
+.carRaportPDF span {
+  font-weight: bold;
+}
+.carRaportPDF div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .vinArticle {
   display: flex;
   justify-content: flex-start;
@@ -233,6 +321,12 @@ main {
 .infoRaportWrapper ul i,
 .infoRaportWrapper li i {
   padding-right: 20px;
+}
+.infoRaportWrapper ul img,
+.infoRaportWrapper li img {
+  height: 20px;
+  width: 20px;
+  padding-right: 15px;
 }
 
 .NameCarHeader {
