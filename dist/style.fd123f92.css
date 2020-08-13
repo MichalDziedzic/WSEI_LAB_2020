@@ -47,7 +47,7 @@
 
 .projects li:hover,
 .products li:hover {
-  background-color: #c5adb5;
+  background-color: #fa255e;
   cursor: pointer;
 }
 
@@ -84,69 +84,92 @@
   transform: translateY(-10px);
 }
 
-.firstPage {
-  width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-}
-
-.vinDecoder {
-  width: 100%;
+.ContainerDetailsRaport {
   display: flex;
-  flex-direction: column;
-}
-
-.vinHeader,
-.vinFinder {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
   flex-direction: row;
-}
-
-.vinFinder {
-  min-height: 20vh;
-  align-items: center;
-}
-
-#InputVin {
-  height: 25px;
-}
-
-.btn,
-.detailsBtn {
-  height: 31px;
-  background: #c39ea0;
-  border: 1px solid black;
-  border-radius: 2px;
-}
-
-.vinHeader {
-  font-size: 38px;
-  min-height: 15vh;
-  align-items: flex-end;
-}
-.vinHeader p {
-  font-size: 2 rem;
-}
-
-.vinArticle {
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  flex-direction: column;
-  min-height: 55vh;
-  padding: 50px;
-}
-.vinArticle p {
   width: 100%;
-  line-height: 1.3;
-  padding: 30px 0 30px 0;
+  height: 20vh;
 }
-.vinArticle h3 {
-  font-size: 25px;
-  color: #fa255e;
+.ContainerDetailsRaport div {
+  display: flex;
+}
+
+.engineDetails {
+  background: #c39ea0;
+  justify-content: center;
+  align-items: center;
+  width: 33.33%;
+}
+.engineDetails img {
+  width: 70px;
+}
+
+.engineIcons img {
+  width: 70px;
+  padding: 20px;
+}
+
+.engineSpec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 33.33%;
+}
+
+.engineDataBar {
+  padding-top: 10px;
+}
+.engineDataBar p {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.engineIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.engineIcon img {
+  width: 50px;
+}
+
+.engineDesc {
+  background-color: #fa255e;
+  justify-content: center;
+  font-size: 3em;
+  align-items: center;
+  width: 33.33%;
+}
+.engineDesc img {
+  width: 100px;
+  padding-left: 20px;
+}
+.engineDesc div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carRaportPDF {
+  background-color: #fa255e;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  width: 33.33%;
+}
+.carRaportPDF i {
+  font-size: 100px;
+  cursor: pointer;
+  padding-left: 10px;
+}
+.carRaportPDF span {
+  font-weight: bold;
+}
+.carRaportPDF div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 main,
@@ -234,6 +257,12 @@ main {
 .infoRaportWrapper li i {
   padding-right: 20px;
 }
+.infoRaportWrapper ul img,
+.infoRaportWrapper li img {
+  height: 20px;
+  width: 20px;
+  padding-right: 15px;
+}
 
 .NameCarHeader {
   font-weight: 450;
@@ -242,7 +271,6 @@ main {
 .ContainerDetailsRaport {
   min-height: 40vh;
   width: 100%;
-  background: orange;
   display: none;
 }
 
@@ -325,6 +353,112 @@ nav i {
 
 .vinHeader p {
   font-weight: 600;
+}
+
+.firstPage {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+}
+
+.vinDecoder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.vinHeader,
+.vinFinder {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: row;
+}
+
+.vinFinder {
+  min-height: 20vh;
+  align-items: center;
+}
+
+.vinWrapper {
+  width: 500px;
+  position: absolute;
+  transition: 0.5s;
+}
+.vinWrapper input {
+  transition: 0.5s;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 20px;
+  height: 50px;
+}
+.vinWrapper input[type=text] {
+  background: #fa255e;
+  width: 340px;
+  border: none;
+  outline: none;
+  padding: 0 0 0 25px;
+  border-radius: 25px 0 0 25px;
+  position: relative;
+}
+
+.btn,
+.detailsBtn {
+  font-size: 20px;
+  height: 50px;
+  left: -5px;
+  position: relative;
+  background: #c39ea0;
+  border: 1px solid black;
+  width: 150px;
+  border-radius: 0 25px 25px 0;
+  border: none;
+  outline: none;
+  transition: 0.5s;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.detailsBtn {
+  border-radius: 25px 25px;
+}
+
+.btn:hover {
+  background: black;
+  color: #fa255e;
+}
+
+.detailsBtn:hover {
+  background: #fa255e;
+  color: black;
+}
+
+.vinHeader {
+  font-size: 38px;
+  min-height: 15vh;
+  align-items: flex-end;
+}
+.vinHeader p {
+  font-size: 2 rem;
+}
+
+.vinArticle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+  min-height: 55vh;
+  padding: 50px;
+}
+.vinArticle p {
+  width: 100%;
+  line-height: 1.3;
+  padding: 30px 0 30px 0;
+}
+.vinArticle h3 {
+  font-size: 30px;
+  color: #fa255e;
 }
 
 aside {

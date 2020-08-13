@@ -1,17 +1,10 @@
+import Api from "./Api";
 import VinHistory from "./VinHistory";
 import HistoryUI from "./VinHistoryUI";
 import Ui from "./Ui";
-interface ApiObject {
-  engine: string;
-  make: string;
-  manufacturer: string;
-  model: string;
-  transmission: string;
-  trim: string;
-  year: string;
-  vin: string;
-  img: string;
-}
+import CarData from "./VinHistoryUI";
+import ApiObject from "./Interfaces";
+
 interface App {
   btnCheck: HTMLElement | null;
   vinCodeEl: HTMLInputElement | null;
@@ -23,6 +16,7 @@ interface App {
 }
 class App {
   constructor() {
+    // this.Api=new Api();
     (this.btnCheck = document.querySelector(".checkBtn")),
       (this.vinCodeEl = document.querySelector("input[name=vinCode]")),
       (this.vin = null),
@@ -69,101 +63,46 @@ class App {
         throw new Error("inncorect vin format");
       }
     }
+    if (this.vinCode) {
+      let API = new Api(this.vinCode);
 
-    this.handleVinInfo("img");
+      API.handleVinInfo("img");
+      API.handleVinInfo("maintanceList");
+      API.handleVinInfo("carData");
 
-    this.handleVinInfo("maintanceList");
-    this.handleVinInfo("carData");
+      setTimeout(() => {
+        console.log(API.testDuba);
+        new Ui(API.testDuba as ApiObject);
+        this.saveDataToLocal(API.testDuba);
+      }, 1500);
+    }
 
     (<HTMLInputElement>document.querySelector("input[name=vinCode]")).value =
       "";
   };
 
-  mergeObjectData = (data: object, data1: object) => {
-    return Object.assign({}, data, data1);
-  };
-
-  handleVinInfo = (param: string): void => {
-    const apiArray: string[] = [
-      "http://api.carmd.com/v3.0/image?vin",
-      "http://api.carmd.com/v3.0/maintlist?vin",
-      "http://api.carmd.com/v3.0/decode?vin",
-    ];
-
-    let test: string = "";
-
-    switch (param) {
-      case "img":
-        test = apiArray[0];
-        break;
-      case "maintanceList":
-        test = apiArray[1];
-        break;
-      case "carData":
-        test = apiArray[2];
-        break;
-    }
-
-    fetch(`${test}=${this.vinCode}`, {
-      method: "GET",
-      headers: {
-        authorization: "Basic ZTY2YzE0ZDgtMDYzMS00NDM0LTlkMDMtY2JmNzJiZjkwMDkz", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZDIwMjE3OTMtNzM1Zi00YzIyLWI2NmEtNWRiZjRkMmIyMDEy", //"Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", // ,"Basic NWYwYThhNWEtYjAxMy00YTQwLWFhZWUtZTM5OTQzNzJkZmU4", "Basic N2U4ZDIwNDAtM2ZiZi00N2RlLTljYzgtZDNlYTI0OWM5NTBm", //"Basic ZGRiZTVlZDAtYTM2Ni00NzVjLWFlOWItNTZhMGU4MWQ3Zjhj", //"Basic OGQ5NzM4ZmQtZDg3Yi00MzU4LWI2NzItOWJlZmI3YTE0ZTYz",
-        "partner-token": "41b91927b6104c9199daf05ff511368f", // "63e713fbbc4a4532b1e5edd6f25f39a3", // "543fafc5bd9b472ea5d6614e0b9a56d1", //"63e713fbbc4a4532b1e5edd6f25f39a3", "c0937ea58143414796ec5c98cbb9bfd8", //"fe1708c8fbc94a29a7885e04c837da04",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        const { data, message } = response;
-
-        switch (param) {
-          case "img":
-            this.testDuba = this.mergeObjectData(
-              { img: data.image },
-              this.testDuba
-            ) as object;
-
-            break;
-          case "maintanceList":
-            this.testDuba = this.mergeObjectData(data, this.testDuba) as object;
-            break;
-          case "carData":
-            this.testDuba = this.mergeObjectData(this.testDuba, data) as object;
-
-            break;
-        }
-        this.testDuba = this.mergeObjectData(this.testDuba, {
-          vin: this.vinCode,
-        }) as object;
-
-        if (this.testDuba) {
-          console.log(this.testDuba);
-          this.saveDataToLocal(this.testDuba);
-          // this.handleDataFromLocal();
-          new Ui(this.testDuba as ApiObject);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        return new Error("sry api not works");
-      });
-  };
-  saveDataToLocal = (data: object) => {
-    if (this.vinCode) {
-      let saveToLocal = this.VinHistory.saveItemToLocalStorage(
-        this.vinCode,
-        data
-      );
-    }
-  };
   handleDataFromLocal = () => {
-    const testData = this.VinHistory.getItemsFromLocalStorage();
+    const testData: CarData[] = this.VinHistory.handleVinsFromLocal() as CarData[];
 
     if (testData) {
       this.HistoryUi.DisplayVinHeader(testData);
     } else {
       console.log("your histry vin not found!");
+    }
+  };
+  saveDataToLocal = (data: object) => {
+    if (this.vinCode) {
+      let test1: boolean = this.VinHistory.saveItemToLocalStorage(
+        this.vinCode,
+        data
+      );
+
+      if (test1 === true) {
+        throw new Error("your car  stay in  localstorage");
+      } else {
+        this.HistoryUi.ClearVinHistoryList();
+        this.handleDataFromLocal();
+      }
     }
   };
 }

@@ -1,3 +1,4 @@
+@import "./colors";
 @mixin flexCenter($content, $direction, $alignItem) {
   display: flex;
   justify-content: $content;
@@ -43,7 +44,7 @@
 
 .projects li:hover,
 .products li:hover {
-  background-color: rgb(197, 173, 181);
+  background-color: $brightPink;
   cursor: pointer;
 }
 

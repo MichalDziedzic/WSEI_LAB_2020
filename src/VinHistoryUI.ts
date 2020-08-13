@@ -1,30 +1,7 @@
 import vinHistory from "./VinHistory";
 import Ui from "./Ui";
-interface CarData {
-  [index: number]: {
-    engine: string;
-    make: string;
-    manufacturer: string;
-    model: string;
-    transmission: string;
-    trim: string;
-    year: string;
-    vin: string;
-    img: string;
-  };
-}
 
-interface carObj {
-  engine: string;
-  make: string;
-  manufacturer: string;
-  model: string;
-  transmission: string;
-  trim: string;
-  year: string;
-  vin: string;
-  img: string;
-}
+import CarData from "./Interfaces";
 
 export default class VinHistoryUI {
   listVinEl: HTMLElement | null;
@@ -33,24 +10,32 @@ export default class VinHistoryUI {
     this.listVinEl = document.querySelector(".hitoryVin-Bar");
     this.ElemHistoryVin = null;
   }
-  DisplayVinHeader = (HistoryVin: Array<object>) => {
+  DisplayVinHeader = (HistoryVin: CarData[]) => {
     HistoryVin.map((el) => {
       const { vin } = el;
       const li: HTMLElement = document.createElement("li");
-      const shortDescVin: HTMLElement = document.createElement("p");
+      const paragrafVin: HTMLElement = document.createElement("p");
       const HeaderHistoryVin: HTMLElement = document.createElement("div");
+      HeaderHistoryVin.className = "vinHistory-test";
+      HeaderHistoryVin.setAttribute("id", vin);
+      const vinDescribeHeader = document.createTextNode(`${vin}`);
+
+      const aEl: HTMLElement = document.createElement("a");
+      aEl.className = "delete";
+      const deleteDescribe = document.createTextNode("x");
+
       HeaderHistoryVin.addEventListener("mousedown", (e) =>
         this.handleMouseDownListElem(e)
       );
 
-      shortDescVin.innerHTML = "testVin-HISTORY";
-      HeaderHistoryVin.className = "vinHistory-test";
-      HeaderHistoryVin.setAttribute("id", vin);
+      paragrafVin.appendChild(vinDescribeHeader);
+      aEl.appendChild(deleteDescribe);
 
       if (this.listVinEl) {
         this.listVinEl.appendChild(li);
-        HeaderHistoryVin.innerHTML = ` <p>${vin}</p><a href='usun'>X</a>`;
         li.appendChild(HeaderHistoryVin);
+        HeaderHistoryVin.appendChild(paragrafVin);
+        paragrafVin.after(aEl);
       }
       return true;
     });
@@ -61,12 +46,22 @@ export default class VinHistoryUI {
     console.log(id);
 
     console.log(id);
-    let testduba: Array<object> = new vinHistory().getItemsFromLocalStorage();
+    let testduba: Array<object> = new vinHistory().handleVinsFromLocal();
     console.log(testduba);
 
-    const catchElemList: Array<object> = testduba.filter((el) => el.vin === id);
+    const catchElemList: Array<object> = testduba.filter(
+      (el: any) => el.vin == id
+    );
 
     console.log(catchElemList);
     catchElemList.map((el) => new Ui(el));
+  };
+  ClearVinHistoryList = () => {
+    let menuList: HTMLElement | null = document.querySelector(".hitoryVin-Bar");
+    if (menuList != null) {
+      while (menuList.firstChild) {
+        menuList.removeChild(menuList.firstChild);
+      }
+    }
   };
 }

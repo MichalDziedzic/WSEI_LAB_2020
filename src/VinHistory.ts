@@ -1,34 +1,32 @@
-// import Ui from "./Ui";
-
-// console.log(" działą w pliku  z klasa infoVin");
-// //1GNALDEK9FZ108495 example number vin
+import CarData from "./Interfaces";
 
 export default class VinHistory {
-  public saveItemToLocalStorage = (vinCode: string, data: object) => {
-    // const items = { ...localStorage };
-    // Object.entries(items).forEach(([key, value]) => {
-    //   if (vinCode === key) {
-    //     console.log(`${key} chujowo!`);
-    //     return false;
-    //   } else {
-    //     console.log(`${key} ok!`);
-    //   }
-    // });
-    localStorage.setItem(vinCode, JSON.stringify(data));
+  vinsDB: Object[] | undefined | CarData;
+  constructor() {
+    this.vinsDB = this.handleVinsFromLocal();
+  }
+  public saveItemToLocalStorage = (vinCode: string, data: object): boolean => {
+    let CopyVinsArray = this.vinsDB as Object[];
+
+    let bagno: boolean = CopyVinsArray.some((el) => el.vin === vinCode);
+
+    if (bagno != true) {
+      localStorage.setItem(vinCode, JSON.stringify(data));
+    }
+    return bagno;
   };
 
-  getItemsFromLocalStorage = () => {
+  handleVinsFromLocal = () => {
     const items = { ...localStorage };
-    //console.log(items);
-    let tabtest: Array<object> = [];
+
+    let VinsArrayFromLocal: Object[] = [];
 
     if (items.length != 0) {
       Object.entries(items).forEach(([key, value]) => {
-        tabtest.push(JSON.parse(value));
+        VinsArrayFromLocal.push(JSON.parse(value));
       });
-      return tabtest;
-    } else {
-      return [];
+
+      return VinsArrayFromLocal;
     }
   };
 }

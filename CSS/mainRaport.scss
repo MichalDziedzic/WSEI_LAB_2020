@@ -1,55 +1,88 @@
 @import "./colors";
-.firstPage {
-  width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-}
 
-.vinDecoder {
-  width: 100%;
+.ContainerDetailsRaport {
   display: flex;
-  flex-direction: column;
-}
-.vinHeader,
-.vinFinder {
+  flex-direction: row;
   width: 100%;
-  @include flexCenter(center, row, stretch);
-}
-.vinFinder {
-  min-height: 20vh;
-  align-items: center;
-}
-#InputVin {
-  height: 25px;
-}
-.btn,
-.detailsBtn {
-  height: 31px;
-  background: $smoke;
-  border: 1px solid black;
-  border-radius: 2px;
-}
-.vinHeader {
-  font-size: 38px;
-  min-height: 15vh;
-  align-items: flex-end;
-  p {
-    font-size: 2 rem;
+  height: 20vh;
+  div {
+    //width: 33.33%;
+    display: flex;
   }
 }
 
-.vinArticle {
-  @include flexCenter(flex-start, column, stretch);
-  min-height: 55vh;
-  padding: 50px;
-  p {
-    width: 100%;
-    line-height: 1.3;
-    padding: 30px 0 30px 0;
+.engineDetails {
+  background: $smoke;
+  justify-content: center;
+  align-items: center;
+  width: 33.33%;
+  img {
+    width: 70px;
   }
-  h3 {
-    font-size: 25px;
-    color: $brightPink;
+}
+.engineIcons {
+  img {
+    width: 70px;
+    padding: 20px;
+  }
+}
+.engineSpec {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 33.33%;
+}
+.engineDataBar {
+  padding-top: 10px;
+  p {
+    font-size: 20px;
+    font-weight: 600;
+  }
+}
+.engineIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 50px;
+  }
+}
+.engineDesc {
+  background-color: $brightPink;
+  justify-content: center;
+  font-size: 3em;
+  align-items: center;
+  width: 33.33%;
+  img {
+    width: 100px;
+    padding-left: 20px;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.carRaportPDF {
+  background-color: $brightPink;
+  align-items: center;
+  justify-content: center;
+  //min-height: 40vh;
+  font-size: 17px;
+  width: 33.33%;
+  i {
+    font-size: 100px;
+    cursor: pointer;
+    padding-left: 10px;
+  }
+  span {
+    font-weight: bold;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -123,6 +156,11 @@ main {
     i {
       padding-right: 20px;
     }
+    img {
+      height: 20px;
+      width: 20px;
+      padding-right: 15px;
+    }
   }
 }
 .NameCarHeader {
@@ -131,6 +169,5 @@ main {
 .ContainerDetailsRaport {
   min-height: 40vh;
   width: 100%;
-  background: orange;
   display: none;
 }
